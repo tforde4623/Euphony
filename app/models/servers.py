@@ -10,7 +10,7 @@ class Server(db.Model):
     owner_id = db.Column(db.Integer, db.ForeignKey("users.id"), nullable=False)
     icon_url = db.Column(db.Text)
 
-    users = db.relationship("User", secondary=Member, back_populates="members")
+    users = db.relationship("User", secondary='members', back_populates="members")
     channels = db.relationship("Channel", back_populates="server")
     owner = db.relationship("User", back_populates="servers")
     categories = db.relationship("Category", back_populates="server")
