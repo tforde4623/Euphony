@@ -1,1 +1,98 @@
-/* TODO Add site wide styles */
+@import url("https://fonts.googleapis.com/css2?family=Alegreya+Sans+SC:wght@500&family=Source+Sans+Pro:wght@300;400&display=swap");
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+html {
+  background-color: #dfdbd8;
+}
+
+button {
+  color: #0F0F11;
+  padding: 10px 25px;
+  background-color: #A53B17;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: all 0.5s ease 0s;
+  width: fit-content;
+  margin: 3px;
+}
+
+button:hover {
+  background-color: rgba(165, 59, 23, 0.7);
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+}
+
+a,
+p,
+h1,
+h2,
+h3,
+h4,
+li {
+  color: #0F0F11;
+  text-decoration: none;
+  font-family: "Source Sans Pro", sans-serif;
+}
+
+.light_small, .light_medium, .light_large {
+  color: #E8EAED;
+}
+.dark_large, .dark_medium, .dark_small {
+  color: #0F0F11
+}
+
+.light_small, .darks_small {
+  font-family: "Source Sans Pro", sans-serif;
+  font-weight: 300;
+  font-size: 16px;
+}
+.light_medium, .dark_medium {
+  font-family: 'Source Sans Pro', sans-serif;
+  font-weight: 400;
+  font-size: 20px;
+}
+
+.light_large, .dark_large {
+  font-family: 'Alegreya Sans SC', sans-serif;
+  font-weight: 500;
+  font-size: 30px;
+}
+
+input {
+  align-items: space-between;
+  height: 25px;
+  border: none;
+  border-radius: 60px;
+  font-size: 14px;
+  padding-left: 10px;
+  margin: 10px 0;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+}
+
+textarea {
+  outline: none;
+  border: none;
+  border-radius: 10px;
+  padding: 10px;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+}
+
+
+.errors {
+  display: flex;
+  flex-direction: column;
+  padding: 12px;
+  /* background-color:  */
+  border-radius: 15px;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+}
+
+.errors li {
+  padding: 3px 0;
+  list-style: none;
+}
