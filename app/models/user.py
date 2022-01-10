@@ -13,7 +13,7 @@ class User(db.Model, UserMixin):
     hashed_password = db.Column(db.String(255), nullable=False)
     icon_url = db.Column(db.Text)
 
-    members = db.relationship("Server", secondary=Member, back_populates="users")
+    members = db.relationship("Server", secondary='members', back_populates="users")
     servers = db.relationship("Server", back_populates="owner")
     messages = db.relationship("Message", back_populates="user")
 
