@@ -9,6 +9,7 @@ class Category(db.Model):
         db.Integer, db.ForeignKey('servers.id'), nullable=False)
     
     server = db.relationship('Server', back_populates='categories')
+    channels = db.relationship("Channel", back_populates="category")
 
     def to_dict(self):
         return {

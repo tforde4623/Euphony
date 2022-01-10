@@ -1,4 +1,5 @@
 from .db import db
+from .members import Member
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
 
@@ -10,7 +11,11 @@ class User(db.Model, UserMixin):
     username = db.Column(db.String(20), nullable=False, unique=True)
     email = db.Column(db.String(100), nullable=False, unique=True)
     hashed_password = db.Column(db.String(255), nullable=False)
-    icon_url = db.Comlumn(db.Text)
+    icon_url = db.Column(db.Text)
+
+    members = db.relationship("Server", secondary=Member, back_populates="users")
+    servers = db.relationship("Server", back_populates="owner")
+    messages = db.relationship("Message", back_populates="user")
 
     @property
     def password(self):
