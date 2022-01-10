@@ -1,5 +1,5 @@
 from flask import Blueprint, session, request
-from .models.messages import Message
+from app.models import Message
 
 messages = Blueprint('messages', __name__)
 
