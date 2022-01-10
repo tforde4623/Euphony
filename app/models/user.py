@@ -7,9 +7,10 @@ class User(db.Model, UserMixin):
     __tablename__ = 'users'
 
     id = db.Column(db.Integer, primary_key=True)
-    username = db.Column(db.String(40), nullable=False, unique=True)
-    email = db.Column(db.String(255), nullable=False, unique=True)
+    username = db.Column(db.String(20), nullable=False, unique=True)
+    email = db.Column(db.String(100), nullable=False, unique=True)
     hashed_password = db.Column(db.String(255), nullable=False)
+    icon_url = db.Comlumn(db.Text)
 
     @property
     def password(self):
@@ -26,5 +27,6 @@ class User(db.Model, UserMixin):
         return {
             'id': self.id,
             'username': self.username,
-            'email': self.email
+            'email': self.email,
+            'icon_url': self.icon_url
         }
