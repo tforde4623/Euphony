@@ -17,6 +17,7 @@ def create_message():
     new_msg = Message(content=msg_data['content'], 
                       user_id=curr_user_id, 
                       channel_id=msg_data['channel_id'])
+    return new_msg
 
 # ~~~~~~~~~~~~ READ ~~~~~~~~~~~~~~
 '''getting all msgs will be by channel, in the channel routes'''
