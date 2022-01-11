@@ -5,9 +5,8 @@ import { createChannel } from "../../store/channels";
 import "./NewChannel.css";
 
 const NewChannel = () => {
-  let { serverId, categoryId } = useParams();
+  let { serverId } = useParams();
   serverId = Number(serverId);
-  categoryId = Number(categoryId);
   const dispatch = useDispatch();
   const history = useHistory();
 
@@ -18,7 +17,7 @@ const NewChannel = () => {
 
   // COMMENT IN ONCE SERVER THUNKS DONE
   // const serverOwnerId = useSelector(state => state.servers[serverId]?.owner_id)
-  // if (userId !== serverOwnerId) return <Redirect to={`/servers/${serverId}/categories/${categoryId}/channels`}></Redirect>
+  // if (userId !== serverOwnerId) return <Redirect to={`/servers/${serverId}/channels`}></Redirect>
 
   useEffect(() => {
     const errors = [];
@@ -31,11 +30,10 @@ const NewChannel = () => {
     const newChannel = {
       name,
       serverId,
-      categoryId,
     };
 
     dispatch(createChannel(newChannel));
-    history.push(`/servers/${serverId}/categories/${categoryId}/channels`)
+    history.push(`/servers/${serverId}/channels`)
   };
 
   return (

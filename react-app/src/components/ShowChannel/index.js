@@ -6,9 +6,8 @@ import "./ShowChannel.css";
 
 const ShowChannel = () => {
   const dispatch = useDispatch();
-  let { serverId, categoryId, channelId } = useParams();
+  let { serverId, channelId } = useParams();
   serverId = Number(serverId);
-  categoryId = Number(categoryId);
   channelId = Number(channelId);
 
   const channelsObj = useSelector((state) => state.channels);
@@ -19,13 +18,13 @@ const ShowChannel = () => {
 
   useEffect(() => {
     dispatch(getAllChannels());
-  }, [dispatch, serverId, categoryId, channelId]);
+  }, [dispatch, serverId, channelId]);
 
   return (
     <ul>
       {channelsArr.map((channel) => (
         <NavLink
-          to={`/servers/${serverId}/categories/${categoryId}/channels/${channelId}/messages`}
+          to={`/servers/${serverId}/channels/${channelId}/messages`}
         >
           <li key={channel?.id}>{channel?.name}</li>
         </NavLink>

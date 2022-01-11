@@ -6,9 +6,8 @@ import "./EditChannel.css";
 import DeleteChannel from "../DeleteChannel";
 
 const EditChannel = () => {
-  let { serverId, categoryId, channelId } = useParams();
+  let { serverId, channelId } = useParams();
   serverId = Number(serverId);
-  categoryId = Number(categoryId);
   channelId = Number(channelId);
   const dispatch = useDispatch();
   const history = useHistory();
@@ -34,13 +33,12 @@ const EditChannel = () => {
     const updatedChannel = {
       name,
       serverId,
-      categoryId,
       channelId,
       userId
     };
 
     dispatch(updateChannel(updatedChannel));
-    history.push(`/servers/${serverId}/categories/${categoryId}/channels`);
+    history.push(`/servers/${serverId}/channels`);
   };
 
   return (
@@ -70,7 +68,7 @@ const EditChannel = () => {
         </button>
 
         {/* Delete */}
-        <DeleteChannel channelId={channelId} userId={userId} serverId={serverId} categoryId={categoryId}/>
+        <DeleteChannel channelId={channelId} userId={userId} serverId={serverId}/>
       </form>
     </div>
   );

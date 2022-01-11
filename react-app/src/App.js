@@ -54,13 +54,13 @@ function App() {
         </Route>
 
         {/* Channels */}
-        <Route path="/servers/:serverId/categories/:categoryId/channels/new">
+        <Route path="/servers/:serverId/channels/new">
           <NewChannel />
         </Route>
-        <Route path="/servers/:serverId/categories/:categoryId/channels/:channelId">
+        <Route path="/servers/:serverId/channels/:channelId">
           <ShowChannel />
         </Route>
-        <Route path="/servers/:serverId/categories/:categoryId/channels/:channelId/edit">
+        <Route path="/servers/:serverId/channels/:channelId/edit">
           <EditChannel />
         </Route>
 
