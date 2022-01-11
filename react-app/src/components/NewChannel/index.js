@@ -13,7 +13,7 @@ const NewChannel = () => {
   const [name, setName] = useState("");
   const [errors, setErrors] = useState([]);
 
-  const userId = useSelector((state) => state.session.user?.id);
+  // const userId = useSelector((state) => state.session.user?.id);
 
   // COMMENT IN ONCE SERVER THUNKS DONE
   // const serverOwnerId = useSelector(state => state.servers[serverId]?.owner_id)

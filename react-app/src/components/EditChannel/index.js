@@ -26,7 +26,7 @@ const EditChannel = () => {
   useEffect(() => {
     dispatch(getAllChannels());
     setName(channel.name);
-  }, [dispatch, serverId, channelId]);
+  }, [dispatch, serverId, channelId, channel.name]);
 
   useEffect(() => {
     const errors = [];

@@ -54,7 +54,6 @@ const LoginForm = () => {
             placeholder="Password"
             name="password"
             type="password"
-            placeholder="Password"
             value={password}
             onChange={updatePassword}
           />
