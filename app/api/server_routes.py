@@ -1,5 +1,5 @@
 from flask import Blueprint, json, request, jsonify
-from app.models import db, Server
+from app.models import db, Server, Channel
 
 servers = Blueprint('servers', __name__)
 
@@ -21,6 +21,11 @@ def create_server():
 def view_server(server_id):
     server = Server.query.filter_by(id=server_id).one()
     return jsonify(server)
+    
+@servers.route('/', methods=['GET'])
+def view_servers():
+    servers = Server.query.all()
+    return jsonify(svr.to_dict() for svr in servers)
 
 # ~~~~~~~~~~~~ UPDATE ~~~~~~~~~~~~
 @servers.route('/<id>/edit', methods=['PUT'])
