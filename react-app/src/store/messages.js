@@ -7,8 +7,8 @@ const addMessage = (message) => ({
 });
 
 export const createMessage = (newMessage) => async (dispatch) => {
-  const res = await fetch(`/api/messages`, {
-    method: "POST",
+  const res = await fetch(`/api/messages/`, {
+    method: "post",
     headers: {
       "Content-Type": "application/json",
     },
