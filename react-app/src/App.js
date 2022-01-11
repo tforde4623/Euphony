@@ -10,6 +10,7 @@ import User from "./components/User";
 import EditMessage from "./components/EditMessage";
 import ShowAllMessages from "./components/ShowAllMessages";
 import { authenticate } from "./store/session";
+import NewMessage from "./components/NewMessage";
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -30,24 +31,47 @@ function App() {
     <BrowserRouter>
       <NavBar />
       <Switch>
+        {/* Auth  */}
         <Route path="/login" exact={true}>
           <LoginForm />
         </Route>
         <Route path="/sign-up" exact={true}>
           <SignUpForm />
         </Route>
+
+        {/* Messagaes */}
         <Route path="/servers/:serverId/channels/:channelId/messages/:messageId">
           <EditMessage />
+        </Route>
+        <Route path="/servers/:serverId/channels/:channelId/messages/new">
+          <NewMessage />
         </Route>
         <Route path="/servers/:serverId/channels/:channelId/messages">
           <ShowAllMessages />
         </Route>
+
+        {/* Channels */}
+        <Route path="/servers/:serverId/channels/new">
+          
+        </Route>
+        <Route path="/servers/:serverId/channels/:channelId">
+          
+        </Route>
+        <Route path="/servers/:serverId/channels/:channelId/edit">
+          
+        </Route>
+
+        {/* Servers */}
+
+        {/* Users */}
         <ProtectedRoute path="/users" exact={true}>
           <UsersList />
         </ProtectedRoute>
         <ProtectedRoute path="/users/:userId" exact={true}>
           <User />
         </ProtectedRoute>
+
+        {/* Home */}
         <ProtectedRoute path="/" exact={true}>
           <h1>My Home Page</h1>
         </ProtectedRoute>
