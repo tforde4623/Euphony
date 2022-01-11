@@ -42,7 +42,7 @@ function App() {
           <SignUpForm />
         </Route>
 
-        {/* Messagaes */}
+        {/* Messagaes */} 
         <Route path="/servers/:serverId/channels/:channelId/messages/:messageId">
           <EditMessage />
         </Route>
@@ -57,11 +57,11 @@ function App() {
         <Route path="/servers/:serverId/channels/new">
           <NewChannel />
         </Route>
-        <Route path="/servers/:serverId/channels/:channelId">
-          <ShowChannel />
-        </Route>
         <Route path="/servers/:serverId/channels/:channelId/edit">
           <EditChannel />
+        </Route>
+        <Route path="/servers/:serverId/channels">
+          <ShowChannel />
         </Route>
 
         {/* Servers */}

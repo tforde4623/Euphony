@@ -23,11 +23,14 @@ const ShowChannel = () => {
   return (
     <ul>
       {channelsArr.map((channel) => (
-        <NavLink
-          to={`/servers/${serverId}/channels/${channelId}/messages`}
-        >
-          <li key={channel?.id}>{channel?.name}</li>
-        </NavLink>
+        <>
+          <NavLink to={`/servers/${serverId}/channels/${channel?.id}/messages`}>
+            <li key={channel?.id}>{channel?.name}</li>
+          </NavLink>
+          <NavLink to={`/servers/${serverId}/channels/${channel?.id}/edit`}>
+            <i className="fas fa-edit"></i>
+          </NavLink>
+        </>
       ))}
     </ul>
   );

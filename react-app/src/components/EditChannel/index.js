@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useHistory, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { updateChannel } from "../../store/channels";
+import { updateChannel, getAllChannels } from "../../store/channels";
 import "./EditChannel.css";
 import DeleteChannel from "../DeleteChannel";
 
@@ -14,17 +14,23 @@ const EditChannel = () => {
 
   const userId = useSelector((state) => state.session.user?.id);
   const channel = useSelector((state) => state.channels[channelId]);
+  // console.log(channel, "DOG")
 
   // COMMENT IN ONCE SERVER THUNKS DONE
   // const serverOwnerId = useSelector(state => state.servers[serverId]?.owner_id)
   // if (userId !== serverOwnerId) return <Redirect to={`/servers/${serverId}/categories/${categoryId}/channels`}></Redirect>
 
-  const [name, setName] = useState(channel?.name || "");
+  const [name, setName] = useState("");
   const [errors, setErrors] = useState([]);
 
   useEffect(() => {
+    dispatch(getAllChannels());
+    setName(channel.name);
+  }, [dispatch, serverId, channelId]);
+
+  useEffect(() => {
     const errors = [];
-    if (!name.length) errors.push("Channel name must not be empty.");
+    if (!name?.length) errors.push("Channel name must not be empty.");
     setErrors(errors);
   }, [name]);
 
