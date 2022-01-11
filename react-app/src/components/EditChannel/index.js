@@ -3,6 +3,7 @@ import { useHistory, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { updateChannel } from "../../store/channels";
 import "./EditChannel.css";
+import DeleteChannel from "../DeleteChannel";
 
 const EditChannel = () => {
   let { serverId, categoryId, channelId } = useParams();
@@ -67,6 +68,9 @@ const EditChannel = () => {
         <button type="submit" disabled={errors.length > 0} className="add_btn">
           <i className="fas fa-plus"></i>
         </button>
+
+        {/* Delete */}
+        <DeleteChannel channelId={channelId} userId={userId}/>
       </form>
     </div>
   );

@@ -41,7 +41,6 @@ export const createChannel = (newChannel) => async (dispatch) => {
 };
 
 // Edit a channel
-// Edit a bar
 const UPDATE_CHANNEL = "bars/UPDATE_CHANNEL";
 
 const loadEditedChannel = (channel) => ({
@@ -64,6 +63,8 @@ export const updateChannel =
     }
   };
 
+  
+
 const initialState = {};
 const channelReducer = (state = initialState, action) => {
   let newState = {};
@@ -77,10 +78,10 @@ const channelReducer = (state = initialState, action) => {
       return { ...state, [action.channel.id]: action.channel };
     case UPDATE_CHANNEL:
       return { ...state, [action.channel.id]: action.channel };
-    // case DELETE_CHANNEL:
-    //   newState = { ...state };
-    //   delete newState[action.channelId];
-    //   return { ...newState };
+    case DELETE_CHANNEL:
+      newState = { ...state };
+      delete newState[action.channelId]; //FLAG: is it channel.id??
+      return { ...newState };
     default:
       return state;
   }
