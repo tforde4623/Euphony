@@ -78,7 +78,7 @@ const messageReducer = (state = initialState, action) => {
       action.messages.forEach(message => {
         newState[message.id] = message
       })
-      return { ...newState, ...state}
+      return { ...newState}
     case ADD_MESSAGE:
       return { ...state, [action.message.id]: action.message };
     case UPDATE_MESSAGE:
