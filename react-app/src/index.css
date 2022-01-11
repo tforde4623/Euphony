@@ -11,20 +11,21 @@ html {
 }
 
 button {
-  color: #0F0F11;
+  color: #e8eaed;
   padding: 10px 25px;
-  background-color: #A53B17;
+  background-color: #a53b17;
   border: none;
   border-radius: 50px;
   cursor: pointer;
   transition: all 0.5s ease 0s;
   width: fit-content;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
   margin: 3px;
 }
 
 button:hover {
-  background-color: rgba(165, 59, 23, 0.7);
-  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+  background-color: rgba(165, 59, 23, 0.95);
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
 }
 
 a,
@@ -34,34 +35,43 @@ h2,
 h3,
 h4,
 li {
-  color: #0F0F11;
+  color: #0f0f11;
   text-decoration: none;
   font-family: "Source Sans Pro", sans-serif;
 }
 
-.light_small, .light_medium, .light_large {
-  color: #E8EAED;
+.light_small,
+.light_medium,
+.light_large {
+  color: #e8eaed;
 }
-.dark_large, .dark_medium, .dark_small {
-  color: #0F0F11
+.dark_large,
+.dark_medium,
+.dark_small {
+  color: #0f0f11;
 }
 
-.light_small, .darks_small {
+.light_small,
+.darks_small {
   font-family: "Source Sans Pro", sans-serif;
   font-weight: 300;
   font-size: 16px;
 }
-.light_medium, .dark_medium {
-  font-family: 'Source Sans Pro', sans-serif;
+.light_medium,
+.dark_medium {
+  font-family: "Source Sans Pro", sans-serif;
   font-weight: 400;
   font-size: 20px;
 }
 
-.light_large, .dark_large {
-  font-family: 'Alegreya Sans SC', sans-serif;
+.light_large,
+.dark_large {
+  font-family: "Alegreya Sans SC", sans-serif;
   font-weight: 500;
   font-size: 30px;
 }
+
+/* link text underline animation */
 
 input {
   align-items: space-between;
@@ -82,7 +92,6 @@ textarea {
   box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
 }
 
-
 .errors {
   display: flex;
   flex-direction: column;
@@ -95,4 +104,29 @@ textarea {
 .errors li {
   padding: 3px 0;
   list-style: none;
+}
+
+/* link text underline animation */
+.dynamic_underline {
+  display: inline-block;
+  position: relative;
+  transition: all 0.5s ease 0s;
+}
+
+.dynamic_underline:after {
+  background: none repeat scroll 0 0 transparent;
+  bottom: 0;
+  content: "";
+  display: block;
+  height: 2px;
+  left: 50%;
+  position: absolute;
+  background: #0f0f11;
+  transition: width 0.5s ease 0s, left 0.5s ease 0s;
+  width: 0;
+}
+
+.dynamic_underline:hover:after {
+  width: 100%;
+  left: 0;
 }
