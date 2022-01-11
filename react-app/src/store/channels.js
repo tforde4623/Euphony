@@ -40,6 +40,30 @@ export const createChannel = (newChannel) => async (dispatch) => {
   }
 };
 
+// Edit a channel
+// Edit a bar
+const UPDATE_CHANNEL = "bars/UPDATE_CHANNEL";
+
+const loadEditedChannel = (channel) => ({
+  type: UPDATE_CHANNEL,
+  channel,
+});
+
+export const updateChannel =
+  ({ name, serverId, categoryId, channelId }) =>
+  async (dispatch) => {
+    const res = await fetch(`/api/servers/${serverId}/channels/${channelId}`, {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ name, serverId, categoryId, channelId, userId }),
+    });
+
+    if (res.ok) {
+      const channel = await res.json();
+      dispatch(loadEditedChannel(channel));
+    }
+  };
+
 const initialState = {};
 const channelReducer = (state = initialState, action) => {
   let newState = {};
@@ -51,8 +75,8 @@ const channelReducer = (state = initialState, action) => {
       return { ...state, ...newState };
     case ADD_CHANNEL:
       return { ...state, [action.channel.id]: action.channel };
-    // case UPDATE_CHANNEL:
-    //   return { ...state, [action.channel.id]: action.channel };
+    case UPDATE_CHANNEL:
+      return { ...state, [action.channel.id]: action.channel };
     // case DELETE_CHANNEL:
     //   newState = { ...state };
     //   delete newState[action.channelId];

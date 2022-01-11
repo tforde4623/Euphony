@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useHistory, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-// import { updateChannel } from "../../store/channels";
+import { updateChannel } from "../../store/channels";
 import "./EditChannel.css";
 
 const EditChannel = () => {
@@ -35,9 +35,10 @@ const EditChannel = () => {
       serverId,
       categoryId,
       channelId,
+      userId
     };
 
-    dispatch(createChannel(updatedChannel));
+    dispatch(updateChannel(updatedChannel));
     history.push(`/servers/${serverId}/categories/${categoryId}/channels`);
   };
 
@@ -52,7 +53,7 @@ const EditChannel = () => {
             ))}
           </ul>
         )}
-
+ 
         {/* Name */}
         <input
           placeholder="Channel Name"
