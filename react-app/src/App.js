@@ -11,6 +11,9 @@ import EditMessage from "./components/EditMessage";
 import ShowAllMessages from "./components/ShowAllMessages";
 import { authenticate } from "./store/session";
 import NewMessage from "./components/NewMessage";
+import NewChannel from "./components/NewChannel";
+import ShowChannels from "./components/ShowChannel";
+import EditChannel from "./components/EditChannel";
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -52,13 +55,13 @@ function App() {
 
         {/* Channels */}
         <Route path="/servers/:serverId/channels/new">
-          
+          <NewChannel />
         </Route>
         <Route path="/servers/:serverId/channels/:channelId">
-          
+          <ShowChannel />
         </Route>
         <Route path="/servers/:serverId/channels/:channelId/edit">
-          
+          <EditChannel />
         </Route>
 
         {/* Servers */}
