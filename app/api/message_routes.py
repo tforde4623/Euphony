@@ -1,4 +1,4 @@
-from flask import Blueprint, request, jsonify
+from flask import Blueprint, json, request, jsonify
 from app.models import db, Message
 
 messages = Blueprint('messages', __name__)
@@ -19,3 +19,19 @@ def create_message():
 
 # ~~~~~~~~~~~~ READ ~~~~~~~~~~~~~~
 '''getting all msgs will be by channel, in the channel routes'''
+
+#~~~~~~~~~~~~ UPDATE ~~~~~~~~~~~~~~
+@messages.route('/<id>/edit', methods=['PUT'])
+def edit_message(id):
+    msg = Message.query.filter_by(id=id).one()
+    msg_data = request.json
+
+    msg.content = msg_data['content']
+    db.session.commit()
+
+    return jsonify(msg.to_dict())
+
+#~~~~~~~~~~~~ DELETE ~~~~~~~~~~~~~~
+@messages.route('/<id>/delete', methods=['DELETE'])
+def delete_message(id):
+    pass
