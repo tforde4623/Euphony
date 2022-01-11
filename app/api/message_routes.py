@@ -34,4 +34,8 @@ def edit_message(id):
 #~~~~~~~~~~~~ DELETE ~~~~~~~~~~~~~~
 @messages.route('/<id>/delete', methods=['DELETE'])
 def delete_message(id):
-    pass
+    msg = Message.query.filter_by(id=id).one()
+    db.session.delete(msg)
+    db.session.commit()
+
+    return id
