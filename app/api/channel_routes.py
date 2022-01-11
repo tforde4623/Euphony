@@ -30,12 +30,31 @@ def get_all_channels():
 @channels.route('/', methods=['POST'])
 def create_channel():
     channel_payload = request.json
+    print(channel_payload, "DOG")
 
     new_channel = Channel(name=channel_payload['name'],
-                      server_id=channel_payload['serverId'],
-                      channel_id=channel_payload['channelId'])
+                      server_id=channel_payload['serverId'])
 
     db.session.add(new_channel)
     db.session.commit()
 
     return jsonify(new_channel.to_dict())
+
+@channels.route('/<id>', methods=['PUT'])
+def edit_channel(id):
+    channel = Channel.query.filter_by(id=id).one()
+    channel_data = request.json
+
+    channel.name = channel_data['name']
+    db.session.commit()
+
+    return jsonify(channel.to_dict())
+
+
+@channels.route('/<id>', methods=['DELETE'])
+def delete_channel(id):
+    channel = Channel.query.filter_by(id=id).one()
+    db.session.delete(channel)
+    db.session.commit()
+
+    return id

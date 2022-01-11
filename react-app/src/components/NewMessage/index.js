@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { useHistory, Redirect, useParams } from "react-router-dom";
+import { Redirect, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { createMessage } from "../../store/messages";
 import "./NewMessage.css";
 
 const NewMessage = () => {
-  const history = useHistory();
   const dispatch = useDispatch();
   const { channelId } = useParams();
   const [content, setContent] = useState("");

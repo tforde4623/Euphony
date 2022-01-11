@@ -8,10 +8,10 @@ class Channel(db.Model):
     server_id = db.Column(
         db.Integer, db.ForeignKey('servers.id'), nullable=False)
     category_id = db.Column(
-      db.Integer, db.ForeignKey('categories.id'), nullable=False)
+      db.Integer, db.ForeignKey('categories.id'))
     
     server = db.relationship("Server", back_populates="channels")
-    message = db.relationship("Message", back_populates="channel")
+    message = db.relationship("Message", back_populates="channel", cascade="all, delete")
     category = db.relationship("Category", back_populates="channels")
 
     def to_dict(self):
