@@ -12,7 +12,7 @@ import ShowAllMessages from "./components/ShowAllMessages";
 import { authenticate } from "./store/session";
 import NewMessage from "./components/NewMessage";
 import NewChannel from "./components/NewChannel";
-import ShowChannels from "./components/ShowChannel";
+import ShowChannel from "./components/ShowChannel";
 import EditChannel from "./components/EditChannel";
 
 function App() {
@@ -54,13 +54,13 @@ function App() {
         </Route>
 
         {/* Channels */}
-        <Route path="/servers/:serverId/channels/new">
+        <Route path="/servers/:serverId/categories/:categoryId/channels/new">
           <NewChannel />
         </Route>
-        <Route path="/servers/:serverId/channels/:channelId">
+        <Route path="/servers/:serverId/categories/:categoryId/channels/:channelId">
           <ShowChannel />
         </Route>
-        <Route path="/servers/:serverId/channels/:channelId/edit">
+        <Route path="/servers/:serverId/categories/:categoryId/channels/:channelId/edit">
           <EditChannel />
         </Route>
 
