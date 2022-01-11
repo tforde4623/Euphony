@@ -70,7 +70,7 @@ const EditChannel = () => {
         </button>
 
         {/* Delete */}
-        <DeleteChannel channelId={channelId} userId={userId}/>
+        <DeleteChannel channelId={channelId} userId={userId} serverId={serverId} categoryId={categoryId}/>
       </form>
     </div>
   );

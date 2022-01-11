@@ -49,7 +49,7 @@ const loadEditedChannel = (channel) => ({
 });
 
 export const updateChannel =
-  ({ name, serverId, categoryId, channelId }) =>
+  ({ name, serverId, categoryId, channelId, userId }) =>
   async (dispatch) => {
     const res = await fetch(`/api/servers/${serverId}/channels/${channelId}`, {
       method: "PUT",
@@ -74,7 +74,7 @@ const loadDeletedChannel = (channelId) => ({
 export const deleteChannel =
   ({ userId, channelId }) =>
   async (dispatch) => {
-    const res = await csrfFetch(`/api/channels/${channelId}`, {
+    const res = await fetch(`/api/channels/${channelId}`, {
       method: "DELETE",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ userId, channelId }),
