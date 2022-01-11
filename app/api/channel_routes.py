@@ -1,13 +1,26 @@
 from flask import Blueprint, jsonify, request
-from app.models import Message, Channel, db
+from sqlalchemy.orm import joinedload
+from app.models import Message, Channel, User, db
 
 channels = Blueprint('channels', __name__)
 
 # GET all messages by channel_id
 @channels.route('/<channel_id>/messages')
 def get_channel_msgs(channel_id):
-    msgs = Message.query.filter_by(channel_id= channel_id).all()
-    return jsonify([msg.to_dict() for msg in msgs])
+    msgs = Message.query \
+        .filter_by(channel_id= channel_id) \
+        .join(User) \
+        .options(joinedload(Message.user))
+
+    # allowing alchemies format to be in a jsonable format
+    dict_msgs = []
+    for msg in msgs:
+        user = msg.user.to_dict()
+        msg_dict = msg.to_dict() 
+        msg_dict['user'] = user
+        dict_msgs.append(msg_dict)
+    
+    return jsonify(dict_msgs)
 
 @channels.route('/')
 def get_all_channels():
