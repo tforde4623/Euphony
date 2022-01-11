@@ -36,11 +36,11 @@ function App() {
         <Route path="/sign-up" exact={true}>
           <SignUpForm />
         </Route>
-        <Route path="/servers/:serverId/channels/:channelId/messages">
-          <NewMessage />
-        </Route>
         <Route path="/servers/:serverId/channels/:channelId/messages/:messageId">
           <EditMessage />
+        </Route>
+        <Route path="/servers/:serverId/channels/:channelId/messages">
+          <NewMessage />
         </Route>
         <ProtectedRoute path="/users" exact={true}>
           <UsersList />

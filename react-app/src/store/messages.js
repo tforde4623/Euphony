@@ -1,3 +1,20 @@
+// get all messages
+const LOAD_ALL_MESSAGES = "messages/LOAD_ALL_MESSAGES";
+
+const loadMessages = (messages) => ({
+  type: LOAD_ALL_MESSAGES,
+  messages,
+});
+
+
+export const readMessages = (channelId) => async(dispatch)=> {
+  const messages = await fetch(`/api/channels/${channelId}/messages`); 
+  if(messages.ok) {
+    const list = await messages.json();
+    dispatch(loadMessages(list))
+  }
+}
+
 // Create a message
 const ADD_MESSAGE = "messages/ADD_MESSAGE";
 
@@ -23,7 +40,6 @@ export const createMessage = (newMessage) => async (dispatch) => {
 };
 
 // Update message
-
 const UPDATE_MESSAGE = "messages/UPDATE_MESSAGE";
 
 const editMessage = (message) => ({
@@ -58,6 +74,11 @@ const initialState = {};
 const messageReducer = (state = initialState, action) => {
   let newState = {};
   switch (action.type) {
+    case LOAD_ALL_MESSAGES: 
+      action.messages.forEach(message => {
+        newState[message.id] = message
+      })
+      return { ...newState, ...state}
     case ADD_MESSAGE:
       return { ...state, [action.message.id]: action.message };
     case UPDATE_MESSAGE:
