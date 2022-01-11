@@ -22,8 +22,8 @@ def create_message():
 
 #~~~~~~~~~~~~ UPDATE ~~~~~~~~~~~~~~
 @messages.route('/<id>/edit', methods=['PUT'])
-def edit_message(id):
-    msg = Message.query.filter_by(id=id).one()
+def edit_message(msg_id):
+    msg = Message.query.filter_by(id=msg_id).one()
     msg_data = request.json
 
     msg.content = msg_data['content']
@@ -33,9 +33,9 @@ def edit_message(id):
 
 #~~~~~~~~~~~~ DELETE ~~~~~~~~~~~~~~
 @messages.route('/<id>/delete', methods=['DELETE'])
-def delete_message(id):
-    msg = Message.query.filter_by(id=id).one()
+def delete_message(msg_id):
+    msg = Message.query.filter_by(id=msg_id).one()
     db.session.delete(msg)
     db.session.commit()
 
-    return id
+    return msg_id
