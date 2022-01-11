@@ -1,4 +1,4 @@
-from flask import Blueprint, session, request, jsonify
+from flask import Blueprint, request, jsonify
 from app.models import db, Message
 
 messages = Blueprint('messages', __name__)
