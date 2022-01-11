@@ -7,9 +7,9 @@ const loadAllChannels = (channels) => ({
 });
 
 export const getAllChannels =
-  ({ serverId }) =>
+  () =>
   async (dispatch) => {
-    const res = await fetch(`/api/servers/${serverId}/channels`);
+    const res = await fetch(`/api/channels/`);
     if (res.ok) {
       const channels = await res.json();
       dispatch(loadAllChannels(channels));
@@ -26,7 +26,7 @@ const addChannel = (channel) => ({
 });
 
 export const createChannel = (newChannel) => async (dispatch) => {
-  const res = await fetch(`/api/servers/channels`, {
+  const res = await fetch(`/api/channels/`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -51,7 +51,7 @@ const loadEditedChannel = (channel) => ({
 export const updateChannel =
   ({ name, serverId, channelId, userId }) =>
   async (dispatch) => {
-    const res = await fetch(`/api/servers/${serverId}/channels/${channelId}`, {
+    const res = await fetch(`/api/channels/${channelId}`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ name, serverId, channelId, userId }),
