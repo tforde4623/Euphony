@@ -1,15 +1,13 @@
 import React, { useEffect, useState } from "react";
-import { useHistory, Redirect, useParams } from "react-router-dom";
+import {  Redirect, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { readMessages, updateMessage } from "../../store/messages";
 import "./EditMessage.css";
 
 const EditMessage = () => {
-  // const history = useHistory();
   const dispatch = useDispatch();
   let { channelId, messageId, serverId } = useParams();
   channelId = Number(channelId);
-  // console.log('channelId', channelId)
   messageId = Number(messageId);
   const message = useSelector((state) => state.messages[messageId]);
   const userId = useSelector((state) => state.session.user?.id);
@@ -18,7 +16,7 @@ const EditMessage = () => {
 
   useEffect(() => {
     dispatch(readMessages(channelId));
-  }, [dispatch]);
+  }, [dispatch, channelId]);
 
   useEffect(() => {
     const errors = [];
