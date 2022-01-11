@@ -7,8 +7,8 @@ import NavBar from "./components/NavBar";
 import ProtectedRoute from "./components/auth/ProtectedRoute";
 import UsersList from "./components/UsersList";
 import User from "./components/User";
-import NewMessage from "./components/NewMessage";
-import EditMessage from "./components/EditMessage"
+import EditMessage from "./components/EditMessage";
+import ShowAllMessages from "./components/ShowAllMessages";
 import { authenticate } from "./store/session";
 
 function App() {
@@ -40,7 +40,7 @@ function App() {
           <EditMessage />
         </Route>
         <Route path="/servers/:serverId/channels/:channelId/messages">
-          <NewMessage />
+          <ShowAllMessages />
         </Route>
         <ProtectedRoute path="/users" exact={true}>
           <UsersList />
