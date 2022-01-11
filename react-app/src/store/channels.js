@@ -1,5 +1,5 @@
 // Get all channels in a server
-const GET_ALL_CHANNELS = "channels/GET_ALL_BARS";
+const GET_ALL_CHANNELS = "channels/GET_ALL_CHANNELS";
 
 const loadAllChannels = (channels) => ({
   type: GET_ALL_CHANNELS,
@@ -41,7 +41,7 @@ export const createChannel = (newChannel) => async (dispatch) => {
 };
 
 // Edit a channel
-const UPDATE_CHANNEL = "bars/UPDATE_CHANNEL";
+const UPDATE_CHANNEL = "channels/UPDATE_CHANNEL";
 
 const loadEditedChannel = (channel) => ({
   type: UPDATE_CHANNEL,
@@ -63,7 +63,28 @@ export const updateChannel =
     }
   };
 
-  
+// Delete a channel
+const DELETE_CHANNEL = "channels/DELETE_CHANNEL";
+
+const loadDeletedChannel = (channelId) => ({
+  type: DELETE_CHANNEL,
+  channelId,
+});
+
+export const deleteChannel =
+  ({ userId, channelId }) =>
+  async (dispatch) => {
+    const res = await csrfFetch(`/api/channels/${channelId}`, {
+      method: "DELETE",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ userId, channelId }),
+    });
+
+    if (res.ok) {
+      const channelId = await res.json();
+      dispatch(loadDeletedChannel(channelId));
+    }
+  };
 
 const initialState = {};
 const channelReducer = (state = initialState, action) => {
