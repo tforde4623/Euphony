@@ -60,7 +60,7 @@ const NewMessage = () => {
 
         {/* Submit */}
         <button type="submit" disabled={errors.length > 0} className="add_btn">
-          <i class="fas fa-plus"></i>
+          <i className="fas fa-plus"></i>
         </button>
       </form>
     </div>
