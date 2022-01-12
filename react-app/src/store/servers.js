@@ -6,7 +6,7 @@ const loadServers = servers => ({
     servers
 });
 
-export const showServer = server_id => async(dispatch) => {
+export const showServers = server_id => async(dispatch) => {
     const servers = await fetch(`/servers`);
     if (servers.ok) {
         const list = await servers.json()
