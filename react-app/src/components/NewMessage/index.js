@@ -33,6 +33,8 @@ const NewMessage = () => {
       channelId,
     };
 
+    // send new message via emission
+
     dispatch(createMessage(newMessage, user));
     resetContent();
   };
