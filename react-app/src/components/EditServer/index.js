@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useHistory, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { updateServer, showServers } from "../../store/servers";
+import { updateServer, showServers, DeleteServer } from "../../store/servers";
 
 const EditServer = () => {
     let { serverId } = useParams();
@@ -60,6 +60,8 @@ const EditServer = () => {
                 <button type='submit' disabled={errors.length > 0} className="add_btn">
                     <i className="fas fa-plus"></i>
                 </button>
+
+                <DeleteServer serverId={serverId} userId={userId} />
             </form>
         </div>
     )
