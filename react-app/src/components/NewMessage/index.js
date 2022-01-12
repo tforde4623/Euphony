@@ -16,7 +16,8 @@ const NewMessage = () => {
     setErrors(errors);
   }, [content]);
 
-  const userId = useSelector((state) => state.session.user?.id);
+  const user = useSelector((state) => state.session.user);
+  const userId = user?.id;
   if (!userId) return <Redirect to="/"></Redirect>;
 
   const resetContent = () => {
@@ -32,7 +33,7 @@ const NewMessage = () => {
       channelId,
     };
 
-    dispatch(createMessage(newMessage));
+    dispatch(createMessage(newMessage, user));
     resetContent();
   };
 

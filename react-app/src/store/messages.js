@@ -23,7 +23,7 @@ const addMessage = (message) => ({
   message,
 });
 
-export const createMessage = (newMessage) => async (dispatch) => {
+export const createMessage = (newMessage, user) => async (dispatch) => {
   const res = await fetch(`/api/messages/`, {
     method: "post",
     headers: {
@@ -34,6 +34,7 @@ export const createMessage = (newMessage) => async (dispatch) => {
 
   if (res.ok) {
     const message = await res.json();
+    message.user = user
     dispatch(addMessage(message));
     return message;
   }
