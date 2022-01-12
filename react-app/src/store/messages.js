@@ -34,7 +34,7 @@ export const createMessage = (newMessage, user) => async (dispatch) => {
 
   if (res.ok) {
     const message = await res.json();
-    message.user = user
+    message.user = user;
     dispatch(addMessage(message));
     return message;
   }
