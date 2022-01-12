@@ -21,18 +21,25 @@ const ShowChannel = () => {
   }, [dispatch, serverId, channelId]);
 
   return (
-    <ul>
-      {channelsArr.map((channel) => (
-        <>
-          <NavLink to={`/servers/${serverId}/channels/${channel?.id}/messages`}>
-            <li key={channel?.id}>{channel?.name}</li>
-          </NavLink>
-          <NavLink to={`/servers/${serverId}/channels/${channel?.id}/edit`}>
-            <i className="fas fa-edit"></i>
-          </NavLink>
-        </>
-      ))}
-    </ul>
+    <div className="channels_div">
+      <p className="light_large">SERVER NAME</p>
+      <ul className="channels_list">
+        {channelsArr.map((channel) => (
+          <li>
+            <NavLink
+              to={`/servers/${serverId}/channels/${channel?.id}/messages`}
+            >
+              <p className="light_medium dynamic_underline" key={channel?.id}>
+                {channel?.name}
+              </p>
+            </NavLink>
+            <NavLink to={`/servers/${serverId}/channels/${channel?.id}/edit`}>
+              <i className="fas fa-edit"></i>
+            </NavLink>
+          </li>
+        ))}
+      </ul>
+    </div>
   );
 };
 

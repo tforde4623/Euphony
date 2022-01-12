@@ -1,0 +1,29 @@
+.channels_div {
+  background-color: #a53b17;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  height: 100vh;
+  width: 25vw;
+}
+
+.channels_list {
+  width: 100%;
+  height: 100%;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+
+.channels_list li {
+  display: flex;
+  justify-content: space-between;
+  padding: 20px 30px;
+  
+}
+
+.channels_list li i {
+  color: #e8eaed;
+}

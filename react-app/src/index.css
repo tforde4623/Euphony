@@ -34,7 +34,8 @@ h1,
 h2,
 h3,
 h4,
-li {
+li,
+div {
   color: #0f0f11;
   text-decoration: none;
   font-family: "Source Sans Pro", sans-serif;
@@ -52,7 +53,7 @@ li {
 }
 
 .light_small,
-.darks_small {
+.dark_small {
   font-family: "Source Sans Pro", sans-serif;
   font-weight: 300;
   font-size: 16px;
@@ -70,8 +71,6 @@ li {
   font-weight: 500;
   font-size: 30px;
 }
-
-/* link text underline animation */
 
 input {
   align-items: space-between;
@@ -129,4 +128,11 @@ textarea {
 .dynamic_underline:hover:after {
   width: 100%;
   left: 0;
+}
+
+/* White underline */
+.light_small.dynamic_underline:after,
+.light_medium.dynamic_underline:after,
+.light_large.dynamic_underline:after {
+  background: #e8eaed;
 }

@@ -8,13 +8,12 @@ import ProtectedRoute from "./components/auth/ProtectedRoute";
 import UsersList from "./components/UsersList";
 import User from "./components/User";
 import EditMessage from "./components/EditMessage";
-import ShowAllMessages from "./components/ShowAllMessages";
 import { authenticate } from "./store/session";
 import NewMessage from "./components/NewMessage";
 import NewChannel from "./components/NewChannel";
 import ShowChannel from "./components/ShowChannel";
 import EditChannel from "./components/EditChannel";
-import Main from "./components/mainPageParentComponent";
+import Main from "./components/Main";
 
 function App() {
   const [loaded, setLoaded] = useState(false);
