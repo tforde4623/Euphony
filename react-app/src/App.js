@@ -14,6 +14,7 @@ import NewMessage from "./components/NewMessage";
 import NewChannel from "./components/NewChannel";
 import ShowChannel from "./components/ShowChannel";
 import EditChannel from "./components/EditChannel";
+import Main from "./components/mainPageParentComponent";
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -50,7 +51,7 @@ function App() {
           <NewMessage />
         </Route>
         <Route path="/servers/:serverId/channels/:channelId/messages">
-          <ShowAllMessages />
+          <Main />
         </Route>
 
         {/* Channels */}
