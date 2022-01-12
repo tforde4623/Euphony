@@ -37,7 +37,7 @@ export const createServer = newServer => async dispatch => {
     }
 };
 
-//update message
+//update server
 const UPDATE_SERVER = 'servers/edit';
 const editServer = server => ({
     type: UPDATE_SERVER,
