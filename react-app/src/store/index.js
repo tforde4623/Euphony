@@ -4,12 +4,14 @@ import session from "./session";
 import messageReducer from "./messages";
 import channelReducer from "./channels";
 import categoriesReducer from "./categories";
+import memberReducer from "./members";
 
 const rootReducer = combineReducers({    
   session,
   messages: messageReducer,
   channels: channelReducer,
-  categories: categoriesReducer
+  categories: categoriesReducer,
+  members: memberReducer
 });
 
 let enhancer;
