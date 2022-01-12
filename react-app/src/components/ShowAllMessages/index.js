@@ -4,8 +4,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { readMessages } from '../../store/messages';
 
 import NewMessage from "../NewMessage";
-import MessageBox from "../Message";
-import './ShowAllMessages.css';
+import MessageBox from "../MessageBox";
+import "./ShowAllMessages.css"
 
 const ShowAllMessages = () => {
   const { channelId } = useParams();
@@ -17,7 +17,7 @@ const ShowAllMessages = () => {
   }, [channelId, dispatch]);
 
   return (
-    <div>
+    <div className='msg_div'>
       {/* messages rendered */}
       <div className='messages-container'>
       {messages.map((msg, idx) => (

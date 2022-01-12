@@ -1,6 +1,13 @@
+.msg_div {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+  width: 47vw;
+}
 .messages-container {
   /* decide on height with group */
-  height: 400px;
+  height: 90vh;
   overflow-x: hidden;
   overflow-y: auto;
 }

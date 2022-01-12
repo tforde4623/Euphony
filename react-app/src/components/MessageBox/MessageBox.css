@@ -1,0 +1,95 @@
+.message_full {
+  display: flex; 
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  margin-top: 20px; 
+  
+}
+
+.user_icon_div {
+background-color: #a53b17;
+width: 60px; 
+height: 60px; 
+border-radius: 30px;
+box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+
+}
+
+.message_box {
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+  background-color: #e8eaed;
+  border-radius: 15px;
+  padding: 20px; 
+  width: 400px; 
+  margin-left: 20px;
+}
+
+.msg_dropdown {
+  display: flex; 
+  align-items: center;
+}
+
+.menu {
+  display: flex;
+  justify-content: space-between;
+  align-items: center; 
+}
+
+.menu button {
+  border-radius: 30px;
+  padding: 8px;
+}
+
+.fa-ellipsis-v {
+  padding-left: 8px; 
+}
+
+.content {
+  padding-top: 10px;
+}
+
+
+/* .message-box {
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
+  background-color: white;
+  width: 40%;
+  border-radius: 15px;
+  display: flex;
+  flex-direction: column;
+  min-height: 50px;
+  padding: 5px;
+  margin: 5px;
+}
+
+.top-row, .user-info {
+  display: flex;
+  justify-content: space-between;
+}
+
+.user-info img {
+  margin-right: 5px;
+}
+
+.message-action-menu {
+  position: absolute;
+  background-color: black;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  left: 160px;
+  border-radius: 12px;
+  padding: 5px;
+}
+
+.message-action-button {
+  width: 95%;
+  background-color: black;
+  margin: 0;
+  padding-top: 7px;
+  padding-bottom: 7px;
+}
+
+.hidden {
+  display: none;
+} */

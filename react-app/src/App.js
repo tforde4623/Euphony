@@ -13,7 +13,7 @@ import NewMessage from "./components/NewMessage";
 import NewChannel from "./components/NewChannel";
 import ShowChannel from "./components/ShowChannel";
 import EditChannel from "./components/EditChannel";
-import Main from "./components/mainPageParentComponent";
+import Main from "./components/Main";
 
 function App() {
   const [loaded, setLoaded] = useState(false);
