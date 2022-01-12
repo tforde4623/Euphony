@@ -14,14 +14,16 @@ const ShowAllMessages = () => {
 
   useEffect(() => {
     dispatch(readMessages(channelId))
-  }, [channelId, dispatch])
+  }, [channelId, dispatch]);
 
   return (
     <div className='msg_div'>
       {/* messages rendered */}
+      <div className='messages-container'>
       {messages.map((msg, idx) => (
         <MessageBox key={idx} message={msg}/>
       ))}
+      </div>
 
       {/* send a new message */}
       <NewMessage />

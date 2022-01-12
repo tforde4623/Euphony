@@ -5,3 +5,9 @@
   align-items: center;
   width: 47vw;
 }
+.messages-container {
+  /* decide on height with group */
+  height: 90vh;
+  overflow-x: hidden;
+  overflow-y: auto;
+}

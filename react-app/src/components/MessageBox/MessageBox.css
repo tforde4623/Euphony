@@ -33,7 +33,7 @@ box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
 .menu {
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: center; 
 }
 
 .menu button {
@@ -48,3 +48,48 @@ box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
 .content {
   padding-top: 10px;
 }
+
+
+/* .message-box {
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
+  background-color: white;
+  width: 40%;
+  border-radius: 15px;
+  display: flex;
+  flex-direction: column;
+  min-height: 50px;
+  padding: 5px;
+  margin: 5px;
+}
+
+.top-row, .user-info {
+  display: flex;
+  justify-content: space-between;
+}
+
+.user-info img {
+  margin-right: 5px;
+}
+
+.message-action-menu {
+  position: absolute;
+  background-color: black;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  left: 160px;
+  border-radius: 12px;
+  padding: 5px;
+}
+
+.message-action-button {
+  width: 95%;
+  background-color: black;
+  margin: 0;
+  padding-top: 7px;
+  padding-bottom: 7px;
+}
+
+.hidden {
+  display: none;
+} */

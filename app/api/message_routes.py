@@ -1,5 +1,6 @@
 from flask import Blueprint, json, request, jsonify
-from app.models import db, Message
+from sqlalchemy.orm import joinedload
+from app.models import db, Message, User
 
 messages = Blueprint('messages', __name__)
 
@@ -21,7 +22,7 @@ def create_message():
 '''getting all msgs will be by channel, in the channel routes'''
 
 #~~~~~~~~~~~~ UPDATE ~~~~~~~~~~~~~~
-@messages.route('/<id>/edit', methods=['PUT'])
+@messages.route('/<msg_id>/edit', methods=['PUT'])
 def edit_message(msg_id):
     msg = Message.query.filter_by(id=msg_id).one()
     msg_data = request.json
@@ -29,10 +30,21 @@ def edit_message(msg_id):
     msg.content = msg_data['content']
     db.session.commit()
 
-    return jsonify(msg.to_dict())
+    # we need to include the user when we return the edited msg
+    msg = Message.query \
+        .filter_by(id=msg_id) \
+        .join(User) \
+        .options(joinedload(Message.user))
+
+    # allowing alchemies format to be in a jsonable format
+    user = msg[0].user.to_dict()
+    msg_dict = msg[0].to_dict()
+    msg_dict['user'] = user
+
+    return jsonify(msg_dict)
 
 #~~~~~~~~~~~~ DELETE ~~~~~~~~~~~~~~
-@messages.route('/<id>/delete', methods=['DELETE'])
+@messages.route('/<msg_id>/delete', methods=['DELETE'])
 def delete_message(msg_id):
     msg = Message.query.filter_by(id=msg_id).one()
     db.session.delete(msg)
