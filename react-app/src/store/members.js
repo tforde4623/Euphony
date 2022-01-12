@@ -11,7 +11,7 @@ export const readMembers = serverId => async dispatch => {
 
   if (members.ok) {
     const data = await members.json();
-    dispatch(loadMembers(data));
+    return dispatch(loadMembers(data));
   }
 };
 

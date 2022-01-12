@@ -1,5 +1,5 @@
 from flask import Blueprint, request, jsonify
-from app.models import db, Server, Member, User
+from app.models import db, Server
 
 servers = Blueprint('servers', __name__)
 
@@ -25,14 +25,15 @@ def view_server(server_id):
 @servers.route('/', methods=['GET'])
 def view_servers():
     servers = Server.query.all()
-    return jsonify(svr.to_dict() for svr in servers)
+    return jsonify([svr.to_dict() for svr in servers])
 
 @servers.route('/<id>/members')
 def get_server_members(id):
     server = db.session.query(Server) \
-        .filter_by(id=id)
+        .filter_by(id=id) \
+        .one()
     
-    return jsonify([user.to_dict for user in server.users])
+    return jsonify([user.to_dict() for user in server.users])
 
 # ~~~~~~~~~~~~ UPDATE ~~~~~~~~~~~~
 @servers.route('/<id>/edit', methods=['PUT'])
