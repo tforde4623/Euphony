@@ -1,0 +1,6 @@
+.messages-container {
+  /* decide on height with group */
+  height: 400px;
+  overflow-x: hidden;
+  overflow-y: auto;
+}

@@ -5,6 +5,7 @@ import { readMessages } from '../../store/messages';
 
 import NewMessage from "../NewMessage";
 import MessageBox from "../Message";
+import './ShowAllMessages.css';
 
 const ShowAllMessages = () => {
   const { channelId } = useParams();
@@ -18,9 +19,11 @@ const ShowAllMessages = () => {
   return (
     <div>
       {/* messages rendered */}
+      <div className='messages-container'>
       {messages.map((msg, idx) => (
         <MessageBox key={idx} message={msg}/>
       ))}
+      </div>
 
       {/* send a new message */}
       <NewMessage />
