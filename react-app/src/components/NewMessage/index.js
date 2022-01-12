@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { createMessage } from "../../store/messages";
 import "./NewMessage.css";
 
-const NewMessage = () => {
+const NewMessage = ({ sock }) => {
   const dispatch = useDispatch();
   const { channelId } = useParams();
   const [content, setContent] = useState("");
@@ -34,6 +34,7 @@ const NewMessage = () => {
     };
 
     // send new message via emission
+    sock.emit('chat', { content, userId, user, channelId });
 
     dispatch(createMessage(newMessage, user));
     resetContent();
