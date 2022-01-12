@@ -48,18 +48,18 @@ const editMessage = (message) => ({
 });
 
 export const updateMessage =
-  ({ messageId, content, userId, channelId }) =>
+  ({ id, content, user_id, channel_id }) =>
   async (dispatch) => {
-    const res = await fetch(`/api/messages/${messageId}}`, {
+    const res = await fetch(`/api/messages/${id}/edit`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        messageId,
+        id,
         content,
-        userId,
-        channelId,
+        user_id,
+        channel_id,
       }),
     });
 
@@ -68,6 +68,24 @@ export const updateMessage =
       dispatch(editMessage(editedMessage));
     }
   };
+
+// delete message
+const DELETE_MESSAGE = "messages/delete";
+
+const removeMessage = msgId => ({
+  type: DELETE_MESSAGE,
+  msgId
+});
+
+export const deleteMessage = msgId => async (dispatch) => {
+  const res = await fetch(`/api/messages/${msgId}/delete`, {
+    method: 'DELETE'
+  });
+
+  if (res.ok) {
+    dispatch(removeMessage(msgId));
+  }
+};
 
 const initialState = {};
 
@@ -83,6 +101,10 @@ const messageReducer = (state = initialState, action) => {
       return { ...state, [action.message.id]: action.message };
     case UPDATE_MESSAGE:
       return { ...state, [action.message.id]: action.message };
+    case DELETE_MESSAGE:
+      newState = state;
+      delete newState[action.msgId]
+      return { ...newState }
     default:
       return state;
   }
