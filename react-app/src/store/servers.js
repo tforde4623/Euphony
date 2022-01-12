@@ -6,7 +6,7 @@ const loadServers = servers => ({
     servers
 });
 
-export const showServer = server_id => async(dispatch) => {
+export const showServers = server_id => async(dispatch) => {
     const servers = await fetch(`/servers`);
     if (servers.ok) {
         const list = await servers.json()
@@ -37,7 +37,7 @@ export const createServer = newServer => async dispatch => {
     }
 };
 
-//update message
+//update server
 const UPDATE_SERVER = 'servers/edit';
 const editServer = server => ({
     type: UPDATE_SERVER,
@@ -65,6 +65,30 @@ export const updateServer =
         }
     }
 
+//delete server
+const DEL_SERVER = 'servers/DEL_SERVER';
+const delServer = serverId => ({
+    type: DEL_SERVER,
+    serverId
+});
+
+export const DeleteServer =
+    ({ userId, serverId }) =>
+    async dispatch => {
+        const res = await fetch(`/api/servers/${serverId}`, {
+            method: 'DELETE',
+            headers: { 'Content-Type': 'application/json'},
+            body: JSON.stringify({ userId, serverId })
+        });
+
+        if (res.ok) {
+            const serverId = await res.json();
+            dispatch(delServer(serverId))
+        }
+    }
+
+
+// reducer
 const initialState = {}
 
 const serverReducer = (state = initialState, action) => {
@@ -79,6 +103,10 @@ const serverReducer = (state = initialState, action) => {
             return { ...state, [action.server.id]: action.server };
         case UPDATE_SERVER:
             return { ...state, [action.server.id]: action.server };
+        case DEL_SERVER:
+            newState = { ...state };
+            delete newState[action.serverId];
+            return { ...newState };
         default:
             return state;
     }
