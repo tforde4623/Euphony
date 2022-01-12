@@ -1,4 +1,4 @@
-from flask_socketio import SocketIO, emit, join_room, leave_room
+from flask_socketio import SocketIO, emit, join_room
 import os
 
 # setup socket origins for prod and dev
@@ -11,7 +11,6 @@ sock = SocketIO(cors_allowed_origins=origins)
 
 @sock.on('join')
 def join(data):
-  print('room1', data['room'])
   join_room(str(data['room']))
 
 @sock.on('chat')
