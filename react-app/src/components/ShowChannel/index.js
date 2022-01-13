@@ -11,8 +11,7 @@ const ShowChannel = () => {
   serverId = Number(serverId);
   channelId = Number(channelId);
 
-
-  const categoriesObject = useSelector((state) => state.categories)
+  const categoriesObject = useSelector((state) => state.categories);
   const channelsObj = useSelector((state) => state.channels);
 
   let channelsArr;
@@ -21,7 +20,7 @@ const ShowChannel = () => {
     channelsArr = Object.values(channelsObj);
     for (let i = 0; i < channelsArr.length; i++) {
       if (!channelsArr[i].category_id) {
-        nullchannels.push(channelsArr[i])
+        nullchannels.push(channelsArr[i]);
       }
     }
   }
@@ -33,45 +32,15 @@ const ShowChannel = () => {
 
   useEffect(() => {
     dispatch(getAllChannels());
-  }, [dispatch, serverId, channelId]);
-
-  useEffect(() => {
     dispatch(getAllCategories(serverId));
   }, [dispatch, serverId, channelId]);
-
-
-  //   <ul>
-  //     map(
-  //       <h2> category
-  //         <ul>
-  //         map(
-  //           <li>
-
-  //           </li>
-  //         )
-  //         </ul>
-  //       </h2>
-  //     )
-  //   </ul>
-
-
-  // <li>
-  // <NavLink
-  //   to={`/servers/${serverId}/channels/${channel?.id}/messages`}
-  // >
-  //   <p className="light_medium dynamic_underline" key={channel?.id}>
-  //     {channel?.name}
-  //   </p>
-  // </NavLink>
-  // <NavLink to={`/servers/${serverId}/channels/${channel?.id}/edit`}>
-  //   <i className="fas fa-edit"></i>
-  // </NavLink>
-  // </li>
-
 
   return (
     <div className="channels_div">
       <p className="light_large">SERVER NAME</p>
+      <NavLink to={`/servers/${serverId}/categories/new`}>
+        <button>Add a Category</button>
+      </NavLink>
       <ul className="channels_list">
         {nullchannels.map((channel) => {
           return (
@@ -87,26 +56,37 @@ const ShowChannel = () => {
                 <i className="fas fa-edit"></i>
               </NavLink>
             </li>
-          )
+          );
         })}
+        
         {categoriesArr.map((category) => (
           <div>
             <h2>{category.name}</h2>
+            <NavLink
+              to={`/servers/${serverId}/categories/${category?.id}/edit`}
+            >
+              <i className="fas fa-edit"></i>
+            </NavLink>
             {category.channelsList.map((channel) => {
               return (
                 <li>
                   <NavLink
                     to={`/servers/${serverId}/channels/${channel?.id}/messages`}
                   >
-                    <p className="light_medium dynamic_underline" key={channel?.id}>
+                    <p
+                      className="light_medium dynamic_underline"
+                      key={channel?.id}
+                    >
                       {channel?.name}
                     </p>
                   </NavLink>
-                  <NavLink to={`/servers/${serverId}/channels/${channel?.id}/edit`}>
+                  <NavLink
+                    to={`/servers/${serverId}/channels/${channel?.id}/edit`}
+                  >
                     <i className="fas fa-edit"></i>
                   </NavLink>
                 </li>
-              )
+              );
             })}
           </div>
         ))}
