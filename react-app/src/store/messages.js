@@ -28,7 +28,7 @@ export const createMessage = message => ({
 // Update message
 const UPDATE_MESSAGE = "messages/UPDATE_MESSAGE";
 
-const editMessage = (message) => ({
+export const editMessage = (message) => ({
   type: UPDATE_MESSAGE,
   message,
 });
@@ -58,7 +58,7 @@ export const updateMessage =
 // delete message
 const DELETE_MESSAGE = "messages/delete";
 
-const removeMessage = msgId => ({
+export const removeMessage = msgId => ({
   type: DELETE_MESSAGE,
   msgId
 });
