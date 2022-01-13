@@ -47,7 +47,7 @@ const EditCategory = () => {
 
   const handleDelete = (e) => {
     e.preventDefault();
-    const deletePayload = { userId, categoryId };
+    const deletePayload = { userId, categoryId, serverId };
     let deletedCategory = dispatch(deleteCategory(deletePayload));
     if (deletedCategory) {
       history.push(`/servers/${serverId}/channels`);
