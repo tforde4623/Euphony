@@ -1,30 +1,91 @@
-// import React, { useEffect } from "react";
-// import { useDispatch, useSelector } from "react-redux";
-// import { NavLink, useParams } from "react-router-dom";
-// // import { getAllCategories } from "../../store/categories";
-// // import { getAllChannels } from "../../store/channels";
-// import "./EditCategory.css";
+import React, { useEffect, useState } from "react";
+import { useHistory, useParams } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  updateCategory,
+  getAllCategories,
+  deleteCategory,
+} from "../../store/categories";
+import "./EditCategory.css";
 
-// const EditCategory = () => {
+const EditCategory = () => {
+  let { serverId, categoryId } = useParams();
+  serverId = Number(serverId);
+  categoryId = Number(categoryId);
+  const dispatch = useDispatch();
+  const history = useHistory();
 
+  const userId = useSelector((state) => state.session.user?.id);
+  const category = useSelector((state) => state.categories[categoryId]);
 
-//   const handleDelete = (e) => {
-//     e.preventDefault();
-//     const deletePayload = { userId, categoryId };
-//     let deletedCategory = dispatch(deleteChannel(deletePayload));
-//     if (deletedCategory) {
-//       history.push(`/servers/${serverId}/channels/${channelId}`);
-//     }
-//   };
+  const [name, setName] = useState("");
+  const [errors, setErrors] = useState([]);
 
-//   return (
-//     <div>
-//       {/* DELETE */}
-//       <button onClick={handleDelete}>
-//         <i className="far fa-trash-alt"></i>
-//       </button>
-//     </div>
-//   );
-// };
+  useEffect(() => {
+    dispatch(getAllCategories());
+    setName(category?.name);
+  }, [dispatch, serverId, categoryId, category?.name]);
 
-// export default EditCategory;
+  useEffect(() => {
+    const errors = [];
+    if (!name?.length) errors.push("Category name must not be empty.");
+    setErrors(errors);
+  }, [name]);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const updatedCategory = {
+      name,
+      serverId,
+      categoryId,
+      userId
+    };
+
+    dispatch(updateCategory(updatedCategory));
+    history.push(`/servers/${serverId}/channels`);
+  };
+
+  const handleDelete = (e) => {
+    e.preventDefault();
+    const deletePayload = { userId, categoryId };
+    let deletedCategory = dispatch(deleteCategory(deletePayload));
+    if (deletedCategory) {
+      history.push(`/servers/${serverId}/channels`);
+    }
+  };
+
+  return (
+    <div>
+      <form onSubmit={handleSubmit}>
+        {/* Errors */}
+        {errors.length > 0 && (
+          <ul className="errors">
+            {errors.map((error) => (
+              <li key={error}>{error}</li>
+            ))}
+          </ul>
+        )}
+
+        {/* Name */}
+        <input
+          placeholder="Category Name"
+          name="category_name"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+          type="text"
+        ></input>
+
+        {/* Submit */}
+        <button type="submit" disabled={errors.length > 0} className="add_btn">
+          <i className="fas fa-plus"></i>
+        </button>
+        {/* DELETE */}
+        <button onClick={handleDelete}>
+          <i className="far fa-trash-alt"></i>
+        </button>
+      </form>
+    </div>
+  );
+};
+
+export default EditCategory;

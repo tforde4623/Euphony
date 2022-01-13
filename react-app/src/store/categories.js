@@ -17,7 +17,7 @@ export const getAllCategories =
     }
 };
 
-// Create a new channel
+// Create a new category
 export const createCategory = (newCategory) => async (dispatch) => { //include serverId in the newCategory payload object
   const res = await fetch(`/api/categories/`, {
     method: "POST",
@@ -33,14 +33,14 @@ export const createCategory = (newCategory) => async (dispatch) => { //include s
   }
 };
 
-// Edit a channel 
+// Edit a category
 export const updateCategory =
-  ({ id, name, serverId }) =>
+  ({ categoryId, name, serverId }) =>
   async (dispatch) => {
-    const res = await fetch(`/api/category/${id}`, {
+    const res = await fetch(`/api/categories/${categoryId}`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ name, id, serverId }),
+      body: JSON.stringify({ name, categoryId, serverId }),
     });
 
     if (res.ok) {
@@ -50,14 +50,14 @@ export const updateCategory =
     }
 };
 
-// Delete a channel
+// Delete a category
 export const deleteCategory =
-  ({ userId, serverId, id }) =>
+  ({ userId, serverId, categoryId }) =>
   async (dispatch) => {
-    const res = await fetch(`/api/categories/${id}`, {
+    const res = await fetch(`/api/categories/${categoryId}`, {
       method: "DELETE",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ userId, serverId }),
+      body: JSON.stringify({ userId, serverId, categoryId }),
     });
 
     if (res.ok) {
