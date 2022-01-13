@@ -1,6 +1,5 @@
 import React, { useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { deleteMessage } from "../../store/messages";
+import { useSelector } from "react-redux";
 import MsgEditForm from "../MsgEditForm";
 import "./MessageBox.css";
 
@@ -11,11 +10,9 @@ function MessageBox({ message, sock }) {
     message?.user?.id === currUser.id;
   const [hidden, setHidden] = useState(true);
   const [showEditForm, setShowEditForm] = useState(false);
-  const dispatch = useDispatch();
-  console.log('data user', message)
 
   const handleDelBtn = () => {
-    dispatch(deleteMessage(message.id));
+    sock.emit('delete_chat', message);
   };
 
   return (

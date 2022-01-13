@@ -42,3 +42,11 @@ def edit_chat(data):
   msg_dict['user'] = data['user'] 
   # since content is the only thing that changes
   emit('edit_chat', msg_dict, broadcast=True, to=room)
+
+
+@sock.on('delete_chat')
+def delete_chat(data):
+  room = str(data['channel_id'])
+  Message.query.filter_by(id=data['id']).delete()
+  db.session.commit()
+  emit('delete_chat', data, broadcast=True, to=room)

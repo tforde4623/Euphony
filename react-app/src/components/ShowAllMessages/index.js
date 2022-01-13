@@ -1,7 +1,11 @@
 import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { readMessages, createMessage, editMessage } from '../../store/messages';
+import { 
+  readMessages, 
+  createMessage, 
+  editMessage, 
+  removeMessage } from '../../store/messages';
 import { io } from 'socket.io-client';
 
 import NewMessage from "../NewMessage";
@@ -28,6 +32,11 @@ const ShowAllMessages = () => {
     // listener for chat revisions
     sock.on('edit_chat', (data) => {
       dispatch(editMessage(data));
+    });
+
+    // listener for chat deletion
+    sock.on('delete_chat', ({ id }) => {
+      dispatch(removeMessage(id))
     });
 
     // cleanup
