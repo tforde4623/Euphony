@@ -18,26 +18,14 @@ export const readMessages = (channelId) => async(dispatch)=> {
 // Create a message
 const ADD_MESSAGE = "messages/ADD_MESSAGE";
 
-const addMessage = (message) => ({
-  type: ADD_MESSAGE,
-  message,
-});
-
 export const createMessage = (newMessage, user) => async (dispatch) => {
-  const res = await fetch(`/api/messages/`, {
+  await fetch(`/api/messages/`, {
     method: "post",
     headers: {
       "Content-Type": "application/json",
     },
     body: JSON.stringify(newMessage),
   });
-
-  if (res.ok) {
-    const message = await res.json();
-    message.user = user;
-    dispatch(addMessage(message));
-    return message;
-  }
 };
 
 // Update message
