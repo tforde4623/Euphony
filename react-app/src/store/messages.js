@@ -28,7 +28,7 @@ export const createMessage = message => ({
 // Update message
 const UPDATE_MESSAGE = "messages/UPDATE_MESSAGE";
 
-const editMessage = (message) => ({
+export const editMessage = (message) => ({
   type: UPDATE_MESSAGE,
   message,
 });

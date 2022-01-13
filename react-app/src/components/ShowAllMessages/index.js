@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { readMessages, createMessage } from '../../store/messages';
+import { readMessages, createMessage, editMessage } from '../../store/messages';
 import { io } from 'socket.io-client';
 
 import NewMessage from "../NewMessage";
@@ -19,10 +19,15 @@ const ShowAllMessages = () => {
     // initialize connection with socket
     sock = io('http://localhost:5000');
 
-    // recieve chats
+    // listener for new chats
     sock.on('chat', (data) => {
       // maybe tmp msgs?
       dispatch(createMessage(data));
+    });
+
+    // listener for chat revisions
+    sock.on('edit_chat', (data) => {
+      dispatch(editMessage(data));
     });
 
     // cleanup
@@ -42,7 +47,7 @@ const ShowAllMessages = () => {
       {/* messages rendered */}
       <div className='messages-container'>
       {messages.map((msg, idx) => (
-        <MessageBox key={idx} message={msg}/>
+        <MessageBox key={idx} message={msg} sock={sock}/>
       ))}
       </div>
 

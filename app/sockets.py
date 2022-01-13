@@ -12,9 +12,11 @@ else:
 
 sock = SocketIO(cors_allowed_origins=origins)
 
+
 @sock.on('join')
 def join(data):
   join_room(str(data['room']))
+
 
 @sock.on('chat')
 def chat(data):
@@ -28,3 +30,15 @@ def chat(data):
   res_data = new_msg.to_dict()
   res_data['user'] = data['user']
   emit('chat', res_data, broadcast=True, to=room)
+
+
+@sock.on('edit_chat')
+def edit_chat(data):
+  room = str(data['channelId'])
+  msg = Message.query.filter_by(id=data['id']).one()
+  msg.content = data['content']
+  db.session.commit()
+  msg_dict = msg.to_dict()
+  msg_dict['user'] = data['user'] 
+  # since content is the only thing that changes
+  emit('edit_chat', msg_dict, broadcast=True, to=room)

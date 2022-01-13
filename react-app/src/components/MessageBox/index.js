@@ -4,7 +4,7 @@ import { deleteMessage } from "../../store/messages";
 import MsgEditForm from "../MsgEditForm";
 import "./MessageBox.css";
 
-function MessageBox({ message }) {
+function MessageBox({ message, sock }) {
   const currUser = useSelector((state) => state.session.user);
   // tmp msg obj have to be slightly different then ones gathered from db
   const owned = message?.user_id === currUser.id || 
@@ -67,6 +67,7 @@ function MessageBox({ message }) {
             setHidden={setHidden}
             message={message}
             setFormView={setShowEditForm}
+            sock={sock}
           />
         ) : (
           <p className="content">{message.content}</p>
