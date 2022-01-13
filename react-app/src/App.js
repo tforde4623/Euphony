@@ -17,6 +17,7 @@ import NewServer from './components/NewServer';
 import EditServer from './components/EditServer';
 import Main from "./components/Main";
 import ServersList from "./components/ServersList";
+import EditCategory from "./components/EditCategory";
 
 
 function App() {
@@ -77,6 +78,15 @@ function App() {
         </Route>
         <Route path='/servers/:serverId/edit'>
           <EditServer />
+        </Route>
+
+
+        {/* Categories */}
+        <Route path='/servers/:serverId/categories/new'>
+          <NewCategory />
+        </Route>
+        <Route path='/servers/:serverId/categories/:categoryId/edit'>
+          <EditCategory />
         </Route>
 
         {/* Users */}
