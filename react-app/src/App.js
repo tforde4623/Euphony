@@ -13,7 +13,10 @@ import NewMessage from "./components/NewMessage";
 import NewChannel from "./components/NewChannel";
 import ShowChannel from "./components/ShowChannel";
 import EditChannel from "./components/EditChannel";
+import NewServer from './components/NewServer';
+import EditServer from './components/EditServer';
 import Main from "./components/Main";
+import ServersList from "./components/ServersList";
 
 
 function App() {
@@ -66,6 +69,15 @@ function App() {
         </Route>
 
         {/* Servers */}
+        <Route path='/servers/new'>
+          <NewServer />
+        </Route>
+        <Route path='/servers'>
+          <ServersList />
+        </Route>
+        <Route path='/servers/:serverId/edit'>
+          <EditServer />
+        </Route>
 
         {/* Users */}
         <ProtectedRoute path="/users" exact={true}>
