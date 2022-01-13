@@ -14,7 +14,7 @@ const ShowChannel = () => {
 
   const categoriesObject = useSelector((state) => state.categories);
   const channelsObj = useSelector((state) => state.channels);
-  const currServer = useSelector((state) => state.servers?.[serverId]);
+  const currServer = useSelector((state) => state.servers[serverId]);
   console.log(currServer, 'currServer')
 
   let channelsArr;
@@ -41,7 +41,7 @@ const ShowChannel = () => {
 
   return (
     <div className="channels_div">
-      <p className="light_large">SERVER NAME</p>
+      <p className="light_large">{currServer?.name}</p>
       <NavLink to={`/servers/${serverId}/categories/new`}>
         <button>Add a Category</button>
       </NavLink>
