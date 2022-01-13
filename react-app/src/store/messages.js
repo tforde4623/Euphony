@@ -18,15 +18,12 @@ export const readMessages = (channelId) => async(dispatch)=> {
 // Create a message
 const ADD_MESSAGE = "messages/ADD_MESSAGE";
 
-export const createMessage = (newMessage, user) => async (dispatch) => {
-  await fetch(`/api/messages/`, {
-    method: "post",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(newMessage),
-  });
-};
+// we don't need a thunk since the socket reciever is handling
+// addition to database
+export const createMessage = message => ({
+  type: ADD_MESSAGE, 
+  message
+});
 
 // Update message
 const UPDATE_MESSAGE = "messages/UPDATE_MESSAGE";

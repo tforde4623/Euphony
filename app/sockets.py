@@ -1,4 +1,7 @@
+from flask import jsonify
 from flask_socketio import SocketIO, emit, join_room
+from .models.messages import Message
+from .models import db
 import os
 
 # setup socket origins for prod and dev
@@ -16,4 +19,12 @@ def join(data):
 @sock.on('chat')
 def chat(data):
   room = str(data['channelId'])
-  emit('chat', data, broadcast=True, to=room)
+  new_msg = Message(content=data['content'],
+                    channel_id=data['channelId'],
+                    user_id=data['userId'])
+  db.session.add(new_msg)
+  db.session.commit()
+
+  res_data = new_msg.to_dict()
+  res_data['user'] = data['user']
+  emit('chat', res_data, broadcast=True, to=room)

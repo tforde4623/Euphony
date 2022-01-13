@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { readMessages, createMessage } from '../../store/messages';
@@ -12,7 +12,6 @@ let sock;
 const ShowAllMessages = () => {
   const { channelId } = useParams();
   const messages = useSelector(state => Object.values(state.messages)) || [];
-  const [tmpMsgs, setTmpMsgs] = useState([])
   const dispatch = useDispatch();
 
   // handle sock connection
@@ -23,12 +22,12 @@ const ShowAllMessages = () => {
     // recieve chats
     sock.on('chat', (data) => {
       // maybe tmp msgs?
-      setTmpMsgs(m => [...m, data]);
+      dispatch(createMessage(data));
     });
 
     // cleanup
     return (() => sock.disconnect());
-  }, []);
+  }, [dispatch]);
 
   useEffect(() => {
     sock.emit('join', { room: channelId });
@@ -43,9 +42,6 @@ const ShowAllMessages = () => {
       {/* messages rendered */}
       <div className='messages-container'>
       {messages.map((msg, idx) => (
-        <MessageBox key={idx} message={msg}/>
-      ))}
-      {tmpMsgs.map((msg, idx) => (
         <MessageBox key={idx} message={msg}/>
       ))}
       </div>
