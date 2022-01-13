@@ -14,8 +14,7 @@ const rootReducer = combineReducers({
   session,
   messages: messageReducer,
   channels: channelReducer,
-  servers: serverReducer
-
+  servers: serverReducer,
   categories: categoriesReducer,
   members: memberReducer
 

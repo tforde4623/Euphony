@@ -14,7 +14,6 @@ const EditChannel = () => {
 
   const userId = useSelector((state) => state.session.user?.id);
   const channel = useSelector((state) => state.channels[channelId]);
-  // console.log(channel, "DOG")
 
   // COMMENT IN ONCE SERVER THUNKS DONE
   // const serverOwnerId = useSelector(state => state.servers[serverId]?.owner_id)
@@ -25,8 +24,8 @@ const EditChannel = () => {
 
   useEffect(() => {
     dispatch(getAllChannels());
-    setName(channel.name);
-  }, [dispatch, serverId, channelId, channel.name]);
+    setName(channel?.name);
+  }, [dispatch, serverId, channelId, channel?.name]);
 
   useEffect(() => {
     const errors = [];

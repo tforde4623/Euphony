@@ -1,6 +1,6 @@
 import React from "react";
 import { useHistory } from "react-router-dom";
-import { useDispatch} from "react-redux";
+import { useDispatch } from "react-redux";
 import { deleteChannel } from "../../store/channels";
 import "./DeleteChannel.css";
 
@@ -17,7 +17,7 @@ const DeleteChannel = ({ serverId, channelId, userId }) => {
     }
   };
   return (
-    <button onClick={handleDelete} className="edit_cocktail_button">
+    <button onClick={handleDelete}>
       <i className="far fa-trash-alt"></i>
     </button>
   );
