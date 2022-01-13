@@ -18,7 +18,7 @@ function MessageBox({ message, sock }) {
   return (
     <div className="message_full">
       {/* user icon */}
-      <div className="user_icon_div">
+      <div className="user_icon_div light_large">
         {message?.user.icon_url ? null : message.user.username[0]}
         {message.user?.icon_url && (
           <img src={message.user.icon_url} alt="user icon"></img>

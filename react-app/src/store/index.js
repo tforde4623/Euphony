@@ -3,9 +3,7 @@ import thunk from "redux-thunk";
 import session from "./session";
 import messageReducer from "./messages";
 import channelReducer from "./channels";
-
 import serverReducer from './servers';
-
 import categoriesReducer from "./categories";
 import memberReducer from "./members";
 
