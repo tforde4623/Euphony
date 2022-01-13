@@ -9,3 +9,11 @@
   max-height: 150px;
   padding: 8px;
 }
+
+.edit-submit-btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 8px;
+  border-radius: 30px;
+}

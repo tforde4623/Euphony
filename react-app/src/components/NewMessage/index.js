@@ -54,8 +54,8 @@ const NewMessage = ({ sock }) => {
         />
 
         {/* Submit */}
-        <button type="submit" disabled={errors.length > 0} className="add_btn">
-          <i className="fas fa-plus"></i>
+        <button type="submit" disabled={errors.length > 0} className="edit-submit-btn">
+        <i class="fas fa-paper-plane fa-lg"></i>
         </button>
       </form>
     </div>

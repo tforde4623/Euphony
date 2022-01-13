@@ -7,7 +7,6 @@ servers = Blueprint('servers', __name__)
 @servers.route('')
 def get_all_servers():
     servers = Server.query.all()
-    print(servers, 'DOGGIE')
 
     return jsonify([server.to_dict() for server in servers])
 

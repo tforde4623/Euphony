@@ -32,11 +32,11 @@ const MsgEditForm = ({ setFormView, message, sock }) => {
       <button 
         className='edit-submit-btn' 
         onClick={e => handleSubmit(e)}
-      >Edit</button>
+      ><i class="fas fa-check-circle fa-lg"></i></button>
       <button 
         onClick={() => setFormView(false)}
         className='edit-submit-btn'
-      >Cancel</button>
+      ><i class="fas fa-window-close fa-lg"></i></button>
     </div>
   )
 };

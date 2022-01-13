@@ -15,7 +15,7 @@ const ShowChannel = () => {
   const categoriesObject = useSelector((state) => state.categories);
   const channelsObj = useSelector((state) => state.channels);
   const currServer = useSelector((state) => state.servers[serverId]);
-  console.log(currServer, 'currServer')
+  console.log(currServer, "currServer");
 
   let channelsArr;
   let nullchannels = [];
@@ -41,10 +41,19 @@ const ShowChannel = () => {
 
   return (
     <div className="channels_div">
-      <p className="light_large">{currServer?.name}</p>
-      <NavLink to={`/servers/${serverId}/categories/new`}>
-        <button>Add a Category</button>
-      </NavLink>
+      <div>
+        <p className="light_large">{currServer?.name}</p>
+        <NavLink to={`/servers/${serverId}/categories/new`}>
+          <button className="dark_medium">
+            Add Category
+          </button>
+        </NavLink>
+        <NavLink to={`/servers/${serverId}/channels/new`}>
+          <button className="dark_medium">
+            Add Channel
+          </button>
+        </NavLink>
+      </div>
       <ul className="channels_list">
         {nullchannels.map((channel) => {
           return (
