@@ -58,6 +58,7 @@ const ShowChannel = () => {
             </li>
           );
         })}
+        
         {categoriesArr.map((category) => (
           <div>
             <h2>{category.name}</h2>
