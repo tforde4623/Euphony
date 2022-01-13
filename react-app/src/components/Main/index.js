@@ -9,7 +9,6 @@ import { readMembers } from "../../store/members";
 import "./Main.css"
 
 function Main() {
-  //NEED TO ADD SHOW USERS ONCE WRITTEN
   const { serverId } = useParams();
   const dispatch = useDispatch();
 
@@ -25,7 +24,7 @@ function Main() {
       <ShowAllMessages />
       <Members />
     </div>
-  );
+  ); 
 }
 
 export default Main;
