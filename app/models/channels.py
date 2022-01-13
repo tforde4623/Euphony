@@ -10,7 +10,7 @@ class Channel(db.Model):
     category_id = db.Column(
       db.Integer, db.ForeignKey('categories.id'))
     
-    server = db.relationship("Server", back_populates="channels")
+    server = db.relationship("Server", back_populates="channels", foreign_keys=server_id)
     message = db.relationship("Message", back_populates="channel", cascade="all, delete")
     category = db.relationship("Category", back_populates="channels")
 
