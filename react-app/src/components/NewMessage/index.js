@@ -1,11 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { Redirect, useParams } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import { createMessage } from "../../store/messages";
+import { useSelector } from "react-redux";
 import "./NewMessage.css";
 
 const NewMessage = ({ sock }) => {
-  const dispatch = useDispatch();
   const { channelId } = useParams();
   const [content, setContent] = useState("");
   const [errors, setErrors] = useState([]);
@@ -27,16 +25,10 @@ const NewMessage = ({ sock }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    const newMessage = {
-      content,
-      userId,
-      channelId,
-    };
-
     // send new message via emission
     sock.emit('chat', { content, userId, user, channelId });
 
-    dispatch(createMessage(newMessage, user));
+    //dispatch(createMessage(newMessage));
     resetContent();
   };
 
