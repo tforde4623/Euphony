@@ -38,6 +38,9 @@ const ShowChannel = () => {
   return (
     <div className="channels_div">
       <p className="light_large">SERVER NAME</p>
+      <NavLink to={`/servers/${serverId}/categories/new`}>
+        <button>Add a Category</button>
+      </NavLink>
       <ul className="channels_list">
         {nullchannels.map((channel) => {
           return (
