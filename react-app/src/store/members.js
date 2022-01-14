@@ -15,9 +15,40 @@ export const readMembers = serverId => async dispatch => {
   }
 };
 
+
+export const join = (newMembership) => async (dispatch) => { 
+  const res = await fetch(`/api/members/new`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(newMembership),
+  });
+  if (res.ok) {
+    const members = await res.json();
+    dispatch(loadMembers(members));
+    return members;
+  }
+};
+
+
+export const unjoin = (serverId, userId) => async (dispatch) => {
+    const res = await fetch(`/api/members/delete`, {
+      method: "DELETE",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ userId, serverId}),
+    });
+
+    if (res.ok) {
+      const members = await res.json();
+      dispatch(loadmembers(members));
+      return members;
+    }
+};
+
 const initialState = {};
 
-const memberReducer = (state = initialState, action) => {
+const membersReducer = (state = initialState, action) => {
   let newState = {};
 
   switch (action.type) {
@@ -31,4 +62,4 @@ const memberReducer = (state = initialState, action) => {
   }
 };
 
-export default memberReducer;
+export default membersReducer;
