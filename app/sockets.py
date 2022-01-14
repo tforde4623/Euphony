@@ -5,10 +5,8 @@ import os
 
 def fix_datetime(dic):
     new_obj = dic
-    if new_obj.created_at:
-        new_obj['created_at'] = str(dic['created_at'])
-    if new_obj.updated_at:
-        new_obj['updated_at'] = str(dic['updated_at'])
+    new_obj['created_at'] = str(dic['created_at'])
+    new_obj['updated_at'] = str(dic['updated_at'])
 
     return new_obj
 
