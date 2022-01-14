@@ -19,6 +19,7 @@ import Main from "./components/Main";
 import ServersList from "./components/ServersList";
 import EditCategory from "./components/EditCategory";
 import NewCategory from "./components/NewCategory";
+import Splash from "./components/Splash";
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -98,7 +99,7 @@ function App() {
 
         {/* Home */}
         <ProtectedRoute path="/" exact={true}>
-          <h1>My Home Page</h1>
+          <Splash />
         </ProtectedRoute>
       </Switch>
     </BrowserRouter>
