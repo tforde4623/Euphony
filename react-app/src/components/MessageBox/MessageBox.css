@@ -4,6 +4,7 @@
   align-items: center;
   justify-content: center;
   margin-top: 20px;
+  width: 100%;
 }
 
 .user_icon_div {
@@ -22,7 +23,7 @@
   background-color: #e8eaed;
   border-radius: 15px;
   padding: 20px;
-  width: 400px;
+  width: 85%;
   margin-left: 20px;
 }
 
@@ -40,10 +41,6 @@
 .menu button {
   border-radius: 30px;
   padding: 8px;
-}
-
-.fa-ellipsis-v {
-  padding-left: 8px;
 }
 
 .content {

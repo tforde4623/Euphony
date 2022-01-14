@@ -6,13 +6,13 @@ import "./NewMessage.css";
 const NewMessage = ({ sock }) => {
   const { channelId } = useParams();
   const [content, setContent] = useState("");
-  const [errors, setErrors] = useState([]);
+  // const [errors, setErrors] = useState([]);
 
-  useEffect(() => {
-    const errors = [];
-    if (!content.length) errors.push("Message must not be empty.");
-    setErrors(errors);
-  }, [content]);
+  // useEffect(() => {
+  //   const errors = [];
+  //   if (!content.length) errors.push("Message must not be empty.");
+  //   setErrors(errors);
+  // }, [content]);
 
   const user = useSelector((state) => state.session.user);
   const userId = user?.id;
@@ -33,16 +33,16 @@ const NewMessage = ({ sock }) => {
   };
 
   return (
-    <div className="CU_msg">
+    <div className="new_message_div">
       <form onSubmit={handleSubmit} className="add_msg">
         {/* Errors */}
-        {errors.length > 0 && (
+        {/* {errors.length > 0 && (
           <ul className="errors">
             {errors.map((error) => (
               <li key={error}>{error}</li>
             ))}
           </ul>
-        )}
+        )} */}
 
         {/* Message Input */}
         <textarea
@@ -54,7 +54,7 @@ const NewMessage = ({ sock }) => {
         />
 
         {/* Submit */}
-        <button type="submit" disabled={errors.length > 0} className="edit-submit-btn">
+        <button type="submit" /* disabled={errors.length > 0} */ className="edit-submit-btn">
         <i class="fas fa-paper-plane fa-lg"></i>
         </button>
       </form>
