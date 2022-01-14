@@ -7,7 +7,7 @@ DEFAULT_USERS = [
     User(username='Will', email='will@aa.io', password='password'),
     User(username='Santi', email='santi@aa.io', password='password'),
     User(username='Ian', email='ian@aa.io', password='password'),
-    User(username='Jeremy', email='jeremy@aa.io', passowrd='password'),
+    User(username='Jeremy', email='jeremy@aa.io', password='password'),
     User(username='Angela', email='angela@aa.io', password='password'),
     User(username='Gloria', email='gloria@aa.io', password='password'),
     User(username='Cece', email='cece@aa.io', password='password'),
