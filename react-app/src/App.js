@@ -19,6 +19,7 @@ import Main from "./components/Main";
 import ServersList from "./components/ServersList";
 import EditCategory from "./components/EditCategory";
 import NewCategory from "./components/NewCategory";
+import ServerGrid from "./components/JoinServerPage";
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -83,6 +84,7 @@ function App() {
         </Route>
         <Route path="/servers" exact>
           <ServersList />
+          <ServerGrid />
         </Route>
         <Route path="/servers/:serverId/edit">
           <EditServer />

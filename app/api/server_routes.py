@@ -3,6 +3,11 @@ from app.models import db, Server
 
 servers = Blueprint('servers', __name__)
 
+@servers.route('/')
+def view_servers():
+    servers = Server.query.all()
+    return jsonify([svr.to_dict() for svr in servers])
+
 # ~~~~~~~~~~~~ CREATE ~~~~~~~~~~~~
 @servers.route('/new', methods=['POST'])
 def create_server():
@@ -22,10 +27,7 @@ def view_server(server_id):
     server = Server.query.filter_by(id=server_id).one()
     return jsonify(server)
     
-@servers.route('/', methods=['GET'])
-def view_servers():
-    servers = Server.query.all()
-    return jsonify([svr.to_dict() for svr in servers])
+
 
 @servers.route('/<id>/members')
 def get_server_members(id):
