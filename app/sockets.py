@@ -1,8 +1,16 @@
-from flask import jsonify
 from flask_socketio import SocketIO, emit, join_room
 from .models.messages import Message
 from .models import db
 import os
+
+def fix_datetime(dic):
+    new_obj = dic
+    if new_obj.created_at:
+        new_obj['created_at'] = str(dic['created_at'])
+    if new_obj.updated_at:
+        new_obj['updated_at'] = str(dic['updated_at'])
+
+    return new_obj
 
 # setup socket origins for prod and dev
 if os.environ.get('FLASK_ENV') == 'production':
@@ -29,7 +37,7 @@ def chat(data):
 
   res_data = new_msg.to_dict()
   res_data['user'] = data['user']
-  emit('chat', res_data, broadcast=True, to=room)
+  emit('chat', fix_datetime(res_data), broadcast=True, to=room)
 
 
 @sock.on('edit_chat')

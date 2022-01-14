@@ -77,7 +77,7 @@ const ShowChannel = () => {
       </div>
       <ul className="channels_list">
         {/* Render uncategorized channels */}
-        {nullchannels.map((channel) => {
+        {/* nullchannels.map((channel) => {
           return (
             <li>
               <NavLink
@@ -97,25 +97,25 @@ const ShowChannel = () => {
               )}
             </li>
           );
-        })}
+        }) */} 
 
         {/* Render channels with categories*/}
-        {categoriesArr.map((category) => (
+        {Object.values(categoriesObject).map(cat => (
           <div>
             {/* Display category name */}
             <div  id="category_edit">
-              <h2 className="dark_large">{category.name}</h2>
-              {owned && editMode && (
-                <NavLink
-                  to={`/servers/${serverId}/categories/${category?.id}/edit`}
-                >
-                  <i className="fas fa-edit fa-lg"></i>
-                </NavLink>
-              )}
+              <h2 className="dark_large">{cat.name}</h2>
+                {owned && editMode && (
+                  <NavLink
+                    to={`/servers/${serverId}/categories/${cat.id}/edit`} // TODO change this
+                  >
+                    <i className="fas fa-edit fa-lg"></i>
+                  </NavLink>
+                )}
             </div>
             {/* Display channels within that category */}
-            {category.channelsList &&
-              category.channelsList.map((channel) => {
+            {cat.channels &&
+              cat.channels.map((channel) => {
                 return (
                   <li>
                     <NavLink

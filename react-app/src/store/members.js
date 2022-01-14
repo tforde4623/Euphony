@@ -41,7 +41,7 @@ export const unjoin = (serverId, userId) => async (dispatch) => {
 
     if (res.ok) {
       const members = await res.json();
-      dispatch(loadmembers(members));
+      dispatch(loadMembers(members));
       return members;
     }
 };

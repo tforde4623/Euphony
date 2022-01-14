@@ -18,6 +18,8 @@ def get_channel_msgs(channel_id):
         user = msg.user.to_dict()
         msg_dict = msg.to_dict() 
         msg_dict['user'] = user
+        msg_dict['created_at'] = str(msg_dict['created_at'])
+        msg_dict['updated_at'] = str(msg_dict['updated_at'])
         dict_msgs.append(msg_dict)
     
     return jsonify(dict_msgs)
