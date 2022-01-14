@@ -7,9 +7,16 @@ const ServersList = () => {
     <div className="servers_list_div">
       <NavLink to="/servers">
         <div>
-          <i class="fas fa-home fa-lg"></i>{" "}
+          <i class="fas fa-home fa-lg"></i>
         </div>
       </NavLink>
+
+      <NavLink to="/servers/new">
+        <div>
+        <i class="fas fa-plus fa-lg"></i>
+        </div>
+      </NavLink>
+
       <div></div>
       <div></div>
       <div></div>
