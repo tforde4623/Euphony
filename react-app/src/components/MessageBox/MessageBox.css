@@ -47,6 +47,12 @@
   padding-top: 10px;
 }
 
+.message-date {
+  font-size: 10px;
+  font-weight: lighter;
+  margin-top: 1px;
+}
+
 /* .message-box {
   box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
   background-color: white;

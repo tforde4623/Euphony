@@ -72,10 +72,10 @@ const categoriesReducer = (state = initialState, action) => {
   let newState = {};
   switch (action.type) {
     case GET_ALL_CATEGORIES:
-      action.categories.forEach((category) => {
-        newState[category.id] = category;
+      action.categories.forEach(cat => {
+        newState[cat.id] = cat
       });
-      return { ...state, ...newState };
+      return { ...newState };
     default:
       return state;
   }
