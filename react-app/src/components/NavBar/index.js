@@ -73,7 +73,7 @@ const NavBar = () => {
         <div className="nav_links">
           <li>
             <NavLink
-              to="/"
+              to="/servers"
               exact={true}
               activeClassName="active"
               className="dark_large dynamic_underline"
@@ -82,6 +82,7 @@ const NavBar = () => {
             </NavLink>
           </li>
           <li>
+            {/* NTS: Link to favorite server?? */}
             <NavLink
               to="/"
               exact={true}

@@ -4,7 +4,7 @@
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  height: 100vh;
+  height: calc(100vh - 60px);
   padding: 20px 30px;
 }
 
