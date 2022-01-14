@@ -5,13 +5,13 @@
   justify-content: space-between;
   align-items: center;
   height: 100vh;
-  width: 25vw;
   padding: 20px 30px;
 }
 
 .name_toggle_edit {
   display: flex; 
   flex-direction: row;
+  align-items: center;
 }
 
 .name_toggle_edit button {
@@ -32,6 +32,7 @@
 
 #edit_mode_toggle {
   display: inline;
+  height: 30px;
 }
 
 .channels_div a button {
