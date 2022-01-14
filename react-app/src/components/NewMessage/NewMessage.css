@@ -1,0 +1,19 @@
+.new_message_div {
+  width: 100%;
+}
+
+.new_message_div form {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  background-color: #dea406;
+  padding: 20px;
+  border-radius: 10px;
+  margin: 15px 5px 2px 5px;
+}
+
+.new_message_div form textarea {
+  width: 90%;
+  height: 40px;
+  margin-right: 10px;
+}

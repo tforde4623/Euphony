@@ -6,8 +6,8 @@ import "./MessageBox.css";
 function MessageBox({ message, sock }) {
   const currUser = useSelector((state) => state.session.user);
   // tmp msg obj have to be slightly different then ones gathered from db
-  const owned = message?.user_id === currUser.id || 
-    message?.user?.id === currUser.id;
+  const owned = message?.user_id === currUser?.id || 
+    message?.user?.id === currUser?.id;
   const [hidden, setHidden] = useState(true);
   const [showEditForm, setShowEditForm] = useState(false);
 
