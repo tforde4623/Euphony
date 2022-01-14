@@ -10,10 +10,10 @@ const LogoutButton = () => {
 
   const onLogout = async (e) => {
     await dispatch(logout());
-    // return <Redirect to="/"></Redirect>
+    return <Redirect to="/"></Redirect>
   };
 
-  return user && <button onClick={onLogout}>Logout</button>;
+  return user && <button onClick={onLogout} className="light_small">Logout</button>;
 };
 
 export default LogoutButton;
