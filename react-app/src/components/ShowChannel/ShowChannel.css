@@ -6,19 +6,20 @@
   align-items: center;
   height: 100vh;
   width: 25vw;
+  padding: 20px 30px;
 }
 
-.channels_div div:nth-child(1) {
+.channels_div:nth-child(1) {
  display: flex;
  flex-direction: column;
- justify-content: space-around;
  align-items: center;
- width: 100%;;
+ width: 100%;
 }
 
 .channels_div a button {
   background-color: #e8eaed;
   color: black;
+  padding: 12px;
 }
 
 .channels_list {
@@ -33,8 +34,6 @@
 .channels_list li {
   display: flex;
   justify-content: space-between;
-  padding: 20px 30px;
-  
 }
 
 .channels_list li i {
