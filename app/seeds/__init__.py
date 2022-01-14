@@ -5,6 +5,7 @@ from .channels import seed_channels, undo_channels
 from .members import seed_members, undo_members
 from .messages import seed_messages, undo_messages
 from .servers import seed_servers, undo_servers
+from ..models import db, Server
 
 # Creates a seed group to hold our commands
 # So we can type `flask seed --help`
@@ -21,7 +22,10 @@ def seed():
     seed_members()
     seed_messages()
     # Add other seed functions here
-
+    # after seeding all, make general default
+    serv = Server.query.filter_by(id=1).one()
+    serv.default_channel = 1
+    db.session.commit()
 
 # Creates the `flask seed undo` command
 @seed_commands.command('undo')

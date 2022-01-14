@@ -8,6 +8,7 @@ def view_servers():
     servers = Server.query.all()
     return jsonify([svr.to_dict() for svr in servers])
 
+
 # ~~~~~~~~~~~~ CREATE ~~~~~~~~~~~~
 @servers.route('/new', methods=['POST'])
 def create_server():

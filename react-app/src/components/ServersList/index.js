@@ -1,15 +1,27 @@
 import React from "react";
-import "./ServersList.css"
+import { NavLink } from "react-router-dom";
+import "./ServersList.css";
 
 const ServersList = () => {
-  return <div className="servers_list_div">
-    <div><i class="fas fa-home fa-2x"></i></div>
-    <div></div>
-    <div></div>
-    <div></div>
-    
+  return (
+    <div className="servers_list_div">
+      <NavLink to="/servers">
+        <div>
+          <i class="fas fa-home fa-lg"></i>
+        </div>
+      </NavLink>
 
-  </div>;
+      <NavLink to="/servers/new">
+        <div>
+        <i class="fas fa-plus fa-lg"></i>
+        </div>
+      </NavLink>
+
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
+  );
 };
 
 export default ServersList;

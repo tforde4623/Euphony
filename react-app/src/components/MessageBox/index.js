@@ -6,8 +6,8 @@ import "./MessageBox.css";
 function MessageBox({ message, sock }) {
   const currUser = useSelector((state) => state.session.user);
   // tmp msg obj have to be slightly different then ones gathered from db
-  const owned = message?.user_id === currUser.id || 
-    message?.user?.id === currUser.id;
+  const owned = message?.user_id === currUser?.id || 
+    message?.user?.id === currUser?.id;
   const [hidden, setHidden] = useState(true);
   const [showEditForm, setShowEditForm] = useState(false);
 
@@ -18,7 +18,7 @@ function MessageBox({ message, sock }) {
   return (
     <div className="message_full">
       {/* user icon */}
-      <div className="user_icon_div">
+      <div className="user_icon_div light_large">
         {message?.user.icon_url ? null : message.user.username[0]}
         {message.user?.icon_url && (
           <img src={message.user.icon_url} alt="user icon"></img>
@@ -29,7 +29,7 @@ function MessageBox({ message, sock }) {
         <div className="menu">
           <div>
             <p>{message?.user?.username}</p>
-            <p>{message?.updatedAt}TIME</p>
+            <p className='message-date'>{new Date(message?.updated_at).toLocaleString()}</p>
           </div>
 
           {/* edit and delete settings dropdown menu */}
