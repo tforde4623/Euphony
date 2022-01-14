@@ -1,18 +1,6 @@
 // get all members (for given server)
 const LOAD_ALL_SERVER_MEMBERS = "members/load";
-const ADD_MEMBER = "members/ADD_MEMBER";
-const DELETE_MEMBER= "members/DELETE_MEMBER";
 
-export const removeMember = Id => ({
-  type: DELETE_MEMBER,
-  Id
-});
-
-
-export const createMember = member => ({
-  type: ADD_MEMBER, 
-  member
-});
 
 const loadMembers = members => ({
   type: LOAD_ALL_SERVER_MEMBERS,
@@ -47,8 +35,8 @@ export const join = (newMembership) => async (dispatch) => {
     body: JSON.stringify(newMembership),
   });
   if (res.ok) {
-    const members = await res.json();
-    return members;
+    const data = await res.json();
+    return dispatch(loadMembers(data));
   }
 };
 
@@ -61,8 +49,8 @@ export const unjoin = (serverId, userId) => async (dispatch) => {
     });
 
     if (res.ok) {
-      const members = await res.json();
-      return members;
+      const data = await res.json();
+      return dispatch(loadMembers(data));
     }
 };
 
@@ -77,12 +65,6 @@ const membersReducer = (state = initialState, action) => {
           newState[member.id] = member;
       });
       return {...newState};
-    case ADD_MEMBER:
-      return { ...state, [action.member.id]: action.memeber };
-    case DELETE_MEMBER:
-        newState = state;
-        delete newState[action.Id]
-        return { ...newState }
     default:
       return state;
   }

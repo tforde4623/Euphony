@@ -23,7 +23,9 @@ def join():
     db.session.add(new_membership)
     db.session.commit()
 
-    return jsonify(new_membership.to_dict())
+    memberships = Member.query.filter_by(user_id=member_data["userId"]).all()
+
+    return jsonify([mmship.to_dict() for mmship in memberships])
 
 
 #~~~~~~~~~~~~ DELETE ~~~~~~~~~~~~~~
@@ -35,6 +37,8 @@ def unjoin():
     Member.query.filter_by(server_id=member_data["serverId"], user_id=member_data["userId"]).delete()
     db.session.commit()
 
-    return jsonify(member_data["serverId"])
+    memberships = Member.query.filter_by(user_id=member_data["userId"]).all()
+
+    return jsonify([mmship.to_dict() for mmship in memberships])
 
     
