@@ -47,13 +47,19 @@ const ShowChannel = () => {
 
   return (
     <div className="channels_div">
-      <div>
-        <p className="light_large">{currServer?.name}</p>
-        {owned && (
-          <button onClick={(e) => setEditMode(!editMode)}>
-            <i class="fas fa-ellipsis-h fa-lg"></i>
-          </button>
-        )}
+      <div id="channels_header">
+        <div className="name_toggle_edit">
+          <p className="light_large">{currServer?.name}</p>
+          {owned && (
+            <button
+              onClick={(e) => setEditMode(!editMode)}
+              className="edit-submit-btn"
+              id="edit_mode_toggle"
+            >
+              <i class="fas fa-ellipsis-v fa-lg"></i>
+            </button>
+          )}
+        </div>
         {owned && editMode && (
           <>
             <NavLink to={`/servers/${serverId}/categories/new`}>
@@ -86,7 +92,7 @@ const ShowChannel = () => {
                 <NavLink
                   to={`/servers/${serverId}/channels/${channel?.id}/edit`}
                 >
-                  <i className="fas fa-edit"></i>
+                  <i className="fas fa-edit fa-lg"></i>
                 </NavLink>
               )}
             </li>
@@ -97,15 +103,16 @@ const ShowChannel = () => {
         {categoriesArr.map((category) => (
           <div>
             {/* Display category name */}
-            <h2>{category.name}</h2>
-            {owned && editMode && (
-              <NavLink
-                to={`/servers/${serverId}/categories/${category?.id}/edit`}
-              >
-                <i className="fas fa-edit"></i>
-              </NavLink>
-            )}
-
+            <div  id="category_edit">
+              <h2 className="dark_large">{category.name}</h2>
+              {owned && editMode && (
+                <NavLink
+                  to={`/servers/${serverId}/categories/${category?.id}/edit`}
+                >
+                  <i className="fas fa-edit fa-lg"></i>
+                </NavLink>
+              )}
+            </div>
             {/* Display channels within that category */}
             {category.channelsList &&
               category.channelsList.map((channel) => {
@@ -125,7 +132,7 @@ const ShowChannel = () => {
                       <NavLink
                         to={`/servers/${serverId}/channels/${channel?.id}/edit`}
                       >
-                        <i className="fas fa-edit"></i>
+                        <i className="fas fa-edit fa-lg"></i>
                       </NavLink>
                     )}
                   </li>
