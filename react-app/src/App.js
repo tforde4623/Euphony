@@ -13,10 +13,13 @@ import NewMessage from "./components/NewMessage";
 import NewChannel from "./components/NewChannel";
 import ShowChannel from "./components/ShowChannel";
 import EditChannel from "./components/EditChannel";
-import NewServer from './components/NewServer';
-import EditServer from './components/EditServer';
+import NewServer from "./components/NewServer";
+import EditServer from "./components/EditServer";
 import Main from "./components/Main";
 import ServersList from "./components/ServersList";
+import EditCategory from "./components/EditCategory";
+import NewCategory from "./components/NewCategory";
+import Splash from "./components/Splash";
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -45,7 +48,7 @@ function App() {
           <SignUpForm />
         </Route>
 
-        {/* Messagaes */} 
+        {/* Messagaes */}
         <Route path="/servers/:serverId/channels/:channelId/messages/:messageId">
           <EditMessage />
         </Route>
@@ -54,6 +57,14 @@ function App() {
         </Route>
         <Route path="/servers/:serverId/channels/:channelId/messages">
           <Main />
+        </Route>
+
+        {/* Categories */}
+        <Route path="/servers/:serverId/categories/new">
+          <NewCategory />
+        </Route>
+        <Route path="/servers/:serverId/categories/:categoryId/edit">
+          <EditCategory />
         </Route>
 
         {/* Channels */}
@@ -68,13 +79,13 @@ function App() {
         </Route>
 
         {/* Servers */}
-        <Route path='/servers/new'>
+        <Route path="/servers/new">
           <NewServer />
         </Route>
-        <Route path='/servers'>
+        <Route path="/servers" exact>
           <ServersList />
         </Route>
-        <Route path='/servers/:serverId/edit'>
+        <Route path="/servers/:serverId/edit">
           <EditServer />
         </Route>
 
@@ -88,7 +99,7 @@ function App() {
 
         {/* Home */}
         <ProtectedRoute path="/" exact={true}>
-          <h1>My Home Page</h1>
+          <Splash />
         </ProtectedRoute>
       </Switch>
     </BrowserRouter>

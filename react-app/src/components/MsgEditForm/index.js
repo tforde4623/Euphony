@@ -1,38 +1,42 @@
 import { useState } from 'react';
-import { useDispatch } from 'react-redux';
 
-import { updateMessage } from '../../store/messages';
 import './MsgEditForm.css';
 
-const MsgEditForm = ({ setFormView, message }) => {
+const MsgEditForm = ({ setFormView, message, sock }) => {
   const [content, setContent] = useState(message.content);
-  const dispatch = useDispatch();
 
   const handleSubmit = e => {
     e.preventDefault();
-    dispatch(updateMessage({ 
-      id: message.id, 
-      content, 
-      user_id: message.user_id, 
-      channel_id: message.channel_id 
-    }));
+    sock.emit(
+      'edit_chat', 
+      {
+        id: message.id,
+        content,
+        userId: message.user_id,
+        channelId: message.channel_id,
+        user: message.user
+      }
+    );
 
     setFormView(false);
   };
 
   return (
     <div>
-      <form className='edit-form' onSubmit={e => handleSubmit(e)}>
+      <form className='edit-form'>
         <textarea 
           className='edit-textarea'
           value={content}
           onChange={e => setContent(e.target.value)}></textarea>
       </form>
-      <button className='edit-submit-btn' type='submit'>Edit</button>
+      <button 
+        className='edit-submit-btn' 
+        onClick={e => handleSubmit(e)}
+      ><i class="fas fa-check-circle fa-lg"></i></button>
       <button 
         onClick={() => setFormView(false)}
         className='edit-submit-btn'
-        >Cancel</button>
+      ><i class="fas fa-window-close fa-lg"></i></button>
     </div>
   )
 };

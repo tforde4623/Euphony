@@ -18,32 +18,17 @@ export const readMessages = (channelId) => async(dispatch)=> {
 // Create a message
 const ADD_MESSAGE = "messages/ADD_MESSAGE";
 
-const addMessage = (message) => ({
-  type: ADD_MESSAGE,
-  message,
+// we don't need a thunk since the socket reciever is handling
+// addition to database
+export const createMessage = message => ({
+  type: ADD_MESSAGE, 
+  message
 });
-
-export const createMessage = (newMessage, user) => async (dispatch) => {
-  const res = await fetch(`/api/messages/`, {
-    method: "post",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(newMessage),
-  });
-
-  if (res.ok) {
-    const message = await res.json();
-    message.user = user;
-    dispatch(addMessage(message));
-    return message;
-  }
-};
 
 // Update message
 const UPDATE_MESSAGE = "messages/UPDATE_MESSAGE";
 
-const editMessage = (message) => ({
+export const editMessage = (message) => ({
   type: UPDATE_MESSAGE,
   message,
 });
@@ -73,7 +58,7 @@ export const updateMessage =
 // delete message
 const DELETE_MESSAGE = "messages/delete";
 
-const removeMessage = msgId => ({
+export const removeMessage = msgId => ({
   type: DELETE_MESSAGE,
   msgId
 });

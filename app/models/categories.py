@@ -17,3 +17,5 @@ class Category(db.Model):
             'name': self.name,
             'server_id': self.server_id,
         }
+    
+    

@@ -1,20 +1,18 @@
 import React, { useEffect, useState } from "react";
 import { Redirect, useParams } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import { createMessage } from "../../store/messages";
+import { useSelector } from "react-redux";
 import "./NewMessage.css";
 
-const NewMessage = () => {
-  const dispatch = useDispatch();
+const NewMessage = ({ sock }) => {
   const { channelId } = useParams();
   const [content, setContent] = useState("");
-  const [errors, setErrors] = useState([]);
+  // const [errors, setErrors] = useState([]);
 
-  useEffect(() => {
-    const errors = [];
-    if (!content.length) errors.push("Message must not be empty.");
-    setErrors(errors);
-  }, [content]);
+  // useEffect(() => {
+  //   const errors = [];
+  //   if (!content.length) errors.push("Message must not be empty.");
+  //   setErrors(errors);
+  // }, [content]);
 
   const user = useSelector((state) => state.session.user);
   const userId = user?.id;
@@ -27,27 +25,24 @@ const NewMessage = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    const newMessage = {
-      content,
-      userId,
-      channelId,
-    };
+    // send new message via emission
+    sock.emit('chat', { content, userId, user, channelId });
 
-    dispatch(createMessage(newMessage, user));
+    //dispatch(createMessage(newMessage));
     resetContent();
   };
 
   return (
-    <div className="CU_msg">
+    <div className="new_message_div">
       <form onSubmit={handleSubmit} className="add_msg">
         {/* Errors */}
-        {errors.length > 0 && (
+        {/* {errors.length > 0 && (
           <ul className="errors">
             {errors.map((error) => (
               <li key={error}>{error}</li>
             ))}
           </ul>
-        )}
+        )} */}
 
         {/* Message Input */}
         <textarea
@@ -59,8 +54,8 @@ const NewMessage = () => {
         />
 
         {/* Submit */}
-        <button type="submit" disabled={errors.length > 0} className="add_btn">
-          <i className="fas fa-plus"></i>
+        <button type="submit" /* disabled={errors.length > 0} */ className="edit-submit-btn">
+        <i class="fas fa-paper-plane fa-lg"></i>
         </button>
       </form>
     </div>

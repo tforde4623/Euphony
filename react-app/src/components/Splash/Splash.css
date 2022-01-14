@@ -1,0 +1,65 @@
+.splash_div {
+  height: calc(100vh - 60px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.splash_photo_div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-image: url("https://source.unsplash.com/esRJtEsvJhU");
+  background-repeat: no-repeat;
+  background-position: top;
+  background-size: 100vw 60vh;
+  width: 100vw;  
+  height: 60vh; 
+}
+.splash_text_div {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #e8eaed;
+  border-radius: 70px;
+  width: 50vw; 
+  height: 25vh; 
+  padding: 20px 40px;
+}
+.splash_photo_div h1 {
+  margin-bottom: 20px;
+}
+
+.splash_photo_div p {
+}
+
+.server_rotate_div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #e8eaed;
+  width: 70vw; 
+  border-radius: 30px;
+  margin: 20px
+}
+
+.server_rotate_div button {
+  padding: 6px 10px;
+  height: 40px;
+}
+
+.server_rotate_div button i {
+}
+
+.three_servers_div {
+}
+
+
+.server_rotate_div div {
+  width: 200px; 
+  height: 200px;
+  background-color: #a53b17;
+  margin: 20px;
+  border-radius: 30px;
+}

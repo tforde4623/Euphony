@@ -1,49 +1,57 @@
 import React, { useEffect, useState } from "react";
 import { useHistory, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { updateChannel, getAllChannels } from "../../store/channels";
-import "./EditChannel.css";
-import DeleteChannel from "../DeleteChannel";
+import {
+  updateCategory,
+  getAllCategories,
+  deleteCategory,
+} from "../../store/categories";
+import "./EditCategory.css";
 
-const EditChannel = () => {
-  let { serverId, channelId } = useParams();
+const EditCategory = () => {
+  let { serverId, categoryId } = useParams();
   serverId = Number(serverId);
-  channelId = Number(channelId);
+  categoryId = Number(categoryId);
   const dispatch = useDispatch();
   const history = useHistory();
 
   const userId = useSelector((state) => state.session.user?.id);
-  const channel = useSelector((state) => state.channels[channelId]);
-
-  // COMMENT IN ONCE SERVER THUNKS DONE
-  // const serverOwnerId = useSelector(state => state.servers[serverId]?.owner_id)
-  // if (userId !== serverOwnerId) return <Redirect to={`/servers/${serverId}/categories/${categoryId}/channels`}></Redirect>
+  const category = useSelector((state) => state.categories[categoryId]);
 
   const [name, setName] = useState("");
   const [errors, setErrors] = useState([]);
 
   useEffect(() => {
-    dispatch(getAllChannels());
-    setName(channel?.name);
-  }, [dispatch, serverId, channelId, channel?.name]);
+    dispatch(getAllCategories());
+    setName(category?.name);
+  }, [dispatch, serverId, categoryId, category?.name]);
 
   useEffect(() => {
     const errors = [];
-    if (!name?.length) errors.push("Channel name must not be empty.");
+    if (!name?.length) errors.push("Category name must not be empty.");
     setErrors(errors);
   }, [name]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const updatedChannel = {
+    const updatedCategory = {
       name,
       serverId,
-      channelId,
+      categoryId,
       userId
     };
 
-    dispatch(updateChannel(updatedChannel));
+    dispatch(updateCategory(updatedCategory));
     history.push(`/servers/${serverId}/channels`);
+  };
+
+  const handleDelete = (e) => {
+    e.preventDefault();
+    const deletePayload = { userId, categoryId, serverId };
+    let deletedCategory = dispatch(deleteCategory(deletePayload));
+    if (deletedCategory) {
+      history.push(`/servers/${serverId}/channels`);
+    }
   };
 
   return (
@@ -57,11 +65,11 @@ const EditChannel = () => {
             ))}
           </ul>
         )}
- 
+
         {/* Name */}
         <input
-          placeholder="Channel Name"
-          name="channel_name"
+          placeholder="Category Name"
+          name="category_name"
           value={name}
           onChange={(e) => setName(e.target.value)}
           type="text"
@@ -71,12 +79,13 @@ const EditChannel = () => {
         <button type="submit" disabled={errors.length > 0} className="add_btn">
           <i className="fas fa-plus"></i>
         </button>
-
-        {/* Delete */}
-        <DeleteChannel channelId={channelId} userId={userId} serverId={serverId}/>
+        {/* DELETE */}
+        <button onClick={handleDelete}>
+          <i className="far fa-trash-alt"></i>
+        </button>
       </form>
     </div>
   );
 };
 
-export default EditChannel;
+export default EditCategory;

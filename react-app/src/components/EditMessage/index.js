@@ -50,7 +50,7 @@ const EditMessage = () => {
   };
 
   return (
-    <div className="CU_msg">
+    <div className="edit_message_div">
       <form onSubmit={handleSubmit} className="add_msg">
         {/* Errors */}
         {errors.length > 0 && (

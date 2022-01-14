@@ -10,6 +10,11 @@ from .api.user_routes import user_routes
 from .api.auth_routes import auth_routes
 from .api.message_routes import messages
 from .api.channel_routes import channels
+from .api.category_routes import categories
+from .api.server_routes import servers
+from .api.member_routes import members
+
+from .sockets import sock
 
 from .seeds import seed_commands
 
@@ -35,7 +40,12 @@ app.register_blueprint(user_routes, url_prefix='/api/users')
 app.register_blueprint(auth_routes, url_prefix='/api/auth')
 app.register_blueprint(messages, url_prefix='/api/messages')
 app.register_blueprint(channels, url_prefix='/api/channels')
+app.register_blueprint(categories, url_prefix='/api/categories')
+app.register_blueprint(servers, url_prefix='/api/servers')
+app.register_blueprint(members, url_prefix='/api/members')
+
 db.init_app(app)
+sock.init_app(app)
 Migrate(app, db)
 
 # Application Security
@@ -74,3 +84,8 @@ def react_root(path):
     if path == 'favicon.ico':
         return app.send_static_file('favicon.ico')
     return app.send_static_file('index.html')
+
+
+# init sockets w/ app
+if __name__ == '__main__':
+    sock.run(app)
