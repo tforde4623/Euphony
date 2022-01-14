@@ -1,6 +1,6 @@
 from flask import Blueprint, jsonify, request
 from sqlalchemy.orm import joinedload
-from app.models import Message, Category, Channel, User, db
+from app.models import Message, Server, Category, Channel, User, db
 
 categories = Blueprint('categories', __name__)
 
@@ -18,8 +18,11 @@ def nested_to_dict(categories):
 #~~~~~~~~~~~~ GET ~~~~~~~~~~~~~~
 @categories.route('/<server_id>')
 def get_all_categories(server_id):
-    categories = Category.query.filter_by(server_id= server_id).join(Channel).options(joinedload(Category.channels))
-    return jsonify(nested_to_dict(categories))
+    cats = Server.query.filter_by(id= server_id).one()
+    return jsonify([{'name': cat.name, 
+                     'id': cat.id, 
+                     'channels':  [c.to_dict() for c in cat.channels]} 
+                          for cat in cats.categories])
 
 
 # ~~~~~~~~~~~~ CREATE ~~~~~~~~~~~~
@@ -31,7 +34,7 @@ def create_category():
     db.session.add(new_category)
     db.session.commit()
 
-    categories = Category.query.filter_by(server_id= server_id).join(Channel).options(joinedload(Category.channels))
+    categories = Category.query.filter_by(server_id= category_data['serverId']).join(Channel).options(joinedload(Category.channels))
     return jsonify(nested_to_dict(categories))
     
 

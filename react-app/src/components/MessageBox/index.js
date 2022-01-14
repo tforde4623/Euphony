@@ -29,7 +29,7 @@ function MessageBox({ message, sock }) {
         <div className="menu">
           <div>
             <p>{message?.user?.username}</p>
-            <p>{message?.updatedAt}TIME</p>
+            <p className='message-date'>{new Date(message?.updated_at).toLocaleString()}</p>
           </div>
 
           {/* edit and delete settings dropdown menu */}

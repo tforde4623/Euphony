@@ -1,8 +1,15 @@
-from flask import Blueprint, json, request, jsonify
+from flask import Blueprint, request, jsonify
 from sqlalchemy.orm import joinedload
 from app.models import db, Message, User
 
 messages = Blueprint('messages', __name__)
+
+def fix_datetime(dic):
+    new_obj = dic
+    new_obj.created_at = dic.created_at.isoformat()
+    new_obj.updated_at = dic.updated_at.isoformat()
+
+    return new_obj
 
 # ~~~~~~~~~~~~ CREATE ~~~~~~~~~~~~
 @messages.route('/', methods=['POST'])
@@ -16,7 +23,7 @@ def create_message():
     db.session.add(new_msg)
     db.session.commit()
 
-    return jsonify(new_msg.to_dict())
+    return jsonify(fix_datetime(new_msg.to_dict()))
 
 # ~~~~~~~~~~~~ READ ~~~~~~~~~~~~~~
 '''getting all msgs will be by channel, in the channel routes'''
@@ -41,7 +48,7 @@ def edit_message(msg_id):
     msg_dict = msg[0].to_dict()
     msg_dict['user'] = user
 
-    return jsonify(msg_dict)
+    return jsonify(fix_datetime(msg_dict))
 
 #~~~~~~~~~~~~ DELETE ~~~~~~~~~~~~~~
 @messages.route('/<msg_id>/delete', methods=['DELETE'])
