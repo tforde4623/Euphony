@@ -62,11 +62,13 @@ const NavBar = () => {
     <nav>
       <ul>
         {/* Logo */}
+        <NavLink to="/">
         <div className="logo_div">
           <h1 className="dark_large" id="logo">
             Euphony
           </h1>
         </div>
+        </NavLink>
 
         {/* Navigation Links */}
         <div className="nav_links">
