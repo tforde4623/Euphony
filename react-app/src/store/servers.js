@@ -7,7 +7,7 @@ const loadServers = servers => ({
 });
 
 export const showServers = () => async(dispatch) => {
-    const servers = await fetch(`/api/servers`);
+    const servers = await fetch(`/api/servers/`);
     if (servers.ok) {
         const list = await servers.json()
         dispatch(loadServers(list))

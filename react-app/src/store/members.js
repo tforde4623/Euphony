@@ -1,10 +1,20 @@
 // get all members (for given server)
 const LOAD_ALL_SERVER_MEMBERS = "members/load";
 
+
 const loadMembers = members => ({
   type: LOAD_ALL_SERVER_MEMBERS,
   members
 });
+
+export const checkMemberships = (userId) => async dispatch => {
+  const memberships = await fetch(`/api/members/memberships/${userId}`)
+
+  if(memberships.ok) {
+    const data = await memberships.json()
+    return dispatch(loadMembers(data))
+  }
+}
 
 export const readMembers = serverId => async dispatch => {
   const members = await fetch(`/api/servers/${serverId}/members`);
@@ -25,9 +35,8 @@ export const join = (newMembership) => async (dispatch) => {
     body: JSON.stringify(newMembership),
   });
   if (res.ok) {
-    const members = await res.json();
-    dispatch(loadMembers(members));
-    return members;
+    const data = await res.json();
+    return dispatch(loadMembers(data));
   }
 };
 
@@ -40,9 +49,8 @@ export const unjoin = (serverId, userId) => async (dispatch) => {
     });
 
     if (res.ok) {
-      const members = await res.json();
-      dispatch(loadMembers(members));
-      return members;
+      const data = await res.json();
+      return dispatch(loadMembers(data));
     }
 };
 

@@ -1,21 +1,25 @@
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { join, unjoin } from "../../../store/members";
+import JoinButton from "../joinbutton";
+import UnjoinButton from "../unjoinbutton";
+
 
 
 
 function ServerCard({server}) {
-    const currUser = useSelector((state) => state.session.user);
     const dispatch = useDispatch()
-
+    const currUser = useSelector((state) => state.session.user);
+    const memberships = useSelector((state) => state.members)
+    const memberArr = Object.values(memberships)
     
-
+   
     return (
         <div className="card-div">
-            <card classname="server-card">
+            <div classname="server-card">
+                <img src={server.icon_url}></img>
                 <h2 classname="server-title">{server.name}</h2>
-            </card>
-            <button classname="join-button" onClick={}>+</button>
+            </div>
+            {memberArr.map(obj => obj.serverId).includes(server.Id) ? <UnjoinButton serverId={server.id}/> : <JoinButton serverId={server.id}/>}
         </div>
     );
 }
