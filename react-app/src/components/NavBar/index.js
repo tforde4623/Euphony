@@ -91,6 +91,20 @@ const NavBar = () => {
               Your Servers
             </NavLink>
           </li>
+          <li>
+            <NavLink
+              to="/about"
+              activeClassName="active"
+              className="dark_large dynamic_underline"
+            >
+              About
+            </NavLink>
+          </li>
+          <li>
+            <a href="https://github.com/tforde4623/Euphony">
+            <i class="fab fa-github fa-2x"></i>
+            </a>
+          </li>
         </div>
 
         {/* Authentication */}

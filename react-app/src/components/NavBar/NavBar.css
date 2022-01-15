@@ -22,11 +22,20 @@ nav ul {
 .nav_links {
   display: flex;
   justify-content: space-evenly;
-  width: 33vw;
+  width: 60vw;
 }
 
 .nav_links li {
   list-style: none;
+}
+
+.nav_links li a i {
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+  border-radius: 30px;
+}
+
+.nav_links li a i:hover {
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
 }
 
 .auth_nav_div {
