@@ -1,19 +1,26 @@
 from app.models import db, User
 
+DEFAULT_USERS = [
+    User(username='Demo', email='demo@aa.io', password='password'),
+    User(username='Marnie', email='marnie@aa.io', password='password'),
+    User(username='Bobbie', email='bobbie@aa.io', password='password'),
+    User(username='Will', email='will@aa.io', password='password'),
+    User(username='Santi', email='santi@aa.io', password='password'),
+    User(username='Ian', email='ian@aa.io', password='password'),
+    User(username='Jeremy', email='jeremy@aa.io', password='password'),
+    User(username='Angela', email='angela@aa.io', password='password'),
+    User(username='Gloria', email='gloria@aa.io', password='password'),
+    User(username='Cece', email='cece@aa.io', password='password'),
+    User(username='Nari', email='nari@aa.io', password='password'),
+    User(username='Lily', email='lily@aa.io', password='password'),
+    User(username='Michael', email='michael@aa.io', password='password'),
+    User(username='Andrew', email='andrew@aa.io', password='password'),
+]
+
 
 # Adds a demo user, you can add other users here if you want
 def seed_users():
-    demo = User(
-        username='Demo', email='demo@aa.io', password='password')
-    marnie = User(
-        username='marnie', email='marnie@aa.io', password='password')
-    bobbie = User(
-        username='bobbie', email='bobbie@aa.io', password='password')
-
-    db.session.add(demo)
-    db.session.add(marnie)
-    db.session.add(bobbie)
-
+    db.session.add_all(DEFAULT_USERS)
     db.session.commit() 
 
 
