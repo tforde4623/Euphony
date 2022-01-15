@@ -7,7 +7,6 @@ import DemoButton from "../DemoButton";
 import "./NavBar.css";
 
 const NavBar = () => {
-  // const dispatch = useDispatch();
   const user = useSelector((state) => state.session.user);
   let sessionLinks;
   if (user) {
