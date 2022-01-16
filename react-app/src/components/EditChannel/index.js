@@ -21,7 +21,9 @@ const EditChannel = ({ channelId, showChannelEdit, setShowChannelEdit }) => {
   // if (userId !== serverOwnerId) return <Redirect to={`/servers/${serverId}/categories/${categoryId}/channels`}></Redirect>
 
   const [name, setName] = useState("");
-  const [selectCategory, setSelectCategory] = useState("");
+  const [selectCategory, setSelectCategory] = useState(
+    Object.values(categories).filter(cat => cat.id === channel.category_id)[0].id || null
+  );
   const [errors, setErrors] = useState([]);
 
   useEffect(() => {
