@@ -47,7 +47,6 @@ const EditChannel = ({ channelId, showChannelEdit, setShowChannelEdit }) => {
 
     dispatch(updateChannel(updatedChannel));
     setShowChannelEdit(null);
-    // history.push(`/servers/${serverId}/channels/${channelId}`);
   };
 
   return (
