@@ -32,14 +32,14 @@ const Splash = () => {
       <div className="server_rotate_div">
         {fourStaticServers.map((server) => {
           return (
-            <div className="card">
+            <div className="splash_card">
               {/* FAV CHANNEL FIX */}
-              <a href={`/servers/${server?.id}/channels`} id="card_link">
-                <div className="card_img_container">
+              <a href={`/servers/${server?.id}/channels`} id="splash_card_link">
+                <div className="splash_card_img_container">
                   <img src={server?.icon_url} alt={server?.name}></img>
                 </div>
-                <div className="card_content">
-                  <h2 className="card_title light_large">{server?.name}</h2>
+                <div className="splash_card_content">
+                  <h2 className="splash_card_title light_large">{server?.name}</h2>
                 </div>
               </a>
             </div>

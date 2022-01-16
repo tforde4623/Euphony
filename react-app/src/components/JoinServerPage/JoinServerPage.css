@@ -1,3 +1,61 @@
+.banner {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 50px;
+  background-image: url("https://source.unsplash.com/esRJtEsvJhU");
+  background-repeat: no-repeat;
+  background-position: right 80%;
+  background-size: cover;
+  padding: 30px;
+}
+
+.banner button {
+  background-color: #e8eaed;
+  color: #0f0f11;
+}
+
+.grid {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+}
+
+section {
+  display: grid;
+  grid-template-columns: 1fr repeat(12, minmax(auto, 60px)) 1fr;
+  grid-gap: 40px;
+  padding: 60px 0;
+}
+
+.cards {
+  grid-column: 2 / span 12;
+  display: grid;
+  grid-template-columns: repeat(12, minmax(auto, 60px));
+  grid-gap: 40px;
+}
+
+@media only screen and (max-width: 700px) {
+  section {
+    grid-gap: 20px;
+  }
+}
+
+@media only screen and (max-width: 500px) {
+  section {
+    grid-template-columns: 10px repeat(6, 1fr) 10px;
+    grid-gap: 10px;
+  }
+
+  .cards {
+    grid-column: 2 / span 6;
+    grid-template-columns: repeat(6, 1fr);
+    grid-gap: 20px;
+  }
+}
+
 .splash_div {
   height: calc(100vh - 60px);
   display: flex;
@@ -31,7 +89,7 @@
   margin-bottom: 20px;
 }
 
-#splash_card_link:hover {
+#card_link:hover {
   z-index: 0;
   text-decoration: none;
 }
@@ -47,7 +105,7 @@
   margin: 15px;
 }
 
-.splash_card {
+.card {
   display: flex;
   flex-direction: column;
   width: 270px;
@@ -60,12 +118,16 @@
   margin: 20px 10px;
 }
 
-.splash_card:hover {
+.card button {
+  background-color: #c26b02;
+}
+
+.card button:hover {
   transform: translateY(-5px);
   box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
 }
 
-.splash_card_img_container {
+.card_img_container {
   width: 100%;
   padding-top: 70%;
   overflow: hidden;
@@ -74,25 +136,18 @@
   border-top-right-radius: 10px;
 }
 
-.splash_card_img_container img {
+.card_img_container img {
   width: 100%;
   position: absolute;
-  top: 60%;
+  top: 47%;
   left: 50%;
   transform: translate(-50%, -50%);
 }
 
-.splash_card_content {
+.card_content {
   padding: 20px;
 }
 
-.splash_card_title {
+.card_title {
   margin-bottom: 10px;
-}
-
-.splash_card_info {
-  display: flex;
-  flex-direction: column;
-  align-self: end;
-  align-items: center;
 }
