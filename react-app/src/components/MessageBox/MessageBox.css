@@ -28,7 +28,7 @@
   box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
   background-color: #e8eaed;
   border-radius: 15px;
-  padding: 20px;
+  padding: 20px 20px 10px 20px;
   width: 85%;
   margin-left: 20px;
 }
