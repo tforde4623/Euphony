@@ -23,6 +23,10 @@ const ShowChannel = () => {
   // Only render editing buttons in edit mode?
   const [editMode, setEditMode] = useState(false);
 
+  // Conditionally render either the name of the channel/category OR the form to edit it
+  const [showChannelEdit, setShowChannelEdit] = useState(false);
+  const [showcategoryEdit, setShowCategoryEdit] = useState(false);
+
   let channelsArr;
   let nullchannels = [];
   if (channelsObj) {
@@ -49,7 +53,10 @@ const ShowChannel = () => {
     <div className="channels_div">
       <div id="channels_header">
         <div className="name_toggle_edit">
+          {/* Display the server name */}
           <p className="light_large">{currServer?.name}</p>
+
+          {/* If owner of the server, show a button to toggle edit mode */}
           {owned && (
             <button
               onClick={(e) => setEditMode(!editMode)}
@@ -60,6 +67,8 @@ const ShowChannel = () => {
             </button>
           )}
         </div>
+
+        {/* In edit mode, show two buttons: to add a channel and category  */}
         {owned && editMode && (
           <>
             <NavLink to={`/servers/${serverId}/categories/new`}>
@@ -75,43 +84,22 @@ const ShowChannel = () => {
           </>
         )}
       </div>
-      <ul className="channels_list">
-        {/* Render uncategorized channels */}
-        {/* nullchannels.map((channel) => {
-          return (
-            <li>
-              <NavLink
-                to={`/servers/${serverId}/channels/${channel?.id}/messages`}
-              >
-                <p className="light_medium dynamic_underline" key={channel?.id}>
-                  {channel?.name}
-                </p>
-              </NavLink>
 
+      {/* Display the channels and categories */}
+      <ul className="channels_list">
+        {/* Render channels with categories*/}
+        {Object.values(categoriesObject).map((cat) => (
+          <div>
+            {/* Display category name */}
+            <div id="category_edit">
+              <h2 className="dark_large">{cat.name}</h2>
               {owned && editMode && (
                 <NavLink
-                  to={`/servers/${serverId}/channels/${channel?.id}/edit`}
+                  to={`/servers/${serverId}/categories/${cat.id}/edit`} // TODO change this
                 >
                   <i className="fas fa-edit fa-lg"></i>
                 </NavLink>
               )}
-            </li>
-          );
-        }) */} 
-
-        {/* Render channels with categories*/}
-        {Object.values(categoriesObject).map(cat => (
-          <div>
-            {/* Display category name */}
-            <div  id="category_edit">
-              <h2 className="dark_large">{cat.name}</h2>
-                {owned && editMode && (
-                  <NavLink
-                    to={`/servers/${serverId}/categories/${cat.id}/edit`} // TODO change this
-                  >
-                    <i className="fas fa-edit fa-lg"></i>
-                  </NavLink>
-                )}
             </div>
             {/* Display channels within that category */}
             {cat.channels &&
@@ -128,6 +116,7 @@ const ShowChannel = () => {
                         {channel?.name}
                       </p>
                     </NavLink>
+
                     {owned && editMode && (
                       <NavLink
                         to={`/servers/${serverId}/channels/${channel?.id}/edit`}

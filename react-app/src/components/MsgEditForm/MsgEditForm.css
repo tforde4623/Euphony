@@ -17,3 +17,11 @@
   padding: 8px;
   border-radius: 30px;
 }
+
+.msg_buttons_div {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
+  margin-top: 10px; 
+}
