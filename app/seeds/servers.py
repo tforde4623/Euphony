@@ -10,7 +10,6 @@ DEFAULT_SERVERS = [
   Server(name='Ice agers', owner_id=13, icon_url="https://source.unsplash.com/t_Rq61CvcbI"),
   Server(name='CStrikers', owner_id=7, icon_url="https://source.unsplash.com/nXYGViDhUd4"),
   Server(name='Pro League Champs', owner_id=4, icon_url="https://source.unsplash.com/OgqWLzWRSaI"),
-  Server(name='Minecraft Legends', owner_id=8, icon_url="https://source.unsplash.com/6eL_lMJDwjM"),
   Server(name='Grim Reaper Tribe', owner_id=5, icon_url="https://source.unsplash.com/FK5uXiCp9-Q"),
   Server(name='Game Changers', owner_id=6, icon_url="https://source.unsplash.com/p0j-mE6mGo4"),
   Server(name='FortThisNite', owner_id=8, icon_url="https://source.unsplash.com/qgInQSplXBU")

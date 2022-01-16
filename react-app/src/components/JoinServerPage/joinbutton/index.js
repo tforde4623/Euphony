@@ -12,7 +12,7 @@ const JoinButton = ({ serverId }) => {
 
   const payload = {
     serverId,
-    userId: currUser.id,
+    userId: currUser?.id,
   };
   return (
     <button

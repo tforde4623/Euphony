@@ -13,7 +13,6 @@ DEFAULT_MEMBERSHIP = [
   Member(user_id=8, server_id=10),
   Member(user_id=5, server_id=11),
   Member(user_id=6, server_id=12),
-  Member(user_id=8, server_id=13),
   Member(user_id=1, server_id=7),
   Member(user_id=1, server_id=11),
   Member(user_id=4, server_id=4),
