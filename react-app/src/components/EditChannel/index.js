@@ -5,7 +5,7 @@ import { updateChannel, getAllChannels } from "../../store/channels";
 import "./EditChannel.css";
 import DeleteChannel from "../DeleteChannel";
 
-const EditChannel = ({channelId}) => {
+const EditChannel = ({ channelId, showChannelEdit, setShowChannelEdit }) => {
   let { serverId } = useParams();
   serverId = Number(serverId);
   channelId = Number(channelId);
@@ -42,11 +42,12 @@ const EditChannel = ({channelId}) => {
       serverId,
       channelId,
       categoryId: selectCategory,
-      userId
+      userId,
     };
 
     dispatch(updateChannel(updatedChannel));
-    history.push(`/servers/${serverId}/channels`);
+    setShowChannelEdit(null);
+    // history.push(`/servers/${serverId}/channels/${channelId}`);
   };
 
   return (
@@ -60,11 +61,11 @@ const EditChannel = ({channelId}) => {
             ))}
           </ul>
         )}
- 
+
         {/* Name */}
         <input
           placeholder="Channel Name"
-          className='channel-name-input'
+          className="channel-name-input"
           name="channel_name"
           value={name}
           onChange={(e) => setName(e.target.value)}
@@ -72,11 +73,12 @@ const EditChannel = ({channelId}) => {
         ></input>
 
         {/* Change Category */}
-        <select 
-          className='select-input'
-          value={selectCategory} 
-          onChange={e => setSelectCategory(e.target.value)}>
-          {Object.values(categories).map(cat =>(
+        <select
+          className="select-input"
+          value={selectCategory}
+          onChange={(e) => setSelectCategory(e.target.value)}
+        >
+          {Object.values(categories).map((cat) => (
             <option value={cat.id}>{cat.name}</option>
           ))}
         </select>
@@ -87,7 +89,11 @@ const EditChannel = ({channelId}) => {
         </button>
 
         {/* Delete */}
-        <DeleteChannel channelId={channelId} userId={userId} serverId={serverId}/>
+        <DeleteChannel
+          channelId={channelId}
+          userId={userId}
+          serverId={serverId}
+        />
       </form>
     </div>
   );

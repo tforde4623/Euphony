@@ -106,7 +106,7 @@ const ShowChannel = () => {
             {cat.channels &&
               cat.channels.map((channel) => {
                 return (showChannelEdit && channel.id === showChannelEdit ? (
-                  <EditChannel channelId={channel?.id} />
+                  <EditChannel channelId={channel?.id} showChannelEdit={showChannelEdit} setShowChannelEdit={setShowChannelEdit}/>
                 ) : (
                   <li>
                     <NavLink
