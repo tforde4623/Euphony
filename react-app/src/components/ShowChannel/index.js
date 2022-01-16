@@ -105,8 +105,7 @@ const ShowChannel = () => {
             {/* Display channels within that category */}
             {cat.channels &&
               cat.channels.map((channel) => {
-                return (showChannelEdit ? (
-                  channel.id === showChannelEdit &&
+                return (showChannelEdit && channel.id === showChannelEdit ? (
                   <EditChannel channelId={channel?.id} />
                 ) : (
                   <li>
