@@ -59,6 +59,11 @@ nav ul {
   height: 30px;
   margin-right: 5px;
 }
+.auth_user_icon img {
+  border-radius: 50px;
+  width: 30px;
+  height: 30px;
+}
 
 .auth_nav_div {
   width: 33vw;

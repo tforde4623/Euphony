@@ -1,20 +1,20 @@
 from app.models import db, User
 
 DEFAULT_USERS = [
-    User(username='Demo', email='demo@aa.io', password='password'),
-    User(username='Marnie', email='marnie@aa.io', password='password'),
-    User(username='Bobbie', email='bobbie@aa.io', password='password'),
-    User(username='Will', email='will@aa.io', password='password'),
-    User(username='Santi', email='santi@aa.io', password='password'),
-    User(username='Ian', email='ian@aa.io', password='password'),
-    User(username='Jeremy', email='jeremy@aa.io', password='password'),
-    User(username='Angela', email='angela@aa.io', password='password'),
-    User(username='Gloria', email='gloria@aa.io', password='password'),
-    User(username='Cece', email='cece@aa.io', password='password'),
-    User(username='Nari', email='nari@aa.io', password='password'),
-    User(username='Lily', email='lily@aa.io', password='password'),
-    User(username='Michael', email='michael@aa.io', password='password'),
-    User(username='Andrew', email='andrew@aa.io', password='password'),
+    User(username='Demo', email='demo@aa.io', password='password', icon_url="https://source.unsplash.com/P2aOvMMUJnY"),
+    User(username='Marnie', email='marnie@aa.io', password='password',icon_url="https://source.unsplash.com/iVDS4sIQs_Y"),
+    User(username='Bobbie', email='bobbie@aa.io', password='password', icon_url="https://source.unsplash.com/Ul3nBBvxzWA"),
+    User(username='Will', email='will@aa.io', password='password', icon_url="https://source.unsplash.com/paCAdEhnglY"),
+    User(username='Santi', email='santi@aa.io', password='password', icon_url="https://source.unsplash.com/g5kW-Nb46b8"),
+    User(username='Ian', email='ian@aa.io', password='password', icon_url="https://source.unsplash.com/ycMO4eKm1dU"),
+    User(username='Jeremy', email='jeremy@aa.io', password='password', icon_url="https://source.unsplash.com/zA66MV4EyXc"),
+    User(username='Angela', email='angela@aa.io', password='password', icon_url="https://source.unsplash.com/TyZhkVuK658"),
+    User(username='Gloria', email='gloria@aa.io', password='password', icon_url="https://source.unsplash.com/Fw2Uhx5EdmI"),
+    User(username='Cece', email='cece@aa.io', password='password', icon_url="https://source.unsplash.com/0dMWddrISEs"),
+    User(username='Nari', email='nari@aa.io', password='password', icon_url="https://source.unsplash.com/yBsw6m04LnQ"),
+    User(username='Lily', email='lily@aa.io', password='password', icon_url="https://source.unsplash.com/UAHmBhrAWeM"),
+    User(username='Michael', email='michael@aa.io', password='password', icon_url="https://source.unsplash.com/4hSQFsN-qmc"),
+    User(username='Andrew', email='andrew@aa.io', password='password', icon_url="https://source.unsplash.com/XQr4e5O3Q_E"),
 ]
 
 
