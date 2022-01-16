@@ -62,11 +62,13 @@ const NavBar = () => {
     <nav>
       <ul>
         {/* Logo */}
+        <NavLink to="/">
         <div className="logo_div">
           <h1 className="dark_large" id="logo">
             Euphony
           </h1>
         </div>
+        </NavLink>
 
         {/* Navigation Links */}
         <div className="nav_links">
@@ -90,6 +92,20 @@ const NavBar = () => {
             >
               Your Servers
             </NavLink>
+          </li>
+          <li>
+            <NavLink
+              to="/about"
+              activeClassName="active"
+              className="dark_large dynamic_underline"
+            >
+              About
+            </NavLink>
+          </li>
+          <li>
+            <a href="https://github.com/tforde4623/Euphony">
+            <i class="fab fa-github fa-2x"></i>
+            </a>
           </li>
         </div>
 

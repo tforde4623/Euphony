@@ -21,7 +21,7 @@ import EditCategory from "./components/EditCategory";
 import NewCategory from "./components/NewCategory";
 import ServerGrid from "./components/JoinServerPage";
 import Splash from "./components/Splash";
-
+import AboutUs from "./components/AboutUs";
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -99,6 +99,10 @@ function App() {
         <ProtectedRoute path="/users/:userId" exact={true}>
           <User />
         </ProtectedRoute>
+
+        <Route path="/about">
+          <AboutUs />
+        </Route>
 
         {/* Home */}
         <ProtectedRoute path="/" exact={true}>
