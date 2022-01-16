@@ -48,6 +48,7 @@ def edit_channel(id):
     channel_data = request.json
 
     channel.name = channel_data['name']
+    channel.category_id = channel_data['categoryId']
     db.session.commit()
 
     return jsonify(channel.to_dict())

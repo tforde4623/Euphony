@@ -14,12 +14,14 @@ const EditChannel = () => {
 
   const userId = useSelector((state) => state.session.user?.id);
   const channel = useSelector((state) => state.channels[channelId]);
+  const categories = useSelector((state) => state.categories);
 
   // COMMENT IN ONCE SERVER THUNKS DONE
   // const serverOwnerId = useSelector(state => state.servers[serverId]?.owner_id)
   // if (userId !== serverOwnerId) return <Redirect to={`/servers/${serverId}/categories/${categoryId}/channels`}></Redirect>
 
   const [name, setName] = useState("");
+  const [selectCategory, setSelectCategory] = useState("");
   const [errors, setErrors] = useState([]);
 
   useEffect(() => {
@@ -39,6 +41,7 @@ const EditChannel = () => {
       name,
       serverId,
       channelId,
+      categoryId: selectCategory,
       userId
     };
 
@@ -61,11 +64,22 @@ const EditChannel = () => {
         {/* Name */}
         <input
           placeholder="Channel Name"
+          className='channel-name-input'
           name="channel_name"
           value={name}
           onChange={(e) => setName(e.target.value)}
           type="text"
         ></input>
+
+        {/* Change Category */}
+        <select 
+          className='select-input'
+          value={selectCategory} 
+          onChange={e => setSelectCategory(e.target.value)}>
+          {Object.values(categories).map(cat =>(
+            <option value={cat.id}>{cat.name}</option>
+          ))}
+        </select>
 
         {/* Submit */}
         <button type="submit" disabled={errors.length > 0} className="add_btn">

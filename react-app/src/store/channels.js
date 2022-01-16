@@ -49,12 +49,12 @@ const loadEditedChannel = (channel) => ({
 });
 
 export const updateChannel =
-  ({ name, serverId, channelId, userId }) =>
+  ({ name, serverId, channelId, categoryId, userId }) =>
   async (dispatch) => {
     const res = await fetch(`/api/channels/${channelId}`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ name, serverId, channelId, userId }),
+      body: JSON.stringify({ name, serverId, channelId, categoryId, userId }),
     });
 
     if (res.ok) {
