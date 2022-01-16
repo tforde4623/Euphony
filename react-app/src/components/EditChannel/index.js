@@ -5,8 +5,8 @@ import { updateChannel, getAllChannels } from "../../store/channels";
 import "./EditChannel.css";
 import DeleteChannel from "../DeleteChannel";
 
-const EditChannel = () => {
-  let { serverId, channelId } = useParams();
+const EditChannel = ({ channelId, showChannelEdit, setShowChannelEdit }) => {
+  let { serverId } = useParams();
   serverId = Number(serverId);
   channelId = Number(channelId);
   const dispatch = useDispatch();
@@ -21,7 +21,9 @@ const EditChannel = () => {
   // if (userId !== serverOwnerId) return <Redirect to={`/servers/${serverId}/categories/${categoryId}/channels`}></Redirect>
 
   const [name, setName] = useState("");
-  const [selectCategory, setSelectCategory] = useState("");
+  const [selectCategory, setSelectCategory] = useState(
+    Object.values(categories).filter(cat => cat.id === channel.category_id)[0].id || null
+  );
   const [errors, setErrors] = useState([]);
 
   useEffect(() => {
@@ -42,11 +44,11 @@ const EditChannel = () => {
       serverId,
       channelId,
       categoryId: selectCategory,
-      userId
+      userId,
     };
 
     dispatch(updateChannel(updatedChannel));
-    history.push(`/servers/${serverId}/channels`);
+    setShowChannelEdit(null);
   };
 
   return (
@@ -60,11 +62,11 @@ const EditChannel = () => {
             ))}
           </ul>
         )}
- 
+
         {/* Name */}
         <input
           placeholder="Channel Name"
-          className='channel-name-input'
+          className="channel-name-input"
           name="channel_name"
           value={name}
           onChange={(e) => setName(e.target.value)}
@@ -72,11 +74,12 @@ const EditChannel = () => {
         ></input>
 
         {/* Change Category */}
-        <select 
-          className='select-input'
-          value={selectCategory} 
-          onChange={e => setSelectCategory(e.target.value)}>
-          {Object.values(categories).map(cat =>(
+        <select
+          className="select-input"
+          value={selectCategory}
+          onChange={(e) => setSelectCategory(e.target.value)}
+        >
+          {Object.values(categories).map((cat) => (
             <option value={cat.id}>{cat.name}</option>
           ))}
         </select>
@@ -87,7 +90,11 @@ const EditChannel = () => {
         </button>
 
         {/* Delete */}
-        <DeleteChannel channelId={channelId} userId={userId} serverId={serverId}/>
+        <DeleteChannel
+          channelId={channelId}
+          userId={userId}
+          serverId={serverId}
+        />
       </form>
     </div>
   );

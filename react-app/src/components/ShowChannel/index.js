@@ -4,6 +4,7 @@ import { NavLink, useParams } from "react-router-dom";
 import { getAllCategories } from "../../store/categories";
 import { getAllChannels } from "../../store/channels";
 import { showServers } from "../../store/servers";
+import EditChannel from "../EditChannel";
 import "./ShowChannel.css";
 
 const ShowChannel = () => {
@@ -24,7 +25,7 @@ const ShowChannel = () => {
   const [editMode, setEditMode] = useState(false);
 
   // Conditionally render either the name of the channel/category OR the form to edit it
-  const [showChannelEdit, setShowChannelEdit] = useState(false);
+  const [showChannelEdit, setShowChannelEdit] = useState(null);
   const [showcategoryEdit, setShowCategoryEdit] = useState(false);
 
   let channelsArr;
@@ -104,7 +105,9 @@ const ShowChannel = () => {
             {/* Display channels within that category */}
             {cat.channels &&
               cat.channels.map((channel) => {
-                return (
+                return (showChannelEdit && channel.id === showChannelEdit ? (
+                  <EditChannel channelId={channel?.id} showChannelEdit={showChannelEdit} setShowChannelEdit={setShowChannelEdit}/>
+                ) : (
                   <li>
                     <NavLink
                       to={`/servers/${serverId}/channels/${channel?.id}/messages`}
@@ -118,14 +121,12 @@ const ShowChannel = () => {
                     </NavLink>
 
                     {owned && editMode && (
-                      <NavLink
-                        to={`/servers/${serverId}/channels/${channel?.id}/edit`}
-                      >
+                      <button onClick={() => setShowChannelEdit(channel?.id)}>
                         <i className="fas fa-edit fa-lg"></i>
-                      </NavLink>
+                      </button>
                     )}
                   </li>
-                );
+                ))
               })}
           </div>
         ))}
