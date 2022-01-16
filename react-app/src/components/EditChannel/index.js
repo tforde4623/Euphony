@@ -64,6 +64,7 @@ const EditChannel = () => {
         {/* Name */}
         <input
           placeholder="Channel Name"
+          className='channel-name-input'
           name="channel_name"
           value={name}
           onChange={(e) => setName(e.target.value)}
