@@ -4,6 +4,7 @@ import { NavLink, useParams } from "react-router-dom";
 import { getAllCategories } from "../../store/categories";
 import { getAllChannels } from "../../store/channels";
 import { showServers } from "../../store/servers";
+import EditChannel from "../EditChannel";
 import "./ShowChannel.css";
 
 const ShowChannel = () => {
@@ -104,7 +105,9 @@ const ShowChannel = () => {
             {/* Display channels within that category */}
             {cat.channels &&
               cat.channels.map((channel) => {
-                return (
+                return (showChannelEdit ? (
+                  <EditChannel />
+                ) : (
                   <li>
                     <NavLink
                       to={`/servers/${serverId}/channels/${channel?.id}/messages`}
@@ -118,14 +121,12 @@ const ShowChannel = () => {
                     </NavLink>
 
                     {owned && editMode && (
-                      <NavLink
-                        to={`/servers/${serverId}/channels/${channel?.id}/edit`}
-                      >
+                      <button onClick={() => setShowChannelEdit(true)}>
                         <i className="fas fa-edit fa-lg"></i>
-                      </NavLink>
+                      </button>
                     )}
                   </li>
-                );
+                ))
               })}
           </div>
         ))}
