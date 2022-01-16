@@ -50,10 +50,7 @@ function App() {
         </Route>
 
         {/* Messagaes */}
-        <Route path="/servers/:serverId/channels/:channelId/messages/new">
-          <NewMessage />
-        </Route>
-        <Route path="/servers/:serverId/channels/:channelId/messages">
+        <Route path="/servers/:serverId/channels/:channelId">
           <Main />
         </Route>
 
