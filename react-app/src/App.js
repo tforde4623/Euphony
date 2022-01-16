@@ -78,7 +78,6 @@ function App() {
           <NewServer />
         </Route>
         <Route path="/servers" exact>
-          <ServersList />
           <ServerGrid />
         </Route>
         <Route path="/servers/:serverId/edit">
