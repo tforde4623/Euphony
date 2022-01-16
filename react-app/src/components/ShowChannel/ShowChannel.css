@@ -14,12 +14,12 @@
   align-items: center;
 }
 
-.name_toggle_edit button {
+.name_toggle_edit button, .category-edit button {
   margin-left: 10px;
   background-color: #e8eaed;
 }
 
-.name_toggle_edit button i {
+.name_toggle_edit button i, .category-edit button i {
   margin: 0 5px;
   color: #0f0f11;
 }
@@ -51,10 +51,6 @@
   margin-bottom: 10px;
 }
 
-#category_edit button i {
-  font-weight: 400;
-  background-color: #e8eaed;
-}
 .channels_list {
   width: 100%;
   height: 100%;

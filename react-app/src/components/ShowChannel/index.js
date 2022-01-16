@@ -5,6 +5,7 @@ import { getAllCategories } from "../../store/categories";
 import { getAllChannels } from "../../store/channels";
 import { showServers } from "../../store/servers";
 import EditChannel from "../EditChannel";
+import EditCategory from "../EditCategory";
 import "./ShowChannel.css";
 
 const ShowChannel = () => {
@@ -26,7 +27,7 @@ const ShowChannel = () => {
 
   // Conditionally render either the name of the channel/category OR the form to edit it
   const [showChannelEdit, setShowChannelEdit] = useState(null);
-  const [showcategoryEdit, setShowCategoryEdit] = useState(false);
+  const [showCategoryEdit, setShowCategoryEdit] = useState(null);
 
   let channelsArr;
   let nullchannels = [];
@@ -37,11 +38,6 @@ const ShowChannel = () => {
         nullchannels.push(channelsArr[i]);
       }
     }
-  }
-
-  let categoriesArr;
-  if (categoriesObject) {
-    categoriesArr = Object.values(categoriesObject);
   }
 
   useEffect(() => {
@@ -90,16 +86,16 @@ const ShowChannel = () => {
       <ul className="channels_list">
         {/* Render channels with categories*/}
         {Object.values(categoriesObject).map((cat) => (
+          showCategoryEdit && cat.id === showCategoryEdit ?
+            <EditCategory categoryId={cat.id} serverId={serverId}/> :
           <div>
             {/* Display category name */}
             <div id="category_edit">
               <h2 className="dark_large">{cat.name}</h2>
               {owned && editMode && (
-                <NavLink
-                  to={`/servers/${serverId}/categories/${cat.id}/edit`} // TODO change this
-                >
-                  <i className="fas fa-edit fa-lg"></i>
-                </NavLink>
+                <button onClick={() => setShowCategoryEdit(cat?.id)}>
+                  <i class="fas fa-edit fa-lg"></i>
+                </button>
               )}
             </div>
             {/* Display channels within that category */}
@@ -130,6 +126,30 @@ const ShowChannel = () => {
               })}
           </div>
         ))}
+        {nullchannels.map(nch => (
+          showChannelEdit && nch.id === showChannelEdit ? (
+            <EditChannel channelId={nch?.id} showChannelEdit={showChannelEdit} setShowChannelEdit={setShowChannelEdit}/>
+          ) : (
+            <li>
+              <NavLink
+                to={`/servers/${serverId}/channels/${nch?.id}/messages`}
+              >
+                <p
+                  className="light_medium dynamic_underline"
+                  key={nch?.id}
+                >
+                  {nch?.name}
+                </p>
+              </NavLink>
+
+              {owned && editMode && (
+                <button onClick={() => setShowChannelEdit(nch?.id)}>
+                  <i className="fas fa-edit fa-lg"></i>
+                </button>
+              )}
+            </li>
+          ))
+        )}
       </ul>
     </div>
   );
