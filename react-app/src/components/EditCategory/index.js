@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useHistory, useParams } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import {
   updateCategory,
@@ -8,10 +8,7 @@ import {
 } from "../../store/categories";
 import "./EditCategory.css";
 
-const EditCategory = () => {
-  let { serverId, categoryId } = useParams();
-  serverId = Number(serverId);
-  categoryId = Number(categoryId);
+const EditCategory = ({ serverId, categoryId }) => {
   const dispatch = useDispatch();
   const history = useHistory();
 
