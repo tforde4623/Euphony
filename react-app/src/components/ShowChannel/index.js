@@ -25,7 +25,7 @@ const ShowChannel = () => {
   const [editMode, setEditMode] = useState(false);
 
   // Conditionally render either the name of the channel/category OR the form to edit it
-  const [showChannelEdit, setShowChannelEdit] = useState(false);
+  const [showChannelEdit, setShowChannelEdit] = useState(null);
   const [showcategoryEdit, setShowCategoryEdit] = useState(false);
 
   let channelsArr;
@@ -106,7 +106,8 @@ const ShowChannel = () => {
             {cat.channels &&
               cat.channels.map((channel) => {
                 return (showChannelEdit ? (
-                  <EditChannel />
+                  channel.id === showChannelEdit &&
+                  <EditChannel channelId={channel?.id} />
                 ) : (
                   <li>
                     <NavLink
@@ -121,7 +122,7 @@ const ShowChannel = () => {
                     </NavLink>
 
                     {owned && editMode && (
-                      <button onClick={() => setShowChannelEdit(true)}>
+                      <button onClick={() => setShowChannelEdit(channel?.id)}>
                         <i className="fas fa-edit fa-lg"></i>
                       </button>
                     )}

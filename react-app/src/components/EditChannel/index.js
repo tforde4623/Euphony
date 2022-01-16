@@ -5,8 +5,8 @@ import { updateChannel, getAllChannels } from "../../store/channels";
 import "./EditChannel.css";
 import DeleteChannel from "../DeleteChannel";
 
-const EditChannel = () => {
-  let { serverId, channelId } = useParams();
+const EditChannel = ({channelId}) => {
+  let { serverId } = useParams();
   serverId = Number(serverId);
   channelId = Number(channelId);
   const dispatch = useDispatch();
