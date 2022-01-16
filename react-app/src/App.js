@@ -7,7 +7,6 @@ import NavBar from "./components/NavBar";
 import ProtectedRoute from "./components/auth/ProtectedRoute";
 import UsersList from "./components/UsersList";
 import User from "./components/User";
-import EditMessage from "./components/EditMessage";
 import { authenticate } from "./store/session";
 import NewMessage from "./components/NewMessage";
 import NewChannel from "./components/NewChannel";
@@ -51,9 +50,6 @@ function App() {
         </Route>
 
         {/* Messagaes */}
-        <Route path="/servers/:serverId/channels/:channelId/messages/:messageId">
-          <EditMessage />
-        </Route>
         <Route path="/servers/:serverId/channels/:channelId/messages/new">
           <NewMessage />
         </Route>
