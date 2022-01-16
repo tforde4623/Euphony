@@ -1,8 +1,26 @@
+.banner {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 50px;
+  background-image: url("https://source.unsplash.com/esRJtEsvJhU");
+  background-repeat: no-repeat;
+  background-position: right 80%;
+  background-size: cover;
+  padding: 30px;
+}
+
+.banner button {
+  background-color: #e8eaed;
+  color: #0f0f11;
+}
+
 .grid {
-display: flex;
-justify-content: center;
-align-items: center;
-width: 100vw; 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
 }
 
 section {
@@ -23,7 +41,6 @@ section {
   section {
     grid-gap: 20px;
   }
-
 }
 
 @media only screen and (max-width: 500px) {
@@ -37,5 +54,100 @@ section {
     grid-template-columns: repeat(6, 1fr);
     grid-gap: 20px;
   }
+}
 
+.splash_div {
+  height: calc(100vh - 60px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.splash_photo_div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-image: url("https://source.unsplash.com/esRJtEsvJhU");
+  background-repeat: no-repeat;
+  background-position: top;
+  background-size: 100vw 60vh;
+  width: 100vw;
+  height: 60vh;
+}
+.splash_text_div {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #e8eaed;
+  border-radius: 70px;
+  width: 50vw;
+  height: 25vh;
+  padding: 20px 40px;
+}
+.splash_photo_div h1 {
+  margin-bottom: 20px;
+}
+
+#card_link:hover {
+  z-index: 0;
+  text-decoration: none;
+}
+
+.server_rotate_div {
+  background-color: #e8eaed;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  border-radius: 30px;
+  padding: 0 30px;
+  margin: 15px;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  width: 270px;
+  height: 270px;
+  background-color: #a53b17;
+  cursor: pointer;
+  transition: all 0.3s ease 0s;
+  border-radius: 10px;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+  margin: 20px 10px;
+}
+
+.card button {
+  background-color: #c26b02;
+}
+
+.card button:hover {
+  transform: translateY(-5px);
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
+}
+
+.card_img_container {
+  width: 100%;
+  padding-top: 70%;
+  overflow: hidden;
+  position: relative;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+
+.card_img_container img {
+  width: 100%;
+  position: absolute;
+  top: 47%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.card_content {
+  padding: 20px;
+}
+
+.card_title {
+  margin-bottom: 10px;
 }

@@ -1,23 +1,25 @@
-import React from 'react'
-import { useDispatch,useSelector } from 'react-redux';
+import React from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { unjoin } from "../../../store/members";
-import { useState } from 'react';
+import { useState } from "react";
 
-const UnjoinButton = ({serverId}) => {
-    const dispatch = useDispatch()
-    const currUser = useSelector((state) => state.session.user);
-    const memberships = useSelector((state) => state.members)
-    const memberArr = Object.values(memberships)
-    // const [symbol, setSymbol] = useState('X')
+const UnjoinButton = ({ serverId }) => {
+  const dispatch = useDispatch();
+  const currUser = useSelector((state) => state.session.user);
+  const memberships = useSelector((state) => state.members);
+  const memberArr = Object.values(memberships);
+  // const [symbol, setSymbol] = useState('X')
 
-    return (
-        <div>
-            <button onClick={() => {
-                dispatch(unjoin(serverId, currUser.id))
-                // setSymbol('+')
-            }}>X</button>
-        </div>
-    )
-}
+  return (
+    <button
+      onClick={() => {
+        dispatch(unjoin(serverId, currUser.id));
+        // setSymbol('+')
+      }}
+    >
+      <i class="fas fa-times fa-lg"></i>
+    </button>
+  );
+};
 
-export default UnjoinButton
+export default UnjoinButton;
