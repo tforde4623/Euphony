@@ -40,7 +40,7 @@ const AboutUs = () => {
 
         <div className="dev_div">
           <h2 className="dark_large">Adam Cole</h2>
-          <p>Description</p>
+          <p>I'm Adam. I have a background in troubleshooting and repair of mechanical systems (HVAC, Automotive). I recently began the career shift into software engineering. I do my best work on a team of skilled and reliable team mates and I enjoy the collective consciousness aspect of creating something together but in parts and watching the final product come together. I will be looking for work starting in February and hope to work in a backend development role.</p>
           <div className="profile_links">
             <a href="https://github.com/030820acc">
               <i class="fab fa-github fa-lg"></i>
