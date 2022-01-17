@@ -1,7 +1,6 @@
-import React, { useEffect, useState } from "react";
-import { useHistory, useParams } from "react-router-dom";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { updateServer, showServers, DeleteServer } from "../../store/servers";
+import { showServers } from "../../store/servers";
 import "./Splash.css";
 
 const Splash = () => {

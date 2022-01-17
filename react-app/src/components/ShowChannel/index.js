@@ -34,7 +34,10 @@ const ShowChannel = () => {
   if (channelsObj) {
     channelsArr = Object.values(channelsObj);
     for (let i = 0; i < channelsArr.length; i++) {
-      if (!channelsArr[i].category_id && channelsArr[i].server_id === serverId) {
+      if (
+        !channelsArr[i].category_id &&
+        channelsArr[i].server_id === serverId
+      ) {
         nullchannels.push(channelsArr[i]);
       }
     }
@@ -60,7 +63,7 @@ const ShowChannel = () => {
               className="edit-submit-btn"
               id="edit_mode_toggle"
             >
-              <i class="fas fa-ellipsis-v fa-lg"></i>
+              <i className="fas fa-ellipsis-v fa-lg"></i>
             </button>
           )}
         </div>
@@ -70,12 +73,12 @@ const ShowChannel = () => {
           <>
             <NavLink to={`/servers/${serverId}/categories/new`}>
               <button className="dark_small">
-                <i class="fas fa-plus-circle fa-lg"></i> Category
+                <i className="fas fa-plus-circle fa-lg"></i> Category
               </button>
             </NavLink>
             <NavLink to={`/servers/${serverId}/channels/new`}>
               <button className="dark_small">
-                <i class="fas fa-plus-circle fa-lg"></i> Channel
+                <i className="fas fa-plus-circle fa-lg"></i> Channel
               </button>
             </NavLink>
           </>
@@ -84,60 +87,23 @@ const ShowChannel = () => {
 
       {/* Display the channels and categories */}
       <ul className="channels_list">
-        {/* Render channels with categories*/}
-        {Object.values(categoriesObject).map((cat) => (
-          showCategoryEdit && cat.id === showCategoryEdit ?
-            <EditCategory categoryId={cat.id} serverId={serverId}/> :
-          <div>
-            {/* Display category name */}
-            <div id="category_edit">
-              <h2 className="dark_large">{cat.name}</h2>
-              {owned && editMode && (
-                <button onClick={() => setShowCategoryEdit(cat?.id)}>
-                  <i class="fas fa-edit fa-lg"></i>
-                </button>
-              )}
-            </div>
-            {/* Display channels within that category */}
-            {cat.channels &&
-              cat.channels.map((channel) => {
-                return (showChannelEdit && channel.id === showChannelEdit ? (
-                  <EditChannel channelId={channel?.id} showChannelEdit={showChannelEdit} setShowChannelEdit={setShowChannelEdit}/>
-                ) : (
-                  <li>
-                    <NavLink
-                      to={`/servers/${serverId}/channels/${channel?.id}`}
-                    >
-                      <p
-                        className="light_medium dynamic_underline"
-                        key={channel?.id}
-                      >
-                        {channel?.name}
-                      </p>
-                    </NavLink>
-
-                    {owned && editMode && (
-                      <button onClick={() => setShowChannelEdit(channel?.id)}>
-                        <i className="fas fa-edit fa-lg"></i>
-                      </button>
-                    )}
-                  </li>
-                ))
-              })}
-          </div>
-        ))}
-        {nullchannels.map(nch => (
+        {/* Display uncategorized channels first*/}
+        {nullchannels.map((nch) =>
+          // if the showChannelEdit, which is initialized to an integer matching an id matches the id of the current channel,
+          // then render the EditChannel form in place of the name of the channel
           showChannelEdit && nch.id === showChannelEdit ? (
-            <EditChannel channelId={nch?.id} showChannelEdit={showChannelEdit} setShowChannelEdit={setShowChannelEdit}/>
+            // if it's true that showChannelEdit matches the id, that means the edit button has been clicked
+            <EditChannel
+              channelId={`editing:${nch?.id}`}
+              showChannelEdit={showChannelEdit}
+              setShowChannelEdit={setShowChannelEdit}
+              key={nch?.id}
+            />
           ) : (
-            <li>
-              <NavLink
-                to={`/servers/${serverId}/channels/${nch?.id}`}
-              >
-                <p
-                  className="light_medium dynamic_underline"
-                  key={nch?.id}
-                >
+            // Otherwise show the name of the channel as well as an edit button (if owner of server)
+            <li key={`displaying:${nch?.id}`}>
+              <NavLink to={`/servers/${serverId}/channels/${nch?.id}`}>
+                <p className="light_medium dynamic_underline" key={nch?.id}>
                   {nch?.name}
                 </p>
               </NavLink>
@@ -148,7 +114,66 @@ const ShowChannel = () => {
                 </button>
               )}
             </li>
-          ))
+          )
+        )}
+
+        {/* Render channels with categories*/}
+        {Object.values(categoriesObject).map((cat) =>
+          // if showCategoryEdit is set to an id that matches the current category id, it means the edit button has been
+          // clicked, and so the EditCategory component is rendered in place
+          showCategoryEdit && cat.id === showCategoryEdit ? (
+            <EditCategory
+              categoryId={cat.id}
+              serverId={serverId}
+              key={`editing-category:${cat?.id}`}
+            />
+          ) : (
+            // Otherwise show the category name and an edit button
+            <div key={`displaying-category:${cat?.id}`}>
+              {/* Display category name */}
+              <div id="category_edit">
+                <h2 className="dark_large">{cat.name}</h2>
+                {owned && editMode && (
+                  <button onClick={() => setShowCategoryEdit(cat?.id)}>
+                    <i className="fas fa-edit fa-lg"></i>
+                  </button>
+                )}
+              </div>
+
+              {/* If the category has channels in it, then display channels within that category */}
+              {cat.channels &&
+                cat.channels.map((channel) => {
+                  // If showChannelEdit is an integer that matches channel.id, then the edit button has been clicked
+                  return showChannelEdit && channel.id === showChannelEdit ? (
+                    <EditChannel
+                      channelId={channel?.id}
+                      showChannelEdit={showChannelEdit}
+                      setShowChannelEdit={setShowChannelEdit}
+                      key={`editing:${channel?.id}`}
+                    />
+                  ) : (
+                    // Otherwise render the name and an edit button
+                    <li key={`displaying:${channel?.id}`}>
+                      <NavLink
+                        to={`/servers/${serverId}/channels/${channel?.id}`}
+                      >
+                        <p
+                          className="light_medium dynamic_underline"
+                        >
+                          {channel?.name}
+                        </p>
+                      </NavLink>
+
+                      {owned && editMode && (
+                        <button onClick={() => setShowChannelEdit(channel?.id)}>
+                          <i className="fas fa-edit fa-lg"></i>
+                        </button>
+                      )}
+                    </li>
+                  );
+                })}
+            </div>
+          )
         )}
       </ul>
     </div>

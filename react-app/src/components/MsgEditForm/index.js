@@ -33,13 +33,13 @@ const MsgEditForm = ({ setFormView, message, sock }) => {
       </form>
       <div className="msg_buttons_div">
         <button className="edit-submit-btn" onClick={(e) => handleSubmit(e)}>
-          <i class="fas fa-check-circle fa-lg"></i>
+          <i className="fas fa-check-circle fa-lg"></i>
         </button>
         <button onClick={handleDelBtn} className="edit-submit-btn">
           <i className="far fa-trash-alt fa-lg"></i>
         </button>
         <button onClick={() => setFormView(false)} className="edit-submit-btn">
-          <i class="fas fa-window-close fa-lg"></i>
+          <i className="fas fa-window-close fa-lg"></i>
         </button>
       </div>
     </div>

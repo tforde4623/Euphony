@@ -11,7 +11,7 @@ const Members = () => {
   const members = useSelector((state) => state.members) || [];
   useEffect(() => {
     dispatch(readMembers(serverId));
-  }, [dispatch]);
+  }, [dispatch, serverId]);
 
   return (
     <div className="members_div">
@@ -20,7 +20,7 @@ const Members = () => {
       <div className="list_all_members_div">
         {members?.serverMembers &&
           Object.values(members?.serverMembers).map((member) => (
-            <div className="member_icon_name">
+            <div className="member_icon_name" key={`members:${member?.id}`}>
               <div className="member_icon_div light_medium">
                 {member?.icon_url ? null : member?.username[0]}
                 {member.icon_url && (
