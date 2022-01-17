@@ -42,7 +42,7 @@ export const join = (newMembership) => async (dispatch) => {
   });
   if (res.ok) {
     const data = await res.json();
-    return dispatch(loadMembers(data));
+    return dispatch(loadMemberships(data));
   }
 };
 
@@ -55,7 +55,7 @@ export const unjoin = (serverId, userId) => async (dispatch) => {
 
   if (res.ok) {
     const data = await res.json();
-    return dispatch(loadMembers(data));
+    return dispatch(loadMemberships(data));
   }
 };
 
@@ -66,12 +66,14 @@ const membersReducer = (state = initialState, action) => {
   switch (action.type) {
     case LOAD_ALL_SERVER_MEMBERS:
       newState = Object.assign({}, state);
+      newState.serverMembers = {};
       action.members.forEach((member) => {
         newState.serverMembers[member.id] = member;
       });
       return { ...newState };
     case LOAD_YOUR_SERVER_MEMBERSHIPS:
       newState = Object.assign({}, state);
+      newState.memberships = {};
       action.memberships.forEach((membership) => {
         newState.memberships[membership.id] = membership;
       });
