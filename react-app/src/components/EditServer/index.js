@@ -35,7 +35,7 @@ const EditServer = () => {
       name,
       serverId,
       userId,
-      iconURL
+      iconURL,
     };
 
     dispatch(updateServer(updatedServer));
@@ -49,13 +49,13 @@ const EditServer = () => {
         {errors.length > 0 && (
           <ul className="errors">
             {errors.map((error) => (
-              <li key={error}>{error}</li>
+              <li key={`edit-error:${error}`}>{error}</li>
             ))}
           </ul>
         )}
         <input
           placeholder="Server Name"
-          name="server_name"
+          name="name"
           value={name}
           onChange={(e) => setName(e.target.value)}
           type="text"
@@ -63,7 +63,7 @@ const EditServer = () => {
 
         <input
           placeholder="Icon URL (optional)"
-          name="icon_url"
+          name="iconURL"
           value={iconURL}
           onChange={(e) => setIconURL(e.target.value)}
           type="text"
@@ -75,8 +75,6 @@ const EditServer = () => {
           </button>
           <RemoveServer serverId={serverId} userId={userId} />
         </div>
-
-        
       </form>
       <h2 className="dark_large" id="preview_text">
         Live Preview Your Server Card
