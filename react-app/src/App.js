@@ -46,23 +46,7 @@ function App() {
           <SignUpForm />
         </Route>
 
-        {/* Categories */}
-        {/* <Route path="/servers/:serverId/categories/new">
-          <NewCategory />
-        </Route> */}
-        <Route path="/servers/:serverId/categories/:categoryId/edit">
-          <EditCategory />
-        </Route>
-
-        {/* Channels */}
-        <Route path="/servers/:serverId/channels/new">
-          <NewChannel />
-        </Route>
-        <Route path="/servers/:serverId/channels/:channelId/edit">
-          <EditChannel />
-        </Route>
-
-        {/* Messagaes */}
+        {/* Main */}
         <Route path="/servers/:serverId/channels/:channelId">
           <Main />
         </Route>
