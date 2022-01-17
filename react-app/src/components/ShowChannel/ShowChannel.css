@@ -35,7 +35,7 @@
   height: 30px;
 }
 
-.channels_div a button {
+.channels_div a button, .channels_div button {
   background-color: #e8eaed;
   color: black;
   padding: 12px;

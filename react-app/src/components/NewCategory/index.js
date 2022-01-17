@@ -5,7 +5,7 @@ import { createCategory, getAllCategories } from "../../store/categories";
 import { showServers } from "../../store/servers";
 import "./NewCategory.css";
 
-const NewCategory = ({setShowNewCategoryForm}) => {
+const NewCategory = ({ setShowNewCategoryForm }) => {
   let { serverId } = useParams();
   serverId = Number(serverId);
   const dispatch = useDispatch();
@@ -36,13 +36,12 @@ const NewCategory = ({setShowNewCategoryForm}) => {
     };
 
     dispatch(createCategory(newCategory));
-    dispatch(getAllCategories(serverId));
-    setShowNewCategoryForm(false)
-    // history.push(`/servers/${serverId}/channels/${default_channel}`);
+    // dispatch(getAllCategories(serverId));
+    setShowNewCategoryForm(false);
   };
 
   return (
-    <div>
+    <div className="new_category_div">
       <form onSubmit={handleSubmit}>
         {/* Errors */}
         {errors.length > 0 && (

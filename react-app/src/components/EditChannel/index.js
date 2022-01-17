@@ -18,7 +18,7 @@ const EditChannel = ({ channelId, setShowChannelEdit }) => {
 
   const [name, setName] = useState("");
   const [selectCategory, setSelectCategory] = useState(
-    Object.values(categories).filter(cat => cat.id === channel.category_id)[0].id || null
+    Object.values(categories).filter(cat => cat.id === channel?.category_id)[0].id || null
   );
   const [errors, setErrors] = useState([]);
 
