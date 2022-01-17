@@ -51,7 +51,7 @@ const ShowChannel = () => {
     dispatch(getAllChannels());
     dispatch(getAllCategories(serverId));
     dispatch(showServers());
-  }, [dispatch, serverId, channelId]);
+  }, [dispatch, serverId, channelId, showNewCategoryForm, showNewChannelForm, showChannelEdit, showCategoryEdit]);
 
   return (
     <div className="channels_div">

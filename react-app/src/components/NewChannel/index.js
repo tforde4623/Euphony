@@ -41,7 +41,7 @@ const NewChannel = ({ setShowNewChannelForm }) => {
   };
 
   return (
-    <div>
+    <div className="new_channel_div">
       <form onSubmit={handleSubmit}>
         {/* Errors */}
         {errors.length > 0 && (

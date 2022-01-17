@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams, useHistory } from "react-router-dom";
 import { createCategory, getAllCategories } from "../../store/categories";
+import { getAllChannels } from "../../store/channels";
 import { showServers } from "../../store/servers";
 import "./NewCategory.css";
 
@@ -36,7 +37,8 @@ const NewCategory = ({ setShowNewCategoryForm }) => {
     };
 
     dispatch(createCategory(newCategory));
-    // dispatch(getAllCategories(serverId));
+    dispatch(getAllChannels(serverId));
+    dispatch(getAllCategories(serverId))
     setShowNewCategoryForm(false);
   };
 
