@@ -61,7 +61,7 @@ def edit_server(server_id):
     return jsonify(server.to_dict())
 
 # ~~~~~~~~~~~~ DELETE ~~~~~~~~~~~~
-@servers.route('/<id>/delete', methods=['DELETE'])
+@servers.route('/<server_id>', methods=['DELETE'])
 def delete_server(server_id):
     server = Server.query.filter_by(id=server_id).one()
     db.session.delete(server)
