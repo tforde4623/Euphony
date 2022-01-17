@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useHistory, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { updateServer, showServers, DeleteServer } from "../../store/servers";
+import { updateServer, showServers } from "../../store/servers";
+import RemoveServer from "../DeleteServer";
 
 const EditServer = () => {
   let { serverId } = useParams();
@@ -67,11 +68,14 @@ const EditServer = () => {
           type="text"
         ></input>
 
-        <button type="submit" disabled={errors.length} className="add_btn">
-          <i className="fas fa-plus"></i>
-        </button>
+        <div>
+          <button type="submit" disabled={errors.length} className="add_btn">
+            <i className="fas fa-plus"></i>
+          </button>
+          <RemoveServer serverId={serverId} userId={userId} />
+        </div>
 
-        <DeleteServer serverId={serverId} userId={userId} />
+        
       </form>
       <h2 className="dark_large" id="preview_text">
         Live Preview Your Server Card
