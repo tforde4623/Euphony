@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 import { deleteChannel } from "../../store/channels";
 import "./DeleteChannel.css";
 
-const DeleteChannel = ({ serverId, channelId, userId }) => {
+const DeleteChannel = ({ serverId, channelId, userId, default_channel }) => {
   const history = useHistory();
   const dispatch = useDispatch();
 
@@ -13,7 +13,7 @@ const DeleteChannel = ({ serverId, channelId, userId }) => {
     const deletePayload = { userId, channelId };
     let deletedChannel = dispatch(deleteChannel(deletePayload));
     if (deletedChannel) {
-      history.push(`/servers/${serverId}/channels`);
+      history.push(`/servers/${serverId}/channels/${default_channel}`);
     }
   };
   return (

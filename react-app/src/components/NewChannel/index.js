@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { useHistory, useParams } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { createChannel } from "../../store/channels";
 import "./NewChannel.css";
+import { showServers } from "../../store/servers";
 
 const NewChannel = () => {
   let { serverId } = useParams();
@@ -13,11 +14,11 @@ const NewChannel = () => {
   const [name, setName] = useState("");
   const [errors, setErrors] = useState([]);
 
-  // const userId = useSelector((state) => state.session.user?.id);
+  useEffect(() => {
+    dispatch(showServers());
+  }, [serverId]);
 
-  // COMMENT IN ONCE SERVER THUNKS DONE
-  // const serverOwnerId = useSelector(state => state.servers[serverId]?.owner_id)
-  // if (userId !== serverOwnerId) return <Redirect to={`/servers/${serverId}/channels`}></Redirect>
+  const default_channel = useSelector(state => state.servers[serverId]?.default_channel)
 
   useEffect(() => {
     const errors = [];
@@ -33,7 +34,7 @@ const NewChannel = () => {
     };
 
     dispatch(createChannel(newChannel));
-    history.push(`/servers/${serverId}/channels`)
+    history.push(`/servers/${serverId}/channels/${default_channel}`);
   };
 
   return (

@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
-import { NavLink, useParams, useHistory } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { useParams, useHistory } from "react-router-dom";
 import { createCategory } from "../../store/categories";
+import { showServers } from "../../store/servers";
 import "./NewCategory.css";
 
 const NewCategory = () => {
@@ -12,6 +13,12 @@ const NewCategory = () => {
 
   const [name, setName] = useState("");
   const [errors, setErrors] = useState([]);
+
+  useEffect(() => {
+    dispatch(showServers());
+  }, [serverId]);
+
+  const default_channel = useSelector((state) => state.servers[serverId]?.default_channel)
 
   useEffect(() => {
     const errors = [];
@@ -27,7 +34,7 @@ const NewCategory = () => {
     };
 
     dispatch(createCategory(newCategory));
-    history.push(`/servers/${serverId}/channels`);
+    history.push(`/servers/${serverId}/channels/${default_channel}`);
   };
 
   return (
