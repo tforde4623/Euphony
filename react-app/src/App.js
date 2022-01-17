@@ -64,9 +64,6 @@ function App() {
         <Route path="/servers/:serverId/channels/:channelId/edit">
           <EditChannel />
         </Route>
-        <Route path="/servers/:serverId/channels">
-          <ShowChannel />
-        </Route>
 
         {/* Messagaes */}
         <Route path="/servers/:serverId/channels/:channelId">

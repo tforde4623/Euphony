@@ -1,8 +1,21 @@
-import React from "react";
-import { NavLink } from "react-router-dom";
+import React, { useEffect  } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { NavLink, useParams } from "react-router-dom";
+import { checkMemberships } from "../../store/members";
 import "./ServersList.css";
-
 const ServersList = () => {
+  const { serverId } = useParams();
+  const dispatch = useDispatch();
+
+  const userId = useSelector((state) => state.session.user?.id)
+  console.log(userId, 'iserId in ')
+
+  useEffect(() => {
+    dispatch(checkMemberships(userId));
+  });
+
+
+
   return (
     <div className="servers_list_div">
       <NavLink to="/servers">
@@ -13,7 +26,7 @@ const ServersList = () => {
 
       <NavLink to="/servers/new">
         <div>
-        <i class="fas fa-plus fa-lg"></i>
+          <i class="fas fa-plus fa-lg"></i>
         </div>
       </NavLink>
 
