@@ -10,7 +10,6 @@ const ServersList = () => {
   const userId = useSelector((state) => state.session.user?.id);
   const memberships = useSelector((state) => state.members.memberships);
   const servers = useSelector((state) => state.servers);
-  console.log(servers, "servers");
 
   useEffect(() => {
     dispatch(checkMemberships(userId));
@@ -32,9 +31,6 @@ const ServersList = () => {
       </NavLink>
 
       {Object.values(memberships).map((serverMembership) => {
-        {
-          console.log(serverMembership, "serverMembership");
-        }
         return (
           <NavLink
             to={`/servers/${serverMembership?.server_id}/channels/${

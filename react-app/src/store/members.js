@@ -10,7 +10,6 @@ export const checkMemberships = (userId) => async (dispatch) => {
   const memberships = await fetch(`/api/members/memberships/${userId}`);
 
   if (memberships.ok) {
-    console.log(memberships, 'memberships in THUNK')
     const data = await memberships.json();
     return dispatch(loadMemberships(data));
   }
@@ -60,19 +59,19 @@ export const unjoin = (serverId, userId) => async (dispatch) => {
   }
 };
 
-const initialState = {serverMembers: {}, memberships: {} };
+const initialState = { serverMembers: {}, memberships: {} };
 
 const membersReducer = (state = initialState, action) => {
   let newState;
   switch (action.type) {
     case LOAD_ALL_SERVER_MEMBERS:
-      newState = Object.assign({}, state)
+      newState = Object.assign({}, state);
       action.members.forEach((member) => {
         newState.serverMembers[member.id] = member;
       });
       return { ...newState };
     case LOAD_YOUR_SERVER_MEMBERSHIPS:
-      newState = Object.assign({}, state)
+      newState = Object.assign({}, state);
       action.memberships.forEach((membership) => {
         newState.memberships[membership.id] = membership;
       });
