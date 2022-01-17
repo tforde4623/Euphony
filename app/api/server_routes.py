@@ -12,6 +12,8 @@ def view_servers():
 # ~~~~~~~~~~~~ CREATE ~~~~~~~~~~~~
 @servers.route('/', methods=['POST'])
 def create_server():
+
+    # Create a new server
     svr_data = request.json
     new_svr = Server(name=svr_data['name'],
                      owner_id=svr_data['owner_id'],
@@ -19,16 +21,19 @@ def create_server():
 
     db.session.add(new_svr)
     db.session.commit()
-    # db.session.flush()
+    db.session.flush()
 
-    # print(new_svr.id, 'KITTEN')
-
-    #  PROBLEM: Doesn't work if server names aren't unique
-
-    # server_id = Server.query.filter_by(name=svr_data['name']).one()['id']
+    # Create a default channel for the server with the new_svr.id
+    new_default_channel = Channel(name="General", server_id=new_svr.id)
+    db.session.add(new_default_channel)
+    db.session.commit()
+    db.session.flush()
+    print(new_default_channel.id, "CATTT")
     
-
-    # new_default_channel = Channel(name="General", category_id="Null", server_id=server_id)
+    # Set the default channel on the server instance to the newly created channel
+    new_svr.default_channel = new_default_channel.id
+    db.session.add(new_svr)
+    db.session.commit()
 
     return jsonify(new_svr.to_dict())
 
