@@ -8,7 +8,7 @@ const AboutUs = () => {
       <div className="about_content_div">
         <div className="dev_div">
           <h2 className="dark_large">Asia Le</h2>
-          <p>Description</p>
+          <p>Hello! Asia here. Formerly a manager for an escape room company, I decided to take on this program after years of wanting and dabbling in code but never really crossing the threshold. I'm a huge nerd in everything I do, enjoying the aspect of solving puzzles in whatever form they take. Escape room puzzles? You got it. Bugs in code? Hi, I can help. Need a fresh perspective? Let's go over what you have! I enjoy working with frontend and backend programming, so consider me a jack of all trades. I've loved this program and I'm excited to see where my next opportunity takes me in February 2022.</p>
           <div className="profile_links">
             <a href="https://github.com/le-as-a">
               <i className="fab fa-github fa-lg"></i>
