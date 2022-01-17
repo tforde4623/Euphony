@@ -13,7 +13,7 @@ const NavBar = () => {
   const user = useSelector((state) => state.session.user);
   const userId = user?.id;
   const memberships = useSelector((state) => state.members.memberships);
-  const defaultServerId = Object.values(memberships)[0].server_id;
+  const defaultServerId = Object.values(memberships)[0]?.server_id;
   const servers = useSelector((state) => state.servers);
   const defaultChannelId = servers[defaultServerId]?.default_channel;
 
