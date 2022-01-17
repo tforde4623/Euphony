@@ -1,5 +1,5 @@
 from flask import Blueprint, request, jsonify
-from app.models import db, Server
+from app.models import db, Server, Channel
 
 servers = Blueprint('servers', __name__)
 
@@ -16,9 +16,19 @@ def create_server():
     new_svr = Server(name=svr_data['name'],
                      owner_id=svr_data['userId'],
                      icon_url=svr_data['icon_url'])
-    
+
     db.session.add(new_svr)
     db.session.commit()
+    db.session.flush()
+
+    print(new_svr.id, 'KITTEN')
+
+    #  PROBLEM: Doesn't work if server names aren't unique
+
+    # server_id = Server.query.filter_by(name=svr_data['name']).one()['id']
+    
+
+    # new_default_channel = Channel(name="General", category_id="Null", server_id=server_id)
 
     return jsonify(new_svr.to_dict())
 

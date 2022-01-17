@@ -11,10 +11,11 @@ const NewServer = () => {
     const [errors, setErrors] = useState([]);
     const owner_id = useSelector((state) => state.session.user?.id);
 
-    useEffect(() => {
-        if (!name.length) errors.push('Server name cannot be empty.')
-        setErrors(errors);
-    }, [name, errors]);
+  useEffect(() => {
+    const errors = [];
+    if (!name.length) errors.push("Server name must not be empty.");
+    setErrors(errors);
+  }, [name]);
 
     const handleSubmit = e => {
         e.preventDefault();
@@ -23,6 +24,7 @@ const NewServer = () => {
         dispatch(createServer(newServer));
         history.push(`/servers`);
     };
+
     return (
         <div>
             <form onSubmit={handleSubmit}>
@@ -42,7 +44,7 @@ const NewServer = () => {
                     type='text'
                     ></input>
 
-                <button type='submit' disabled={errors.length > 0} className='add_btn'>
+                <button type='submit' disabled={errors.length} className='add_btn'>
                     <i className='fas fa-plus'></i>
                 </button>
             </form>
