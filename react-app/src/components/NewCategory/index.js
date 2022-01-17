@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { useParams, useHistory } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { useParams } from "react-router-dom";
 import { createCategory, getAllCategories } from "../../store/categories";
 import { getAllChannels } from "../../store/channels";
 import { showServers } from "../../store/servers";
@@ -10,7 +10,6 @@ const NewCategory = ({ setShowNewCategoryForm }) => {
   let { serverId } = useParams();
   serverId = Number(serverId);
   const dispatch = useDispatch();
-  const history = useHistory();
 
   const [name, setName] = useState("");
   const [errors, setErrors] = useState([]);
@@ -18,10 +17,6 @@ const NewCategory = ({ setShowNewCategoryForm }) => {
   useEffect(() => {
     dispatch(showServers());
   }, [dispatch]);
-
-  const default_channel = useSelector(
-    (state) => state.servers[serverId]?.default_channel
-  );
 
   useEffect(() => {
     const errors = [];

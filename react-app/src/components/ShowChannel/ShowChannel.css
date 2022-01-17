@@ -44,6 +44,10 @@
   padding: 12px;
 }
 
+.channels_div a button:hover, .new_cat_channel_btn:hover {
+  background-color: #b4c3d1;
+}
+
 #category_edit {
   display: flex;
   justify-content: space-between;

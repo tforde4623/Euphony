@@ -32,10 +32,10 @@ def get_all_channels():
 @channels.route('/', methods=['POST'])
 def create_channel():
     channel_payload = request.json
-    print(channel_payload, "DOG")
 
     new_channel = Channel(name=channel_payload['name'],
-                      server_id=channel_payload['serverId'])
+                      server_id=channel_payload['serverId'],
+                      category_id=channel_payload['categoryId'])
 
     db.session.add(new_channel)
     db.session.commit()

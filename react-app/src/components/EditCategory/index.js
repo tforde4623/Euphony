@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import {
   updateCategory,
@@ -11,14 +10,10 @@ import "./EditCategory.css";
 
 const EditCategory = ({ serverId, categoryId, setShowCategoryEdit }) => {
   const dispatch = useDispatch();
-  const history = useHistory();
 
   const userId = useSelector((state) => state.session.user?.id);
   const category = useSelector((state) => state.categories[categoryId]);
-  const default_channel = useSelector(
-    (state) => state.servers[serverId]?.default_channel
-  );
-
+  
   const [name, setName] = useState("");
   const [errors, setErrors] = useState([]);
 
@@ -26,7 +21,7 @@ const EditCategory = ({ serverId, categoryId, setShowCategoryEdit }) => {
     dispatch(getAllCategories());
     dispatch(showServers());
     setName(category?.name);
-  }, [dispatch, serverId, categoryId, category?.name]);
+  }, [dispatch, serverId, categoryId, category?.name, category]);
 
   useEffect(() => {
     const errors = [];

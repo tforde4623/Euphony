@@ -51,7 +51,7 @@ const ShowChannel = () => {
     dispatch(getAllChannels());
     dispatch(getAllCategories(serverId));
     dispatch(showServers());
-  }, [dispatch, serverId, channelId, showNewCategoryForm, showNewChannelForm, showChannelEdit, showCategoryEdit]);
+  }, [dispatch, serverId, channelId, showNewCategoryForm, showNewChannelForm, showChannelEdit, showCategoryEdit, editMode]);
 
   return (
     <div className="channels_div">
@@ -115,7 +115,7 @@ const ShowChannel = () => {
           showChannelEdit && nch.id === showChannelEdit ? (
             // if it's true that showChannelEdit matches the id, that means the edit button has been clicked
             <EditChannel
-              channelId={`editing:${nch?.id}`}
+              channelId={nch?.id}
               showChannelEdit={showChannelEdit}
               setShowChannelEdit={setShowChannelEdit}
               key={nch?.id}

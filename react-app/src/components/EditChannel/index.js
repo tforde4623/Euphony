@@ -8,7 +8,6 @@ import DeleteChannel from "../DeleteChannel";
 const EditChannel = ({ channelId, setShowChannelEdit }) => {
   let { serverId } = useParams();
   serverId = Number(serverId);
-  channelId = Number(channelId);
   const dispatch = useDispatch();
 
   const userId = useSelector((state) => state.session.user?.id);
@@ -23,14 +22,14 @@ const EditChannel = ({ channelId, setShowChannelEdit }) => {
     null ||
       Object.values(categories).filter(
         (cat) => cat?.id === channel?.category_id
-      )[0].id
+      )[0]?.id
   );
   const [errors, setErrors] = useState([]);
 
   useEffect(() => {
     dispatch(getAllChannels());
     setName(channel?.name);
-  }, [dispatch, serverId, channelId, channel?.name]);
+  }, [dispatch, serverId, channelId, channel?.name, channel?.category_id]);
 
   useEffect(() => {
     const errors = [];
@@ -80,6 +79,7 @@ const EditChannel = ({ channelId, setShowChannelEdit }) => {
           value={selectCategory}
           onChange={(e) => setSelectCategory(e.target.value)}
         >
+          <option value={null}>Select a Category</option>
           {Object.values(categories).map((cat) => (
             <option value={cat.id}>{cat.name}</option>
           ))}
@@ -100,6 +100,7 @@ const EditChannel = ({ channelId, setShowChannelEdit }) => {
           userId={userId}
           serverId={serverId}
           default_channel={default_channel}
+          setShowEditChannel={setShowChannelEdit}
         />
       </form>
     </div>

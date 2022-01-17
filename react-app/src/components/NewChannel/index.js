@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { useHistory, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { createChannel, getAllChannels } from "../../store/channels";
+import { createChannel} from "../../store/channels";
 import "./NewChannel.css";
 import { showServers } from "../../store/servers";
 
@@ -9,18 +9,17 @@ const NewChannel = ({ setShowNewChannelForm }) => {
   let { serverId } = useParams();
   serverId = Number(serverId);
   const dispatch = useDispatch();
-  const history = useHistory();
+
+  const categories = useSelector((state) => state.categories);
 
   const [name, setName] = useState("");
   const [errors, setErrors] = useState([]);
+  const [selectCategory, setSelectCategory] = useState(null);
 
   useEffect(() => {
     dispatch(showServers());
   }, [dispatch]);
 
-  const default_channel = useSelector(
-    (state) => state.servers[serverId]?.default_channel
-  );
 
   useEffect(() => {
     const errors = [];
@@ -33,11 +32,11 @@ const NewChannel = ({ setShowNewChannelForm }) => {
     const newChannel = {
       name,
       serverId,
+      categoryId: selectCategory
     };
 
     dispatch(createChannel(newChannel));
     setShowNewChannelForm(false);
-    dispatch(getAllChannels(serverId));
   };
 
   return (
@@ -60,6 +59,18 @@ const NewChannel = ({ setShowNewChannelForm }) => {
           onChange={(e) => setName(e.target.value)}
           type="text"
         ></input>
+
+        {/* Change Category */}
+        <select
+          className="select-input"
+          value={selectCategory}
+          onChange={(e) => setSelectCategory(e.target.value)}
+        >
+          <option value={null}>Select a Category</option>
+          {Object.values(categories).map((cat) => (
+            <option value={cat.id}>{cat.name}</option>
+          ))}
+        </select>
 
         {/* Submit */}
         <div>
