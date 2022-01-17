@@ -32,13 +32,13 @@ const ServersList = () => {
 
       {Object.values(memberships).map((serverMembership) => {
         return (
-          <NavLink key={`serverMembershipIds:${servers[serverMembership?.server_id].default_channel}`}
+          <NavLink key={`serverMembershipIds:${servers[serverMembership?.server_id]?.default_channel}`}
             to={`/servers/${serverMembership?.server_id}/channels/${
-              servers[serverMembership?.server_id].default_channel
+              servers[serverMembership?.server_id]?.default_channel
             }`}
           >
             <div >
-              <img alt={servers[serverMembership?.server_id].name} src={servers[serverMembership?.server_id].icon_url}></img>
+              <img alt={servers[serverMembership?.server_id]?.name} src={servers[serverMembership?.server_id].icon_url}></img>
             </div>
           </NavLink>
         );
