@@ -144,9 +144,11 @@ const ShowChannel = () => {
           // clicked, and so the EditCategory component is rendered in place
           showCategoryEdit && cat.id === showCategoryEdit ? (
             <EditCategory
-              categoryId={cat.id}
+              categoryId={cat?.id}
               serverId={serverId}
               key={`editing-category:${cat?.id}`}
+              showCategoryEdit={showCategoryEdit}
+              setShowCategoryEdit={setShowCategoryEdit}
             />
           ) : (
             // Otherwise show the category name and an edit button

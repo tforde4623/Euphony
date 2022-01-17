@@ -14,11 +14,16 @@ const EditChannel = ({ channelId, setShowChannelEdit }) => {
   const userId = useSelector((state) => state.session.user?.id);
   const channel = useSelector((state) => state.channels[channelId]);
   const categories = useSelector((state) => state.categories);
-  const default_channel = useSelector(state => state.servers[serverId]?.default_channel)
+  const default_channel = useSelector(
+    (state) => state.servers[serverId]?.default_channel
+  );
 
   const [name, setName] = useState("");
   const [selectCategory, setSelectCategory] = useState(
-    Object.values(categories).filter(cat => cat?.id === channel?.category_id)[0].id || null
+    null ||
+      Object.values(categories).filter(
+        (cat) => cat?.id === channel?.category_id
+      )[0].id
   );
   const [errors, setErrors] = useState([]);
 
@@ -81,7 +86,11 @@ const EditChannel = ({ channelId, setShowChannelEdit }) => {
         </select>
 
         {/* Submit */}
-        <button type="submit" disabled={errors.length > 0} className="add_btn">
+        <button
+          type="submit"
+          disabled={errors.length > 0}
+          className="add_btn"
+        >
           <i className="fas fa-plus"></i>
         </button>
 
