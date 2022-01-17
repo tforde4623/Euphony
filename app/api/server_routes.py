@@ -10,18 +10,18 @@ def view_servers():
 
 
 # ~~~~~~~~~~~~ CREATE ~~~~~~~~~~~~
-@servers.route('/new', methods=['POST'])
+@servers.route('/', methods=['POST'])
 def create_server():
     svr_data = request.json
     new_svr = Server(name=svr_data['name'],
-                     owner_id=svr_data['userId'],
-                     icon_url=svr_data['icon_url'])
+                     owner_id=svr_data['owner_id'],
+                     icon_url=svr_data['iconURL'])
 
     db.session.add(new_svr)
     db.session.commit()
-    db.session.flush()
+    # db.session.flush()
 
-    print(new_svr.id, 'KITTEN')
+    # print(new_svr.id, 'KITTEN')
 
     #  PROBLEM: Doesn't work if server names aren't unique
 

@@ -15,10 +15,10 @@ export const showServers = () => async (dispatch) => {
 };
 
 // create a server
-const ADD_SERVER = "servers/add";
-const addServer = (server_name) => ({
+const ADD_SERVER = "servers/ADD_SERVER";
+const addServer = (server) => ({
   type: ADD_SERVER,
-  server_name,
+  server,
 });
 
 export const createServer = (newServer) => async (dispatch) => {
