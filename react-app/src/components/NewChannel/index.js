@@ -37,7 +37,7 @@ const NewChannel = ({ setShowNewChannelForm }) => {
 
     dispatch(createChannel(newChannel));
     setShowNewChannelForm(false);
-    dispatch(getAllChannels(serverId))
+    dispatch(getAllChannels(serverId));
   };
 
   return (
@@ -62,9 +62,19 @@ const NewChannel = ({ setShowNewChannelForm }) => {
         ></input>
 
         {/* Submit */}
-        <button type="submit" disabled={errors.length > 0} className="add_btn">
-          <i className="fas fa-plus"></i>
-        </button>
+        <div>
+          <button
+            type="submit"
+            disabled={errors.length > 0}
+            className="add_btn"
+          >
+            <i className="fas fa-plus"></i>
+          </button>
+
+          <button onClick={() => setShowNewChannelForm(false)}>
+            <i className="fas fa-window-close fa-lg"></i>
+          </button>
+        </div>
       </form>
     </div>
   );

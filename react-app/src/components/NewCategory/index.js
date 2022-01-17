@@ -38,7 +38,7 @@ const NewCategory = ({ setShowNewCategoryForm }) => {
 
     dispatch(createCategory(newCategory));
     dispatch(getAllChannels(serverId));
-    dispatch(getAllCategories(serverId))
+    dispatch(getAllCategories(serverId));
     setShowNewCategoryForm(false);
   };
 
@@ -64,9 +64,18 @@ const NewCategory = ({ setShowNewCategoryForm }) => {
         ></input>
 
         {/* Submit */}
-        <button type="submit" disabled={errors.length > 0} className="add_btn">
-          <i className="fas fa-plus"></i>
-        </button>
+        <div>
+          <button
+            type="submit"
+            disabled={errors.length > 0}
+            className="add_btn"
+          >
+            <i className="fas fa-plus"></i>
+          </button>
+          <button onClick={() => setShowNewCategoryForm(false)}>
+            <i className="fas fa-window-close fa-lg"></i>
+          </button>
+        </div>
       </form>
     </div>
   );
