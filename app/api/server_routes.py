@@ -49,12 +49,13 @@ def get_server_members(id):
     return jsonify([user.to_dict() for user in server.users])
 
 # ~~~~~~~~~~~~ UPDATE ~~~~~~~~~~~~
-@servers.route('/<id>/edit', methods=['PUT'])
+@servers.route('/<server_id>', methods=['PUT'])
 def edit_server(server_id):
     server = Server.query.filter_by(id=server_id).one()
     svr_data = request.json
 
     server.name = svr_data['name']
+    server.icon_url = svr_data['iconURL']
     db.session.commit()
 
     return jsonify(server.to_dict())

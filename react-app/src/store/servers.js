@@ -38,24 +38,25 @@ export const createServer = (newServer) => async (dispatch) => {
 };
 
 //update server
-const UPDATE_SERVER = "servers/edit";
+const UPDATE_SERVER = "servers/UPDATE_SERVER";
 const editServer = (server) => ({
   type: UPDATE_SERVER,
   server,
 });
 
 export const updateServer =
-  ({ serverId, serverName, ownerId }) =>
+  ({ serverId, name, ownerId, iconURL }) =>
   async (dispatch) => {
     const res = await fetch(`/api/servers/${serverId}`, {
-      method: "put",
+      method: "PUT",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
         serverId,
-        serverName,
+        name,
         ownerId,
+        iconURL
       }),
     });
 

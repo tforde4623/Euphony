@@ -35,10 +35,11 @@ const EditServer = () => {
       name,
       serverId,
       userId,
+      iconURL
     };
 
     dispatch(updateServer(updatedServer));
-    history.push(`/servers/${serverId}`);
+    history.push(`/servers`);
   };
 
   return (
