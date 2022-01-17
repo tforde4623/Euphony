@@ -5,7 +5,6 @@ import UnjoinButton from "../unjoinbutton";
 import "./ServerCards.css"
 
 function ServerCard({ server }) {
-  const dispatch = useDispatch();
   const currUser = useSelector((state) => state.session.user);
   const memberships = useSelector((state) => state.members.memberships);
   const memberArr = Object.values(memberships);

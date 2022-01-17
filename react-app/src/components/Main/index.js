@@ -15,7 +15,7 @@ function Main() {
   // update members state when rendering main
   useEffect(() => {
     dispatch(readMembers(serverId));
-  });
+  }, [serverId, dispatch]);
 
   return (
     <div className="main_div">
