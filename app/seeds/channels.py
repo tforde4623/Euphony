@@ -2,6 +2,18 @@ from app.models import db
 from app.models.channels import Channel
 
 DEFAULT_CHANNELS = [
+  Channel(name='General', server_id=1),
+  Channel(name='General', server_id=2),
+  Channel(name='General', server_id=3),
+  Channel(name='General', server_id=4),
+  Channel(name='General', server_id=5),
+  Channel(name='General', server_id=6),
+  Channel(name='General', server_id=7),
+  Channel(name='General', server_id=8),
+  Channel(name='General', server_id=9),
+  Channel(name='General', server_id=10),
+  Channel(name='General', server_id=11),
+  Channel(name='General', server_id=12),
   Channel(name='Dog Photos', server_id=1, category_id=1),
   Channel(name='Tiktok Links', server_id=1, category_id=1),
   Channel(name='THE CAT KINGDOM', server_id=2, category_id=2),
@@ -17,10 +29,7 @@ DEFAULT_CHANNELS = [
 ]
 
 def seed_channels():
-  dogPhotos = Channel(name="Dog Photos", server_id=1, category_id=1)
-  default = Channel(name="General", server_id=1, category_id=1)
-  db.session.add(default)
-  db.session.add(dogPhotos)
+  db.session.add_all(DEFAULT_CHANNELS)
   db.session.commit()
 
 def undo_channels():

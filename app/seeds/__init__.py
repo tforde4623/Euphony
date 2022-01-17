@@ -25,6 +25,39 @@ def seed():
     # after seeding all, make general default
     serv = Server.query.filter_by(id=1).one()
     serv.default_channel = 1
+
+    serv = Server.query.filter_by(id=2).one()
+    serv.default_channel = 2
+
+    serv = Server.query.filter_by(id=3).one()
+    serv.default_channel = 3
+
+    serv = Server.query.filter_by(id=4).one()
+    serv.default_channel = 4
+
+    serv = Server.query.filter_by(id=5).one()
+    serv.default_channel = 5
+
+    serv = Server.query.filter_by(id=6).one()
+    serv.default_channel = 6
+
+    serv = Server.query.filter_by(id=7).one()
+    serv.default_channel = 7
+
+    serv = Server.query.filter_by(id=8).one()
+    serv.default_channel = 8
+
+    serv = Server.query.filter_by(id=9).one()
+    serv.default_channel = 9
+
+    serv = Server.query.filter_by(id=10).one()
+    serv.default_channel = 10
+
+    serv = Server.query.filter_by(id=11).one()
+    serv.default_channel = 11
+
+    serv = Server.query.filter_by(id=12).one()
+    serv.default_channel = 12
     db.session.commit()
 
 # Creates the `flask seed undo` command
