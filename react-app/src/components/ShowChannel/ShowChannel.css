@@ -6,6 +6,7 @@
   align-items: center;
   height: calc(100vh - 60px);
   padding: 20px 30px;
+  width: 300px;
 }
 
 .name_toggle_edit {
