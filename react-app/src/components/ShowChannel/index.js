@@ -34,7 +34,7 @@ const ShowChannel = () => {
   if (channelsObj) {
     channelsArr = Object.values(channelsObj);
     for (let i = 0; i < channelsArr.length; i++) {
-      if (!channelsArr[i].category_id) {
+      if (!channelsArr[i].category_id && channelsArr[i].server_id === serverId) {
         nullchannels.push(channelsArr[i]);
       }
     }
@@ -106,7 +106,7 @@ const ShowChannel = () => {
                 ) : (
                   <li>
                     <NavLink
-                      to={`/servers/${serverId}/channels/${channel?.id}/messages`}
+                      to={`/servers/${serverId}/channels/${channel?.id}`}
                     >
                       <p
                         className="light_medium dynamic_underline"
@@ -132,7 +132,7 @@ const ShowChannel = () => {
           ) : (
             <li>
               <NavLink
-                to={`/servers/${serverId}/channels/${nch?.id}/messages`}
+                to={`/servers/${serverId}/channels/${nch?.id}`}
               >
                 <p
                   className="light_medium dynamic_underline"

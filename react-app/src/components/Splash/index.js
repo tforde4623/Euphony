@@ -9,7 +9,6 @@ const Splash = () => {
 
   const servers = useSelector((state) => state.servers);
   const fourStaticServers = Object.values(servers).slice(0, 4);
-  console.log(fourStaticServers);
 
   useEffect(() => {
     dispatch(showServers());

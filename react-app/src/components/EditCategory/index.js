@@ -6,6 +6,7 @@ import {
   getAllCategories,
   deleteCategory,
 } from "../../store/categories";
+import { showServers } from "../../store/servers";
 import "./EditCategory.css";
 
 const EditCategory = ({ serverId, categoryId }) => {
@@ -14,12 +15,14 @@ const EditCategory = ({ serverId, categoryId }) => {
 
   const userId = useSelector((state) => state.session.user?.id);
   const category = useSelector((state) => state.categories[categoryId]);
+  const default_channel = useSelector((state) => state.servers[serverId]?.default_channel)
 
   const [name, setName] = useState("");
   const [errors, setErrors] = useState([]);
 
   useEffect(() => {
     dispatch(getAllCategories());
+    dispatch(showServers())
     setName(category?.name);
   }, [dispatch, serverId, categoryId, category?.name]);
 
@@ -39,7 +42,7 @@ const EditCategory = ({ serverId, categoryId }) => {
     };
 
     dispatch(updateCategory(updatedCategory));
-    history.push(`/servers/${serverId}/channels`);
+    history.push(`/servers/${serverId}/channels/${default_channel}`);
   };
 
   const handleDelete = (e) => {
@@ -47,7 +50,7 @@ const EditCategory = ({ serverId, categoryId }) => {
     const deletePayload = { userId, categoryId, serverId };
     let deletedCategory = dispatch(deleteCategory(deletePayload));
     if (deletedCategory) {
-      history.push(`/servers/${serverId}/channels`);
+      history.push(`/servers/${serverId}/channels/${default_channel}`);
     }
   };
 

@@ -1,13 +1,27 @@
-import React from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { NavLink } from "react-router-dom";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { NavLink, useParams } from "react-router-dom";
+import { checkMemberships } from "../../store/members";
+import { showServers } from "../../store/servers";
 import LoginForm from "../auth/LoginForm";
 import LogoutButton from "../auth/LogoutButton";
 import DemoButton from "../DemoButton";
 import "./NavBar.css";
 
 const NavBar = () => {
+  const dispatch = useDispatch();
   const user = useSelector((state) => state.session.user);
+  const userId = user?.id;
+  const memberships = useSelector((state) => state.members.memberships);
+  const defaultServerId = Object.values(memberships)[0].server_id;
+  const servers = useSelector((state) => state.servers);
+  const defaultChannelId = servers[defaultServerId]?.default_channel;
+
+  useEffect(() => {
+    dispatch(checkMemberships(userId));
+    dispatch(showServers());
+  }, [dispatch, userId]);
+
   let sessionLinks;
   if (user) {
     sessionLinks = (
@@ -63,11 +77,11 @@ const NavBar = () => {
       <ul>
         {/* Logo */}
         <NavLink to="/">
-        <div className="logo_div">
-          <h1 className="dark_large" id="logo">
-            Euphony
-          </h1>
-        </div>
+          <div className="logo_div">
+            <h1 className="dark_large" id="logo">
+              Euphony
+            </h1>
+          </div>
         </NavLink>
 
         {/* Navigation Links */}
@@ -85,7 +99,7 @@ const NavBar = () => {
           <li>
             {/* NTS: Link to favorite server?? */}
             <NavLink
-              to="/"
+              to={`/servers/${defaultServerId}/channels/${defaultChannelId}`}
               exact={true}
               activeClassName="active"
               className="dark_large dynamic_underline"
@@ -104,7 +118,7 @@ const NavBar = () => {
           </li>
           <li>
             <a href="https://github.com/tforde4623/Euphony">
-            <i class="fab fa-github fa-2x"></i>
+              <i class="fab fa-github fa-2x"></i>
             </a>
           </li>
         </div>

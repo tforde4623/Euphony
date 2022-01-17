@@ -5,7 +5,7 @@ import { updateChannel, getAllChannels } from "../../store/channels";
 import "./EditChannel.css";
 import DeleteChannel from "../DeleteChannel";
 
-const EditChannel = ({ channelId, showChannelEdit, setShowChannelEdit }) => {
+const EditChannel = ({ channelId, setShowChannelEdit }) => {
   let { serverId } = useParams();
   serverId = Number(serverId);
   channelId = Number(channelId);
@@ -17,7 +17,7 @@ const EditChannel = ({ channelId, showChannelEdit, setShowChannelEdit }) => {
   const categories = useSelector((state) => state.categories);
 
   // COMMENT IN ONCE SERVER THUNKS DONE
-  // const serverOwnerId = useSelector(state => state.servers[serverId]?.owner_id)
+  const default_channel = useSelector(state => state.servers[serverId]?.default_channel)
   // if (userId !== serverOwnerId) return <Redirect to={`/servers/${serverId}/categories/${categoryId}/channels`}></Redirect>
 
   const [name, setName] = useState("");
@@ -94,6 +94,7 @@ const EditChannel = ({ channelId, showChannelEdit, setShowChannelEdit }) => {
           channelId={channelId}
           userId={userId}
           serverId={serverId}
+          default_channel={default_channel}
         />
       </form>
     </div>

@@ -49,11 +49,6 @@ function App() {
           <SignUpForm />
         </Route>
 
-        {/* Messagaes */}
-        <Route path="/servers/:serverId/channels/:channelId">
-          <Main />
-        </Route>
-
         {/* Categories */}
         <Route path="/servers/:serverId/categories/new">
           <NewCategory />
@@ -69,8 +64,10 @@ function App() {
         <Route path="/servers/:serverId/channels/:channelId/edit">
           <EditChannel />
         </Route>
-        <Route path="/servers/:serverId/channels">
-          <ShowChannel />
+
+        {/* Messagaes */}
+        <Route path="/servers/:serverId/channels/:channelId">
+          <Main />
         </Route>
 
         {/* Servers */}
