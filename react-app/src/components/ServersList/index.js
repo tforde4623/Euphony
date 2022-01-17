@@ -1,20 +1,21 @@
-import React, { useEffect  } from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink, useParams } from "react-router-dom";
 import { checkMemberships } from "../../store/members";
+import { showServers } from "../../store/servers";
 import "./ServersList.css";
 const ServersList = () => {
-  const { serverId } = useParams();
   const dispatch = useDispatch();
 
-  const userId = useSelector((state) => state.session.user?.id)
-  console.log(userId, 'iserId in ')
+  const userId = useSelector((state) => state.session.user?.id);
+  const memberships = useSelector((state) => state.members.memberships);
+  const servers = useSelector((state) => state.servers);
+  console.log(servers, "servers");
 
   useEffect(() => {
     dispatch(checkMemberships(userId));
-  });
-
-
+    dispatch(showServers());
+  }, [dispatch, userId]);
 
   return (
     <div className="servers_list_div">
@@ -30,9 +31,22 @@ const ServersList = () => {
         </div>
       </NavLink>
 
-      <div></div>
-      <div></div>
-      <div></div>
+      {Object.values(memberships).map((serverMembership) => {
+        {
+          console.log(serverMembership, "serverMembership");
+        }
+        return (
+          <NavLink
+            to={`/servers/${serverMembership?.server_id}/channels/${
+              servers[serverMembership?.server_id].default_channel
+            }`}
+          >
+            <div key={serverMembership?.server_id}>
+              <img src={servers[serverMembership?.server_id].icon_url}></img>
+            </div>
+          </NavLink>
+        );
+      })}
     </div>
   );
 };
