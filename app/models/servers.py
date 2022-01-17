@@ -22,5 +22,6 @@ class Server(db.Model):
             'id': self.id,
             'name': self.name,
             'owner_id': self.owner_id,
-            'icon_url': self.icon_url
+            'icon_url': self.icon_url,
+            'default_channel': self.default_channel
         }
