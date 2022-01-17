@@ -47,7 +47,7 @@ def update_category(category_id):
     category.name = category_data['name']
     db.session.commit()
 
-    categories = Category.query.filter_by(server_id= server_id).join(Channel).options(joinedload(Category.channels))
+    categories = Category.query.filter_by(server_id= category_data['serverId']).join(Channel).options(joinedload(Category.channels))
     return jsonify(nested_to_dict(categories))
 
 #~~~~~~~~~~~~ DELETE ~~~~~~~~~~~~~~

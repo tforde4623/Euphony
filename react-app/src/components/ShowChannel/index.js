@@ -6,6 +6,8 @@ import { getAllChannels } from "../../store/channels";
 import { showServers } from "../../store/servers";
 import EditChannel from "../EditChannel";
 import EditCategory from "../EditCategory";
+import NewCategory from "../NewCategory";
+import NewChannel from "../NewChannel";
 import "./ShowChannel.css";
 
 const ShowChannel = () => {
@@ -28,6 +30,8 @@ const ShowChannel = () => {
   // Conditionally render either the name of the channel/category OR the form to edit it
   const [showChannelEdit, setShowChannelEdit] = useState(null);
   const [showCategoryEdit, setShowCategoryEdit] = useState(null);
+  const [showNewChannelForm, setShowNewChannelForm] = useState(false);
+  const [showNewCategoryForm, setShowNewCategoryForm] = useState(false);
 
   let channelsArr;
   let nullchannels = [];
@@ -47,7 +51,7 @@ const ShowChannel = () => {
     dispatch(getAllChannels());
     dispatch(getAllCategories(serverId));
     dispatch(showServers());
-  }, [dispatch, serverId, channelId]);
+  }, [dispatch, serverId, channelId, showNewCategoryForm, showNewChannelForm, showChannelEdit, showCategoryEdit, editMode]);
 
   return (
     <div className="channels_div">
@@ -71,14 +75,31 @@ const ShowChannel = () => {
         {/* In edit mode, show two buttons: to add a channel and category  */}
         {owned && editMode && (
           <>
-            <NavLink to={`/servers/${serverId}/categories/new`}>
-              <button className="dark_small">
+            {showNewCategoryForm ? (
+              <NewCategory setShowNewCategoryForm={setShowNewCategoryForm} />
+            ) : (
+              <button
+                className="dark_small new_cat_channel_btn"
+                onClick={() => setShowNewCategoryForm(true)}
+              >
                 <i className="fas fa-plus-circle fa-lg"></i> Category
               </button>
-            </NavLink>
-            <NavLink to={`/servers/${serverId}/channels/new`}>
-              <button className="dark_small">
+            )}
+
+            {showNewChannelForm ? (
+              <NewChannel setShowNewChannelForm={setShowNewChannelForm} />
+            ) : (
+              <button
+                className="dark_small new_cat_channel_btn"
+                onClick={() => setShowNewChannelForm(true)}
+              >
                 <i className="fas fa-plus-circle fa-lg"></i> Channel
+              </button>
+            )}
+
+            <NavLink to={`/servers/${serverId}/edit`}>
+              <button className="dark_small">
+                <i className="fas fa-edit"></i> Edit Server
               </button>
             </NavLink>
           </>
@@ -94,7 +115,7 @@ const ShowChannel = () => {
           showChannelEdit && nch.id === showChannelEdit ? (
             // if it's true that showChannelEdit matches the id, that means the edit button has been clicked
             <EditChannel
-              channelId={`editing:${nch?.id}`}
+              channelId={nch?.id}
               showChannelEdit={showChannelEdit}
               setShowChannelEdit={setShowChannelEdit}
               key={nch?.id}
@@ -123,9 +144,11 @@ const ShowChannel = () => {
           // clicked, and so the EditCategory component is rendered in place
           showCategoryEdit && cat.id === showCategoryEdit ? (
             <EditCategory
-              categoryId={cat.id}
+              categoryId={cat?.id}
               serverId={serverId}
               key={`editing-category:${cat?.id}`}
+              showCategoryEdit={showCategoryEdit}
+              setShowCategoryEdit={setShowCategoryEdit}
             />
           ) : (
             // Otherwise show the category name and an edit button
@@ -157,9 +180,7 @@ const ShowChannel = () => {
                       <NavLink
                         to={`/servers/${serverId}/channels/${channel?.id}`}
                       >
-                        <p
-                          className="light_medium dynamic_underline"
-                        >
+                        <p className="light_medium dynamic_underline">
                           {channel?.name}
                         </p>
                       </NavLink>

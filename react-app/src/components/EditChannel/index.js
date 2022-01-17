@@ -8,24 +8,28 @@ import DeleteChannel from "../DeleteChannel";
 const EditChannel = ({ channelId, setShowChannelEdit }) => {
   let { serverId } = useParams();
   serverId = Number(serverId);
-  channelId = Number(channelId);
   const dispatch = useDispatch();
 
   const userId = useSelector((state) => state.session.user?.id);
   const channel = useSelector((state) => state.channels[channelId]);
   const categories = useSelector((state) => state.categories);
-  const default_channel = useSelector(state => state.servers[serverId]?.default_channel)
+  const default_channel = useSelector(
+    (state) => state.servers[serverId]?.default_channel
+  );
 
   const [name, setName] = useState("");
   const [selectCategory, setSelectCategory] = useState(
-    Object.values(categories).filter(cat => cat.id === channel.category_id)[0].id || null
+    null ||
+      Object.values(categories).filter(
+        (cat) => cat?.id === channel?.category_id
+      )[0]?.id
   );
   const [errors, setErrors] = useState([]);
 
   useEffect(() => {
     dispatch(getAllChannels());
     setName(channel?.name);
-  }, [dispatch, serverId, channelId, channel?.name]);
+  }, [dispatch, serverId, channelId, channel?.name, channel?.category_id]);
 
   useEffect(() => {
     const errors = [];
@@ -75,13 +79,18 @@ const EditChannel = ({ channelId, setShowChannelEdit }) => {
           value={selectCategory}
           onChange={(e) => setSelectCategory(e.target.value)}
         >
+          <option value={null}>Select a Category</option>
           {Object.values(categories).map((cat) => (
             <option value={cat.id}>{cat.name}</option>
           ))}
         </select>
 
         {/* Submit */}
-        <button type="submit" disabled={errors.length > 0} className="add_btn">
+        <button
+          type="submit"
+          disabled={errors.length > 0}
+          className="add_btn"
+        >
           <i className="fas fa-plus"></i>
         </button>
 
@@ -91,6 +100,7 @@ const EditChannel = ({ channelId, setShowChannelEdit }) => {
           userId={userId}
           serverId={serverId}
           default_channel={default_channel}
+          setShowEditChannel={setShowChannelEdit}
         />
       </form>
     </div>

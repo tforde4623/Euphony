@@ -8,13 +8,9 @@ import ProtectedRoute from "./components/auth/ProtectedRoute";
 import UsersList from "./components/UsersList";
 import User from "./components/User";
 import { authenticate } from "./store/session";
-import NewChannel from "./components/NewChannel";
-import EditChannel from "./components/EditChannel";
 import NewServer from "./components/NewServer";
 import EditServer from "./components/EditServer";
 import Main from "./components/Main";
-import EditCategory from "./components/EditCategory";
-import NewCategory from "./components/NewCategory";
 import ServerGrid from "./components/JoinServerPage";
 import Splash from "./components/Splash";
 import AboutUs from "./components/AboutUs";
@@ -46,23 +42,7 @@ function App() {
           <SignUpForm />
         </Route>
 
-        {/* Categories */}
-        <Route path="/servers/:serverId/categories/new">
-          <NewCategory />
-        </Route>
-        <Route path="/servers/:serverId/categories/:categoryId/edit">
-          <EditCategory />
-        </Route>
-
-        {/* Channels */}
-        <Route path="/servers/:serverId/channels/new">
-          <NewChannel />
-        </Route>
-        <Route path="/servers/:serverId/channels/:channelId/edit">
-          <EditChannel />
-        </Route>
-
-        {/* Messagaes */}
+        {/* Main */}
         <Route path="/servers/:serverId/channels/:channelId">
           <Main />
         </Route>

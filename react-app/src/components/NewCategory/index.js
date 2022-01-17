@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { useParams, useHistory } from "react-router-dom";
-import { createCategory } from "../../store/categories";
+import { useDispatch } from "react-redux";
+import { useParams } from "react-router-dom";
+import { createCategory, getAllCategories } from "../../store/categories";
+import { getAllChannels } from "../../store/channels";
 import { showServers } from "../../store/servers";
 import "./NewCategory.css";
 
-const NewCategory = () => {
+const NewCategory = ({ setShowNewCategoryForm }) => {
   let { serverId } = useParams();
   serverId = Number(serverId);
   const dispatch = useDispatch();
-  const history = useHistory();
 
   const [name, setName] = useState("");
   const [errors, setErrors] = useState([]);
@@ -17,8 +17,6 @@ const NewCategory = () => {
   useEffect(() => {
     dispatch(showServers());
   }, [dispatch]);
-
-  const default_channel = useSelector((state) => state.servers[serverId]?.default_channel)
 
   useEffect(() => {
     const errors = [];
@@ -34,11 +32,13 @@ const NewCategory = () => {
     };
 
     dispatch(createCategory(newCategory));
-    history.push(`/servers/${serverId}/channels/${default_channel}`);
+    dispatch(getAllChannels(serverId));
+    dispatch(getAllCategories(serverId));
+    setShowNewCategoryForm(false);
   };
 
   return (
-    <div>
+    <div className="new_category_div">
       <form onSubmit={handleSubmit}>
         {/* Errors */}
         {errors.length > 0 && (
@@ -59,9 +59,18 @@ const NewCategory = () => {
         ></input>
 
         {/* Submit */}
-        <button type="submit" disabled={errors.length > 0} className="add_btn">
-          <i className="fas fa-plus"></i>
-        </button>
+        <div>
+          <button
+            type="submit"
+            disabled={errors.length > 0}
+            className="add_btn"
+          >
+            <i className="fas fa-plus"></i>
+          </button>
+          <button onClick={() => setShowNewCategoryForm(false)}>
+            <i className="fas fa-window-close fa-lg"></i>
+          </button>
+        </div>
       </form>
     </div>
   );

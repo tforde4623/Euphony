@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import {
   updateCategory,
@@ -9,22 +8,20 @@ import {
 import { showServers } from "../../store/servers";
 import "./EditCategory.css";
 
-const EditCategory = ({ serverId, categoryId }) => {
+const EditCategory = ({ serverId, categoryId, setShowCategoryEdit }) => {
   const dispatch = useDispatch();
-  const history = useHistory();
 
   const userId = useSelector((state) => state.session.user?.id);
   const category = useSelector((state) => state.categories[categoryId]);
-  const default_channel = useSelector((state) => state.servers[serverId]?.default_channel)
-
+  
   const [name, setName] = useState("");
   const [errors, setErrors] = useState([]);
 
   useEffect(() => {
     dispatch(getAllCategories());
-    dispatch(showServers())
+    dispatch(showServers());
     setName(category?.name);
-  }, [dispatch, serverId, categoryId, category?.name]);
+  }, [dispatch, serverId, categoryId, category?.name, category]);
 
   useEffect(() => {
     const errors = [];
@@ -38,20 +35,18 @@ const EditCategory = ({ serverId, categoryId }) => {
       name,
       serverId,
       categoryId,
-      userId
+      userId,
     };
 
     dispatch(updateCategory(updatedCategory));
-    history.push(`/servers/${serverId}/channels/${default_channel}`);
+    setShowCategoryEdit(null);
   };
 
   const handleDelete = (e) => {
     e.preventDefault();
     const deletePayload = { userId, categoryId, serverId };
-    let deletedCategory = dispatch(deleteCategory(deletePayload));
-    if (deletedCategory) {
-      history.push(`/servers/${serverId}/channels/${default_channel}`);
-    }
+    dispatch(deleteCategory(deletePayload));
+    setShowCategoryEdit(null);
   };
 
   return (
