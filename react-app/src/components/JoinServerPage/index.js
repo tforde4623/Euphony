@@ -22,7 +22,7 @@ function ServerGrid() {
     <div className="server_grid_page">
       <div className="banner">
         <NavLink to="servers/new">
-          <button>Add a Server</button>
+          <button className="dark_medium">Add a Server</button>
         </NavLink>
       </div>
       <div className="grid">

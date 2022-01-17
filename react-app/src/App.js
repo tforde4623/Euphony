@@ -14,7 +14,7 @@ import NewServer from "./components/NewServer";
 import EditServer from "./components/EditServer";
 import Main from "./components/Main";
 import EditCategory from "./components/EditCategory";
-import NewCategory from "./components/NewCategory";
+// import NewCategory from "./components/NewCategory";
 import ServerGrid from "./components/JoinServerPage";
 import Splash from "./components/Splash";
 import AboutUs from "./components/AboutUs";
@@ -47,9 +47,9 @@ function App() {
         </Route>
 
         {/* Categories */}
-        <Route path="/servers/:serverId/categories/new">
+        {/* <Route path="/servers/:serverId/categories/new">
           <NewCategory />
-        </Route>
+        </Route> */}
         <Route path="/servers/:serverId/categories/:categoryId/edit">
           <EditCategory />
         </Route>

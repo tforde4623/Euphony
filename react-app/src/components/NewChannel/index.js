@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { useHistory, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { createChannel } from "../../store/channels";
+import { createChannel, getAllChannels } from "../../store/channels";
 import "./NewChannel.css";
 import { showServers } from "../../store/servers";
 
-const NewChannel = () => {
+const NewChannel = ({ setShowNewChannelForm }) => {
   let { serverId } = useParams();
   serverId = Number(serverId);
   const dispatch = useDispatch();
@@ -18,7 +18,9 @@ const NewChannel = () => {
     dispatch(showServers());
   }, [dispatch]);
 
-  const default_channel = useSelector(state => state.servers[serverId]?.default_channel)
+  const default_channel = useSelector(
+    (state) => state.servers[serverId]?.default_channel
+  );
 
   useEffect(() => {
     const errors = [];
@@ -34,7 +36,8 @@ const NewChannel = () => {
     };
 
     dispatch(createChannel(newChannel));
-    history.push(`/servers/${serverId}/channels/${default_channel}`);
+    setShowNewChannelForm(false);
+    dispatch(getAllChannels(serverId))
   };
 
   return (
