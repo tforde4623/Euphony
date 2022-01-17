@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, {useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { NavLink } from "react-router-dom";
 import ServerCard from "./serverCards";
@@ -16,7 +16,7 @@ function ServerGrid() {
   useEffect(() => {
     dispatch(showServers());
     dispatch(checkMemberships(userId));
-  }, []);
+  }, [dispatch, userId]);
 
   return (
     <div className="server_grid_page">

@@ -16,7 +16,7 @@ const NewCategory = () => {
 
   useEffect(() => {
     dispatch(showServers());
-  }, [serverId]);
+  }, [dispatch]);
 
   const default_channel = useSelector((state) => state.servers[serverId]?.default_channel)
 

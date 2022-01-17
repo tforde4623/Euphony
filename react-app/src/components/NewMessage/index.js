@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Redirect, useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 import "./NewMessage.css";
@@ -7,12 +7,6 @@ const NewMessage = ({ sock }) => {
   const { channelId } = useParams();
   const [content, setContent] = useState("");
   // const [errors, setErrors] = useState([]);
-
-  // useEffect(() => {
-  //   const errors = [];
-  //   if (!content.length) errors.push("Message must not be empty.");
-  //   setErrors(errors);
-  // }, [content]);
 
   const user = useSelector((state) => state.session.user);
   const userId = user?.id;
@@ -23,10 +17,15 @@ const NewMessage = ({ sock }) => {
   };
 
   const handleSubmit = (e) => {
+    // if (!content.length) {
+    //   setErrors(["Message must not be empty."]);
+    //   return;
+    // }
+
     e.preventDefault();
 
     // send new message via emission
-    sock.emit('chat', { content, userId, user, channelId });
+    sock.emit("chat", { content, userId, user, channelId });
 
     //dispatch(createMessage(newMessage));
     resetContent();
@@ -54,8 +53,12 @@ const NewMessage = ({ sock }) => {
         />
 
         {/* Submit */}
-        <button type="submit" /* disabled={errors.length > 0} */ className="edit-submit-btn">
-        <i class="fas fa-paper-plane fa-lg"></i>
+        <button
+          type="submit"
+          // disabled={errors.length > 0}
+          className="edit-submit-btn"
+        >
+          <i className="fas fa-paper-plane fa-lg"></i>
         </button>
       </form>
     </div>
