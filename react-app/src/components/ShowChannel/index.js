@@ -79,7 +79,7 @@ const ShowChannel = () => {
               <NewCategory setShowNewCategoryForm={setShowNewCategoryForm} />
             ) : (
               <button
-                className="dark_small"
+                className="dark_small new_cat_channel_btn"
                 onClick={() => setShowNewCategoryForm(true)}
               >
                 <i className="fas fa-plus-circle fa-lg"></i> Category
@@ -90,7 +90,7 @@ const ShowChannel = () => {
               <NewChannel setShowNewChannelForm={setShowNewChannelForm} />
             ) : (
               <button
-                className="dark_small"
+                className="dark_small new_cat_channel_btn"
                 onClick={() => setShowNewChannelForm(true)}
               >
                 <i className="fas fa-plus-circle fa-lg"></i> Channel
