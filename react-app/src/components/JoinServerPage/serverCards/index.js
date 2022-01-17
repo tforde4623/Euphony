@@ -7,7 +7,7 @@ import "./ServerCards.css"
 function ServerCard({ server }) {
   const dispatch = useDispatch();
   const currUser = useSelector((state) => state.session.user);
-  const memberships = useSelector((state) => state.members);
+  const memberships = useSelector((state) => state.members.memberships);
   const memberArr = Object.values(memberships);
 
   return (
@@ -18,11 +18,7 @@ function ServerCard({ server }) {
       <div className="card_content">
         <h2 className="card_title light_large">{server?.name}</h2>
       </div>
-      {memberArr.map((obj) => obj.serverId).includes(server.Id) ? (
-        <UnjoinButton serverId={server.id} />
-      ) : (
-        <JoinButton serverId={server.id} />
-      )}
+      {memberArr.map((obj) => obj.serverId).includes(server.Id) ? <UnjoinButton serverId={server.id} /> : <JoinButton serverId={server.id} />}
     </div>
   );
 }
