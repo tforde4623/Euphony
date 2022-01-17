@@ -12,10 +12,10 @@ class Server(db.Model):
     default_channel = db.Column(db.Integer, db.ForeignKey("channels.id"))
 
     users = db.relationship("User", secondary='members', back_populates="members")
-    channels = db.relationship("Channel", back_populates="server", foreign_keys='Channel.server_id')
+    channels = db.relationship("Channel", back_populates="server", foreign_keys='Channel.server_id', cascade="all, delete")
     owner = db.relationship("User", back_populates="servers")
-    categories = db.relationship("Category", back_populates="server")
-    default = db.relationship('Channel', foreign_keys=default_channel)
+    categories = db.relationship("Category", back_populates="server", cascade="all, delete")
+    default = db.relationship('Channel', foreign_keys=default_channel, cascade="all, delete")
 
     def to_dict(self):
         return {

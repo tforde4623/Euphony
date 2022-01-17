@@ -69,6 +69,12 @@ def edit_server(server_id):
 @servers.route('/<server_id>', methods=['DELETE'])
 def delete_server(server_id):
     server = Server.query.filter_by(id=server_id).one()
+    server.default_channel = None
+    db.session.add(server)
+    db.session.commit()
+    db.session.flush()
+    print(server.default_channel, "DOGGIE")
+
     db.session.delete(server)
     db.session.commit()
 
