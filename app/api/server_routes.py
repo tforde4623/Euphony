@@ -28,7 +28,6 @@ def create_server():
     db.session.add(new_default_channel)
     db.session.commit()
     db.session.flush()
-    print(new_default_channel.id, "CATTT")
     
     # Set the default channel on the server instance to the newly created channel
     new_svr.default_channel = new_default_channel.id
