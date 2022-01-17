@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useHistory, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { updateChannel, getAllChannels } from "../../store/channels";
 import "./EditChannel.css";
@@ -10,15 +10,11 @@ const EditChannel = ({ channelId, setShowChannelEdit }) => {
   serverId = Number(serverId);
   channelId = Number(channelId);
   const dispatch = useDispatch();
-  const history = useHistory();
 
   const userId = useSelector((state) => state.session.user?.id);
   const channel = useSelector((state) => state.channels[channelId]);
   const categories = useSelector((state) => state.categories);
-
-  // COMMENT IN ONCE SERVER THUNKS DONE
   const default_channel = useSelector(state => state.servers[serverId]?.default_channel)
-  // if (userId !== serverOwnerId) return <Redirect to={`/servers/${serverId}/categories/${categoryId}/channels`}></Redirect>
 
   const [name, setName] = useState("");
   const [selectCategory, setSelectCategory] = useState(

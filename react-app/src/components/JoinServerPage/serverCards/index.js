@@ -1,12 +1,10 @@
-import React, { useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import React from "react";
+import { useSelector } from "react-redux";
 import JoinButton from "../joinbutton";
 import UnjoinButton from "../unjoinbutton";
 import "./ServerCards.css"
 
 function ServerCard({ server }) {
-  const dispatch = useDispatch();
-  const currUser = useSelector((state) => state.session.user);
   const memberships = useSelector((state) => state.members);
   const memberArr = Object.values(memberships);
 

@@ -1,14 +1,10 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { unjoin } from "../../../store/members";
-import { useState } from "react";
 
 const UnjoinButton = ({ serverId }) => {
   const dispatch = useDispatch();
   const currUser = useSelector((state) => state.session.user);
-  const memberships = useSelector((state) => state.members);
-  const memberArr = Object.values(memberships);
-  // const [symbol, setSymbol] = useState('X')
 
   return (
     <button
@@ -17,7 +13,7 @@ const UnjoinButton = ({ serverId }) => {
         // setSymbol('+')
       }}
     >
-      <i class="fas fa-times fa-lg"></i>
+      <i className="fas fa-times fa-lg"></i>
     </button>
   );
 };

@@ -21,7 +21,7 @@ const EditServer = () => {
     dispatch(showServers());
     setName(server?.name);
     setIconURL(server?.icon_url);
-  }, [dispatch, serverId, server?.name]);
+  }, [dispatch, serverId, server?.name, server?.icon_url]);
 
   useEffect(() => {
     const errors = [];

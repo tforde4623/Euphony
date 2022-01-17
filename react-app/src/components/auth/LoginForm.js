@@ -43,7 +43,6 @@ const LoginForm = () => {
           </div>
 
           <input
-            placeholder="Email"
             name="email"
             type="text"
             placeholder="Email"

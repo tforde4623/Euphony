@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { NavLink, useParams } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { checkMemberships } from "../../store/members";
 import { showServers } from "../../store/servers";
 import "./ServersList.css";
@@ -20,25 +20,25 @@ const ServersList = () => {
     <div className="servers_list_div">
       <NavLink to="/servers">
         <div>
-          <i class="fas fa-home fa-lg"></i>
+          <i className="fas fa-home fa-lg"></i>
         </div>
       </NavLink>
 
       <NavLink to="/servers/new">
         <div>
-          <i class="fas fa-plus fa-lg"></i>
+          <i className="fas fa-plus fa-lg"></i>
         </div>
       </NavLink>
 
       {Object.values(memberships).map((serverMembership) => {
         return (
-          <NavLink
+          <NavLink key={`serverMembershipIds:${servers[serverMembership?.server_id].default_channel}`}
             to={`/servers/${serverMembership?.server_id}/channels/${
               servers[serverMembership?.server_id].default_channel
             }`}
           >
-            <div key={serverMembership?.server_id}>
-              <img src={servers[serverMembership?.server_id].icon_url}></img>
+            <div >
+              <img alt={servers[serverMembership?.server_id].name} src={servers[serverMembership?.server_id].icon_url}></img>
             </div>
           </NavLink>
         );

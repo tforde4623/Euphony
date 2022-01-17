@@ -1,9 +1,8 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { NavLink, useParams } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { checkMemberships } from "../../store/members";
 import { showServers } from "../../store/servers";
-import LoginForm from "../auth/LoginForm";
 import LogoutButton from "../auth/LogoutButton";
 import DemoButton from "../DemoButton";
 import "./NavBar.css";
@@ -118,7 +117,7 @@ const NavBar = () => {
           </li>
           <li>
             <a href="https://github.com/tforde4623/Euphony">
-              <i class="fab fa-github fa-2x"></i>
+              <i className="fab fa-github fa-2x"></i>
             </a>
           </li>
         </div>
