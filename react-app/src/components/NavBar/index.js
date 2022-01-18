@@ -86,25 +86,29 @@ const NavBar = () => {
         {/* Navigation Links */}
         <div className="nav_links">
           <li>
-            <NavLink
-              to="/servers"
-              exact={true}
-              activeClassName="active"
-              className="dark_large dynamic_underline"
-            >
-              Join Servers
-            </NavLink>
+            { user &&
+              <NavLink
+                to="/servers"
+                exact={true}
+                activeClassName="active"
+                className="dark_large dynamic_underline"
+              >
+                Join Servers
+              </NavLink>
+            }
           </li>
           <li>
             {/* NTS: Link to favorite server?? */}
-            <NavLink
-              to={`/servers/${defaultServerId}/channels/${defaultChannelId}`}
-              exact={true}
-              activeClassName="active"
-              className="dark_large dynamic_underline"
-            >
-              Your Servers
-            </NavLink>
+            { user &&
+              <NavLink
+                to={`/servers/${defaultServerId}/channels/${defaultChannelId}`}
+                exact={true}
+                activeClassName="active"
+                className="dark_large dynamic_underline"
+              >
+                Your Servers
+              </NavLink>
+            }
           </li>
           <li>
             <NavLink
