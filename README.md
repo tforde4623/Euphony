@@ -5,14 +5,14 @@
 
 ## Run Locally
 1. Clone Repository
-2. Run '''pipenv install''' in root
-3. Run '''flask db upgrade''' in root
-4. Run '''flask db seed all''' in root
-5. Go into react-app/src/components/ShowAllMessages/index.js and replace line 27 with 'sock = io(<localhost that flask is running on);'''
-7. Run 'npm install''' in react-app dir
+2. Run ''' pipenv install ''' in root
+3. Run ''' flask db upgrade ''' in root
+4. Run ''' flask db seed all ''' in root
+5. Go into react-app/src/components/ShowAllMessages/index.js and replace line 24 with ''' sock = io(<localhost that flask is running on); '''
+7. Run ''' npm install ''' in react-app dir
 8. In two different windows run:
-      1. '''pipenv run flask run'''
-      2. '''npm start'''
+      1. ''' pipenv run flask run '''
+      2. ''' npm start '''
 
 #### Core features: 
 - Create an account
