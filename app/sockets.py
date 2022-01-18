@@ -12,7 +12,7 @@ def fix_datetime(dic):
 
 # setup socket origins for prod and dev
 if os.environ.get('FLASK_ENV') == 'production':
-  origins = ['https://euphony-project.herokuapp.com']
+  origins = ['https://euphony-web.herokuapp.com']
 else:
   origins = ['http://localhost:3000']
 
