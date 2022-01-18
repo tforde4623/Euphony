@@ -24,7 +24,7 @@ const AboutUs = () => {
 
         <div className="dev_div">
           <h2 className="dark_large">Tommy Forde</h2>
-          <p>Description</p>
+          <p>Hello! I'm Tommy. I have experience in Offensive Security and web based development as hobbies, more recently Iv'e been working to make it possible to do full stack web dev professionally. These things were hobbies of mine because Iv'e always enjoyed solving problems and making things work creatively, which this is the perfect path for. I find that loving to code and enjoying what I do is the ultimate advantage. I will be open to job oppurtunities starting Feb. 2022.</p>
           <div className="profile_links">
             <a href="https://github.com/tforde4623">
               <i className="fab fa-github fa-lg"></i>
