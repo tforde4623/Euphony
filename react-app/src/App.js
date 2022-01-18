@@ -71,9 +71,9 @@ function App() {
         </Route>
 
         {/* Home */}
-        <ProtectedRoute path="/" exact={true}>
+        <Route path="/" exact={true}>
           <Splash />
-        </ProtectedRoute>
+        </Route>
       </Switch>
     </BrowserRouter>
   );

@@ -72,7 +72,6 @@ def delete_server(server_id):
     db.session.add(server)
     db.session.commit()
     db.session.flush()
-    print(server.default_channel, "DOGGIE")
 
     db.session.delete(server)
     db.session.commit()

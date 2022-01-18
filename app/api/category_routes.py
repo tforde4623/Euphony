@@ -54,8 +54,9 @@ def update_category(category_id):
 @categories.route('/<category_id>', methods=['DELETE'])
 def delete_category(category_id):
     category = Category.query.filter_by(id=category_id).one()
+    category_data = request.json
     db.session.delete(category)
     db.session.commit()
 
-    categories = Category.query.filter_by(server_id= server_id).join(Channel).options(joinedload(Category.channels))
+    categories = Category.query.filter_by(server_id= category_data['serverId']).join(Channel).options(joinedload(Category.channels))
     return jsonify(nested_to_dict(categories))
