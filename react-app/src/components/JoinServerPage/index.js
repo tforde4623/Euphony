@@ -1,6 +1,6 @@
 import React, {useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { NavLink } from "react-router-dom";
+import { NavLink, Redirect } from "react-router-dom";
 import ServerCard from "./serverCards";
 import { showServers } from "../../store/servers";
 import { checkMemberships } from "../../store/members";
@@ -9,6 +9,7 @@ import "./JoinServerPage.css";
 function ServerGrid() {
   const currUser = useSelector((state) => state.session.user);
   const userId = currUser?.id;
+
   const dispatch = useDispatch();
   const serverlist = useSelector((state) => state.servers);
   const serverArr = Object.values(serverlist);
@@ -17,6 +18,8 @@ function ServerGrid() {
     dispatch(showServers());
     dispatch(checkMemberships(userId));
   }, [dispatch, userId]);
+
+  if (!currUser) return <Redirect to="/login"></Redirect>
 
   return (
     <div className="server_grid_page">
