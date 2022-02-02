@@ -28,6 +28,7 @@ Mako = "==1.1.4"
 psycopg2-binary = "*"
 flask-socketio = "*"
 eventlet = "==0.30.2"
+pylint = "*"
 
 [dev-packages]
 psycopg2-binary = "*"

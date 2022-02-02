@@ -16,6 +16,7 @@ const ServersList = () => {
     dispatch(showServers());
   }, [dispatch, userId]);
 
+
   return (
     <div className="servers_list_div">
       <NavLink to="/servers">
@@ -38,7 +39,7 @@ const ServersList = () => {
             }`}
           >
             <div >
-              <img alt={servers[serverMembership?.server_id]?.name} src={servers[serverMembership?.server_id].icon_url}></img>
+              <img alt={servers[serverMembership?.server_id]?.name} src={servers[serverMembership?.server_id]?.icon_url}></img>
             </div>
           </NavLink>
         );
