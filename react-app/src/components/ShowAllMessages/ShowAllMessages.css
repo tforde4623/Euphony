@@ -11,3 +11,76 @@
   overflow-y: auto;
   width: 100%;
 }
+
+.no_msgs_div h3 {
+  /* background-color: aliceblue; */
+  text-align: center;
+  border-top: 3px solid #0f0f11;
+}
+
+/* Credit for tumbleweed animation: https://jsfiddle.net/02Lxp9gs/24/ */
+.desert {
+  position: relative;
+  height: 8rem;
+  overflow: hidden;
+}
+
+.desert .tumbleweed {
+  position: absolute;
+  top: 0;
+  left: -5rem;
+  background: url("https://img.icons8.com/dotty/48/000000/tumbleweed.png")
+    no-repeat center;
+  background-size: cover;
+  width: 5rem;
+  height: 5rem;
+  animation: jumping 1.5s infinite, rolling 5s linear infinite,
+    rotating 2s linear infinite;
+}
+.tumbleweed:nth-child(2) {
+  animation-delay: 2.5s;
+}
+.tumbleweed:nth-child(3) {
+  animation-delay: 4s;
+}
+
+@keyframes jumping {
+  0% {
+    top: 0rem;
+    animation-timing-function: ease-in;
+  }
+  25% {
+    top: 3rem;
+    animation-timing-function: ease-out;
+  }
+  50% {
+    top: 1rem;
+    animation-timing-function: ease-in;
+  }
+  75% {
+    top: 3rem;
+    animation-timing-function: ease-out;
+  }
+  100% {
+    top: 0rem;
+    animation-timing-function: ease-in;
+  }
+}
+
+@keyframes rolling {
+  0% {
+    left: -5rem;
+  }
+  100% {
+    left: 100%;
+  }
+}
+
+@keyframes rotating {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
