@@ -18,13 +18,13 @@ const ServersList = () => {
 
   return (
     <div className="servers_list_div">
-      <NavLink to="/servers">
+      <NavLink to="/servers" title="Join Servers">
         <div>
           <i className="fas fa-home fa-lg"></i>
         </div>
       </NavLink>
 
-      <NavLink to="/servers/new">
+      <NavLink to="/servers/new" title="Add a Server">
         <div>
           <i className="fas fa-plus fa-lg"></i>
         </div>
@@ -33,6 +33,7 @@ const ServersList = () => {
       {Object.values(memberships).map((serverMembership, idx) => {
         return (
           <NavLink
+            title={`${servers[serverMembership?.server_id]?.name}`}
             key={`${idx}`}
             to={`/servers/${serverMembership?.server_id}/channels/${
               servers[serverMembership?.server_id]?.default_channel
