@@ -17,6 +17,8 @@ const NavBar = () => {
   const servers = useSelector((state) => state.servers);
   const defaultChannelId = servers[defaultServerId]?.default_channel;
 
+  // If the user has servers they're a member of, navigate to the first server
+  // otherwise display an alert to prompt user to join a server first
   const yourServersLink = membershipsArr.length ? (
     <NavLink
       to={`/servers/${defaultServerId}/channels/${defaultChannelId}`}
