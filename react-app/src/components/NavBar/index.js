@@ -17,8 +17,6 @@ const NavBar = () => {
   const servers = useSelector((state) => state.servers);
   const defaultChannelId = servers[defaultServerId]?.default_channel;
 
-  // const yourServersLink = membershipsArr.length ? `/servers/${defaultServerId}/channels/${defaultChannelId}`: "/servers";
-
   const yourServersLink = membershipsArr.length ? (
     <NavLink
       to={`/servers/${defaultServerId}/channels/${defaultChannelId}`}
