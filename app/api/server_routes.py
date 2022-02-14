@@ -34,12 +34,7 @@ def create_server():
     db.session.add(new_svr)
     db.session.commit()
 
-    vn1 = svr_data['owner_id']
-    vn2 = new_svr.id
     # Add the current user to the server's membership automatically
-    print('vn1', vn1)
-    print('vn2', vn2)
-
     new_membership = Member(user_id=svr_data['owner_id'],
                             server_id=new_svr.id) 
     db.session.add(new_membership)
