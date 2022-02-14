@@ -8,7 +8,7 @@
   background-position: center;
   background-size: cover;
   width: 100vw;
-  height: 70vh;
+  height: calc(100vh - 60px);
 }
 
 .auth_div {
@@ -32,4 +32,16 @@
 
 .auth_form input {
   width: 90%;
+}
+
+@media only screen and (max-width: 1000px) {
+  .auth_div {
+    width: 70vw;
+  }
+}
+
+@media only screen and (max-width: 700px) {
+  .auth_div {
+    width: 90vw;
+  }
 }
