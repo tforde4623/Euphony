@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { createServer } from "../../store/servers";
-import "./NewServer.css"
+import "./NewServer.css";
 
 const NewServer = () => {
   const dispatch = useDispatch();
@@ -19,12 +19,14 @@ const NewServer = () => {
     setErrors(errors);
   }, [name]);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const newServer = { name, owner_id, iconURL };
 
-    dispatch(createServer(newServer));
-    history.push(`/servers`);
+    const server = await dispatch(createServer(newServer));
+    if (server) {
+      history.push(`/servers/${server?.id}/channels/${server?.default_channel}`);
+    }
   };
 
   return (
@@ -59,7 +61,9 @@ const NewServer = () => {
           <i className="fas fa-plus"></i>
         </button>
       </form>
-      <h2 className="dark_large" id="preview_text">Live Preview Your Server Card</h2>
+      <h2 className="dark_large" id="preview_text">
+        Live Preview Your Server Card
+      </h2>
       <div className="card" id="preview_card">
         <div className="splash_card_img_container">
           <img src={iconURL} alt={name}></img>

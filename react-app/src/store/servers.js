@@ -56,7 +56,7 @@ export const updateServer =
         serverId,
         name,
         ownerId,
-        iconURL
+        iconURL,
       }),
     });
 
