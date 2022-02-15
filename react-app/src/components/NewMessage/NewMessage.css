@@ -27,4 +27,5 @@
 
 .input-err::placeholder {
   color: red !important;
+  opacity: 0.7;
 }
