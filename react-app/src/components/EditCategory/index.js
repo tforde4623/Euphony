@@ -5,6 +5,7 @@ import {
   getAllCategories,
   deleteCategory,
 } from "../../store/categories";
+import { getAllChannels } from "../../store/channels";
 import { showServers } from "../../store/servers";
 import "./EditCategory.css";
 
@@ -45,7 +46,8 @@ const EditCategory = ({ serverId, categoryId, setShowCategoryEdit }) => {
   const handleDelete = (e) => {
     e.preventDefault();
     const deletePayload = { userId, categoryId, serverId };
-    dispatch(deleteCategory(deletePayload));
+    dispatch(deleteCategory(deletePayload))
+      .then(() => dispatch(getAllChannels()));
     setShowCategoryEdit(null);
   };
 

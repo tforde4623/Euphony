@@ -10,6 +10,7 @@ def fix_datetime(dic):
 
     return new_obj
 
+
 # setup socket origins for prod and dev
 if os.environ.get('FLASK_ENV') == 'production':
   origins = ['https://euphony-web.herokuapp.com']
@@ -17,7 +18,6 @@ else:
   origins = ['http://localhost:3000']
 
 sock = SocketIO(cors_allowed_origins=origins)
-
 
 @sock.on('join')
 def join(data):
@@ -27,15 +27,29 @@ def join(data):
 @sock.on('chat')
 def chat(data):
   room = str(data['channelId'])
-  new_msg = Message(content=data['content'],
-                    channel_id=data['channelId'],
-                    user_id=data['userId'])
-  db.session.add(new_msg)
-  db.session.commit()
 
-  res_data = new_msg.to_dict()
-  res_data['user'] = data['user']
-  emit('chat', fix_datetime(res_data), broadcast=True, to=room)
+  # if the data isn't valid don't create/emit it...
+  errors = {}
+  if not data['content']:
+      errors['content'] = 'required.'
+
+  # these are less important to convey on the front end because it shouln't happen if not misused from third party source
+  if not data['userId'] or data['channelId']:
+      errors['general'] = 'Required information not present.'
+
+  if len(errors):
+    emit('err', errors)
+
+  else:
+    new_msg = Message(content=data['content'],
+                      channel_id=data['channelId'],
+                      user_id=data['userId'])
+    db.session.add(new_msg)
+    db.session.commit()
+
+    res_data = new_msg.to_dict()
+    res_data['user'] = data['user']
+    emit('chat', fix_datetime(res_data), broadcast=True, to=room)
 
 
 @sock.on('edit_chat')
@@ -45,7 +59,7 @@ def edit_chat(data):
   msg.content = data['content']
   db.session.commit()
   msg_dict = msg.to_dict()
-  msg_dict['user'] = data['user'] 
+  msg_dict['user'] = data['user']
   # since content is the only thing that changes
   emit('edit_chat', fix_datetime(msg_dict), broadcast=True, to=room)
 
