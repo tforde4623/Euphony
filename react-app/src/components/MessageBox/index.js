@@ -13,6 +13,7 @@ function MessageBox({ message, sock }) {
 
   const handleDelBtn = () => {
     sock.emit('delete_chat', message);
+    setHidden(!hidden)
   };
 
   return (

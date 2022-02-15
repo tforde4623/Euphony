@@ -12,9 +12,32 @@ const NavBar = () => {
   const user = useSelector((state) => state.session.user);
   const userId = user?.id;
   const memberships = useSelector((state) => state.members.memberships);
-  const defaultServerId = Object.values(memberships)[0]?.server_id;
+  const membershipsArr = Object.values(memberships);
+  const defaultServerId = membershipsArr[0]?.server_id;
   const servers = useSelector((state) => state.servers);
   const defaultChannelId = servers[defaultServerId]?.default_channel;
+
+  // If the user has servers they're a member of, navigate to the first server
+  // otherwise display an alert to prompt user to join a server first
+  const yourServersLink = membershipsArr.length ? (
+    <NavLink
+      to={`/servers/${defaultServerId}/channels/${defaultChannelId}`}
+      exact={true}
+      activeClassName="active"
+      className="dark_large dynamic_underline"
+    >
+      Your Servers
+    </NavLink>
+  ) : (
+    <p
+      onClick={() => {
+        alert("Join at least one server first.");
+      }}
+      className="dark_large dynamic_underline"
+    >
+      Your Servers
+    </p>
+  );
 
   useEffect(() => {
     dispatch(checkMemberships(userId));
@@ -86,7 +109,7 @@ const NavBar = () => {
         {/* Navigation Links */}
         <div className="nav_links">
           <li>
-            { user &&
+            {user && (
               <NavLink
                 to="/servers"
                 exact={true}
@@ -95,21 +118,9 @@ const NavBar = () => {
               >
                 Join Servers
               </NavLink>
-            }
+            )}
           </li>
-          <li>
-            {/* NTS: Link to favorite server?? */}
-            { user &&
-              <NavLink
-                to={`/servers/${defaultServerId}/channels/${defaultChannelId}`}
-                exact={true}
-                activeClassName="active"
-                className="dark_large dynamic_underline"
-              >
-                Your Servers
-              </NavLink>
-            }
-          </li>
+          <li>{user && yourServersLink}</li>
           <li>
             <NavLink
               to="/about"

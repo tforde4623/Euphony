@@ -16,30 +16,34 @@ const ServersList = () => {
     dispatch(showServers());
   }, [dispatch, userId]);
 
-
   return (
     <div className="servers_list_div">
-      <NavLink to="/servers">
+      <NavLink to="/servers" title="Join Servers">
         <div>
           <i className="fas fa-home fa-lg"></i>
         </div>
       </NavLink>
 
-      <NavLink to="/servers/new">
+      <NavLink to="/servers/new" title="Add a Server">
         <div>
           <i className="fas fa-plus fa-lg"></i>
         </div>
       </NavLink>
 
-      {Object.values(memberships).map((serverMembership) => {
+      {Object.values(memberships).map((serverMembership, idx) => {
         return (
-          <NavLink key={`serverMembershipIds:${servers[serverMembership?.server_id]?.default_channel}`}
+          <NavLink
+            title={`${servers[serverMembership?.server_id]?.name}`}
+            key={`${idx}`}
             to={`/servers/${serverMembership?.server_id}/channels/${
               servers[serverMembership?.server_id]?.default_channel
             }`}
           >
-            <div >
-              <img alt={servers[serverMembership?.server_id]?.name} src={servers[serverMembership?.server_id]?.icon_url}></img>
+            <div>
+              <img
+                alt={servers[serverMembership?.server_id]?.name}
+                src={servers[serverMembership?.server_id]?.icon_url}
+              ></img>
             </div>
           </NavLink>
         );
