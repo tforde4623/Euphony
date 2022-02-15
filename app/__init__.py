@@ -4,7 +4,7 @@ from flask_cors import CORS
 from flask_migrate import Migrate
 from flask_wtf.csrf import generate_csrf
 from flask_login import LoginManager
-from flask_session import Session
+from flask_session import Session, SqlAlchemySessionInterface
 
 from .models import db, User
 from .api.user_routes import user_routes
@@ -23,10 +23,8 @@ from .config import Config
 
 app = Flask(__name__)
 
-app.config['SESSION_TYPE'] = 'filesystem'
 # Setup login manager
 login = LoginManager(app)
-Session(app)
 login.login_view = 'auth.unauthorized'
 
 @login.user_loader
@@ -46,9 +44,15 @@ app.register_blueprint(servers, url_prefix='/api/servers')
 app.register_blueprint(members, url_prefix='/api/members')
 
 
-
 db.init_app(app)
 sock.init_app(app)
+
+app.config['SESSION_TYPE'] = 'sqlalchemy'
+app.config['SESSION_SQLALCHEMY'] = db
+
+sess = Session()
+sess.init_app(app)
+
 Migrate(app, db)
 
 # Application Security
