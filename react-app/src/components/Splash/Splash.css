@@ -137,8 +137,7 @@
   .splash_photo_div {
     min-height: 50vh;
   }
-  .splash_text_div {
-  }
+
 }
 
 @media only screen and (max-width: 1150px) {
@@ -157,8 +156,6 @@
 @media only screen and (max-width: 915px) {
   .server_rotate_div {
     width: 90vw;
-  }
-  .splash_photo_div {
   }
   .splash_text_div {
     height: 35vh;
@@ -182,8 +179,7 @@
     height: 200px;
     width: 200px;
   }
-  .splash_text_div {
-  }
+
   .splash_card {
     width: 270px;
     height: 270px;
