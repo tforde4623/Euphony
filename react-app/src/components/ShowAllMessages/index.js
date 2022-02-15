@@ -21,7 +21,7 @@ const ShowAllMessages = () => {
   // handle sock connection
   useEffect(() => {
     // initialize connection with socket
-    sock = io('localhost:5000');
+    sock = io('http://localhost:5000');
 
     // listener for new chats
     sock.on('chat', (data) => {
