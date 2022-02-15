@@ -16,6 +16,7 @@
   width: 100vw;
   height: 60vh;
 }
+
 .splash_text_div {
   display: flex;
   flex-direction: column;
@@ -24,7 +25,7 @@
   background-color: #e8eaed;
   border-radius: 70px;
   width: 50vw;
-  height: 25vh;
+  min-height: fit-content;
   padding: 20px 40px;
 }
 .splash_photo_div h1 {
@@ -39,12 +40,14 @@
 .server_rotate_div {
   background-color: #e8eaed;
   display: flex;
+  flex-wrap: wrap;
   flex-direction: row;
   justify-content: center;
   align-items: center;
   border-radius: 30px;
   padding: 0 30px;
   margin: 15px;
+  width: fit-content;
 }
 
 .splash_card {
@@ -95,4 +98,107 @@
   flex-direction: column;
   align-self: end;
   align-items: center;
+}
+
+@media only screen and (min-width: 1301px) {
+  .server_rotate_div {
+    width: 90vw;
+  }
+}
+
+@media only screen and (max-width: 1357px) {
+  .server_rotate_div {
+    width: 90vw;
+  }
+  .splash_card {
+    width: 200px;
+    height: 200px;
+  }
+
+  .splash_card h2 {
+    font-size: 20px;
+  }
+
+  .splash_text_div {
+    width: 60vw;
+  }
+}
+
+@media only screen and (max-width: 1280px) {
+  .server_rotate_div {
+    width: 55vw;
+  }
+
+  .splash_card {
+    width: 270px;
+    height: 270px;
+  }
+
+  .splash_photo_div {
+    min-height: 50vh;
+  }
+  .splash_text_div {
+  }
+}
+
+@media only screen and (max-width: 1150px) {
+  .server_rotate_div {
+    width: 70vw;
+  }
+  .splash_text_div {
+    height: 30vh;
+  }
+  .splash_card {
+    width: 270px;
+    height: 270px;
+  }
+}
+
+@media only screen and (max-width: 915px) {
+  .server_rotate_div {
+    width: 90vw;
+  }
+  .splash_photo_div {
+  }
+  .splash_text_div {
+    height: 35vh;
+  }
+}
+
+@media only screen and (max-width: 715px) {
+  .server_rotate_div {
+    width: 95vw;
+  }
+  .splash_text_div {
+    width: 70vw;
+  }
+}
+
+@media only screen and (max-width: 675px) {
+  .server_rotate_div {
+    width: 80vw;
+  }
+  .splash_card {
+    height: 200px;
+    width: 200px;
+  }
+  .splash_text_div {
+  }
+  .splash_card {
+    width: 270px;
+    height: 270px;
+  }
+}
+
+@media only screen and (max-width: 500px) {
+  .server_rotate_div {
+    width: 80vw;
+  }
+  .splash_card {
+    height: 300px;
+    width: 300px;
+  }
+  .splash_text_div {
+    width: 80vw;
+  }
 }
