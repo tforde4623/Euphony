@@ -28,7 +28,8 @@ const ShowAllMessages = () => {
       withCredentials: true
     };
 
-    sock = io("http://localhost:5000" || "", connectionObj); // LOCAL
+    sock = io("http://localhost:5000", connectionObj); // LOCAL
+    // sock = io("", connectionObj); // PRODUCTION
 
     // listener for new chats
     sock.on("chat", (data) => {
