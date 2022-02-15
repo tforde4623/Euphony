@@ -1,5 +1,4 @@
 from flask_login import current_user
-from flask import request
 from flask_socketio import SocketIO, emit, join_room, ConnectionRefusedError
 from .models.messages import Message
 from .models import db
@@ -13,7 +12,6 @@ def fix_datetime(dic):
     return new_obj
 
 
-# setup socket origins for prod and dev
 if os.environ.get('FLASK_ENV') == 'production':
   origins = ['https://euphony-web.herokuapp.com']
 else:
@@ -21,12 +19,10 @@ else:
 
 sock = SocketIO(cors_allowed_origins=origins)
 
-
 @sock.on('connect')
 def connect():
-  print(current_user.is_authenticated)
-  # if not current_user.is_authenticated:
-  #   raise ConnectionRefusedError('unauthorized')
+  if not current_user.is_authenticated:
+    raise ConnectionRefusedError('unauthorized')
 
 
 @sock.on('join')
@@ -68,11 +64,10 @@ def edit_chat(data):
   msg = Message.query.filter_by(id=data['id']).one()
 
   # make sure user owns the message
-  print(current_user)
-  # if not session['user'] or session['user']['id'] != msg['userId']:
-  #   emit('err', 'Not authorized to do this.')
+  if not current_user or current_user.id != msg.user_id:
+    emit('err', 'Not authorized to do this.')
 
-  if True:
+  else:
     msg.content = data['content']
     db.session.commit()
     msg_dict = msg.to_dict()
@@ -87,10 +82,10 @@ def delete_chat(data):
   msg = Message.query.filter_by(id=data['id'])
 
   # make sure user owns the message
-  # if not session.user or session.user.id != msg.userId:
-  #   emit('err', 'Not authorized to do this.')
+  if not current_user or current_user.id != msg.user_id:
+    emit('err', 'Not authorized to do this.')
 
-  if True:
+  else:
     msg.delete()
     db.session.commit()
     emit('delete_chat', data, broadcast=True, to=room)
