@@ -10,6 +10,29 @@
   overflow-y: scroll;
 }
 
+.servers_list_div a {
+  position: relative;
+}
+
+.servers_list_div a[title]:hover::after {
+  content: attr(title);
+  position: absolute;
+  display: flex; 
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  z-index: 1;
+  top: 10px;
+  width: fit-content;
+  background-color: rgba(15, 15, 17, 0.4);
+  color: #e8eaed;
+  text-align: center;
+  width: 80px;
+  min-height: 80px;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+  border-radius: 80px;
+}
+
 .servers_list_div div {
   display: flex;
   align-items: center;

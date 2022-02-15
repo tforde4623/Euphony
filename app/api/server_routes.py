@@ -1,5 +1,5 @@
 from flask import Blueprint, request, jsonify
-from app.models import db, Server, Channel
+from app.models import db, Server, Channel, Member
 
 servers = Blueprint('servers', __name__)
 
@@ -32,6 +32,12 @@ def create_server():
     # Set the default channel on the server instance to the newly created channel
     new_svr.default_channel = new_default_channel.id
     db.session.add(new_svr)
+    db.session.commit()
+
+    # Add the current user to the server's membership automatically
+    new_membership = Member(user_id=svr_data['owner_id'],
+                            server_id=new_svr.id) 
+    db.session.add(new_membership)
     db.session.commit()
 
     return jsonify(new_svr.to_dict())
