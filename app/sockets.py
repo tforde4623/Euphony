@@ -79,13 +79,13 @@ def edit_chat(data):
 @sock.on('delete_chat')
 def delete_chat(data):
   room = str(data['channel_id'])
-  msg = Message.query.filter_by(id=data['id'])
+  msg = Message.query.filter_by(id=data['id']).one()
 
   # make sure user owns the message
   if not current_user or current_user.id != msg.user_id:
     emit('err', 'Not authorized to do this.')
 
   else:
-    msg.delete()
+    db.session.delete(msg)
     db.session.commit()
     emit('delete_chat', data, broadcast=True, to=room)
