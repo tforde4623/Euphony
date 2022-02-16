@@ -97,7 +97,6 @@ nav ul {
   display: none;
 }
 
-
 @media only screen and (max-width: 1100px) {
   .nav_links {
     width: 45vw;
@@ -187,12 +186,16 @@ nav ul {
     background-color: rgba(222, 164, 6, 0.95);
     z-index: 1;
   }
+  .dropdown .auth_nav_div_dropdown li {
+    list-style: none;
+  }
 
   .dropdown .auth_nav_div_dropdown {
     height: 15vh;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    align-items: center;
     margin-top: 5vh;
   }
 
