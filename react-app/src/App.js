@@ -14,6 +14,7 @@ import Main from "./components/Main";
 import ServerGrid from "./components/JoinServerPage";
 import Splash from "./components/Splash";
 import AboutUs from "./components/AboutUs";
+import ErrorPage from "./components/ErrorPage/ErrorPage";
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -73,6 +74,9 @@ function App() {
         {/* Home */}
         <Route path="/" exact={true}>
           <Splash />
+        </Route>
+        <Route>
+          <ErrorPage />
         </Route>
       </Switch>
     </BrowserRouter>
