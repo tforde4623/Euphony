@@ -33,11 +33,18 @@
 
 .new_server_div form input {
   width: 70%;
+  padding: 20px;
 }
 
 .new_server_div form button {
   background-color: #b4c3d1;
   color: #0f0f11;
+}
+
+.err-visibility-container {
+  background-color: white;
+  border-radius: 10px;
+  padding: 10px 20px;
 }
 
 @media only screen and (max-width: 800px) {

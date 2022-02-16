@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { createServer } from "../../store/servers";
@@ -11,43 +11,56 @@ const NewServer = () => {
   const [name, setName] = useState("");
   const [iconURL, setIconURL] = useState("");
   const [errors, setErrors] = useState([]);
+  const [contentErrs, setContentErrs] = useState([]);
   const owner_id = useSelector((state) => state.session.user?.id);
 
-  useEffect(() => {
-    const errors = [];
-    if (!name.length) errors.push("Server name must not be empty.");
-    setErrors(errors);
-  }, [name]);
-
-  const handleSubmit = async (e) => {
+  const handleSubmit = e => {
     e.preventDefault();
     const newServer = { name, owner_id, iconURL };
 
-    const server = await dispatch(createServer(newServer));
-    if (server) {
-      history.push(`/servers/${server?.id}/channels/${server?.default_channel}`);
-    }
+    dispatch(createServer(newServer))
+      .then(res => {
+        if (res.errors) {
+          if (res.errors.name) {
+            setContentErrs(res.errors.name);
+          } else {
+            // this would be an error not related to user input
+            res.errors.general && setErrors(res.errors.general);
+          }
+        } else {
+          history.push(`/servers/${res?.id}/channels/${res?.default_channel}`);
+        }
+      })
   };
 
   return (
     <div className="new_server_div">
       <h1 className="dark_large">Create a New Server</h1>
       <form onSubmit={handleSubmit}>
-        {errors.length > 0 && (
-          <ul className="errors">
-            {errors.map((error) => (
-              <li key={error}>{error}</li>
+        {errors.length ? 
+          <div className='err-visibility-container'>
+            {errors.map(err => (
+              <div className='input-err-msg' key={err}>{err}</div>
             ))}
-          </ul>
-        )}
+          </div>
+        : null }
 
         <input
+          className={contentErrs.length ? 'input-err' : null}
           placeholder="Server Name"
           name="server_name"
           value={name}
           onChange={(e) => setName(e.target.value)}
           type="text"
         ></input>
+        {/* map through errors if present on submission */}
+        {contentErrs.length ? 
+          <div className='err-visibility-container'>
+            {contentErrs.map(err => (
+              <div className='input-err-msg' key={err}>{err}</div>
+            ))}
+          </div>
+        : null }
 
         <input
           placeholder="Icon URL (optional)"
