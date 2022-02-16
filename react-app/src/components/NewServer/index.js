@@ -11,7 +11,7 @@ const NewServer = () => {
   const [name, setName] = useState("");
   const [iconURL, setIconURL] = useState("");
   const [errors, setErrors] = useState([]);
-  const [contentErrs, setContentErrs] = useState([]);
+  const [nameErrs, setNameErrs] = useState([]);
   const owner_id = useSelector((state) => state.session.user?.id);
 
   const handleSubmit = e => {
@@ -22,7 +22,7 @@ const NewServer = () => {
       .then(res => {
         if (res.errors) {
           if (res.errors.name) {
-            setContentErrs(res.errors.name);
+            setNameErrs(res.errors.name);
           } else {
             // this would be an error not related to user input
             res.errors.general && setErrors(res.errors.general);
@@ -46,7 +46,7 @@ const NewServer = () => {
         : null }
 
         <input
-          className={contentErrs.length ? 'input-err' : null}
+          className={nameErrs.length ? 'input-err' : null}
           placeholder="Server Name"
           name="server_name"
           value={name}
@@ -54,9 +54,9 @@ const NewServer = () => {
           type="text"
         ></input>
         {/* map through errors if present on submission */}
-        {contentErrs.length ? 
+        {nameErrs.length ? 
           <div className='err-visibility-container'>
-            {contentErrs.map(err => (
+            {nameErrs.map(err => (
               <div className='input-err-msg' key={err}>{err}</div>
             ))}
           </div>

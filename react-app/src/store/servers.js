@@ -60,10 +60,12 @@ export const updateServer =
       }),
     });
 
+    let editedServer;
     if (res.ok) {
-      const editedServer = await res.json();
+      editedServer = await res.json();
       dispatch(editServer(editedServer));
     }
+    return editedServer;
   };
 
 //delete server

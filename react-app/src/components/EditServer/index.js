@@ -16,18 +16,13 @@ const EditServer = () => {
   const [name, setName] = useState("");
   const [iconURL, setIconURL] = useState("");
   const [errors, setErrors] = useState([]);
+  const [nameErrs, setNameErrs] = useState([]);
 
   useEffect(() => {
     dispatch(showServers());
     setName(server?.name);
     setIconURL(server?.icon_url);
   }, [dispatch, serverId, server?.name, server?.icon_url]);
-
-  useEffect(() => {
-    const errors = [];
-    if (!name?.length) errors.push("Server name cannot be empty.");
-    setErrors(errors);
-  }, [name]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -38,28 +33,50 @@ const EditServer = () => {
       iconURL,
     };
 
-    dispatch(updateServer(updatedServer));
-    history.push(`/servers`);
+    dispatch(updateServer(updatedServer))
+      .then(res => {
+        if (res.errors) {
+          if (res.errors.name) {
+            setNameErrs(res.errors.name);
+          } else {
+            // this would be an error not related to user input
+            res.errors.general && setErrors(res.errors.general);
+          }
+        } else {
+          history.push(`/servers`);
+        }
+      })
   };
 
   return (
     <div className="new_server_div">
       <h1 className="dark_large">Edit Your Server</h1>
       <form onSubmit={handleSubmit}>
-        {errors.length > 0 && (
-          <ul className="errors">
-            {errors.map((error) => (
-              <li key={`edit-error:${error}`}>{error}</li>
+
+        {errors.length ? 
+          <div className='err-visibility-container'>
+            {errors.map(err => (
+              <div className='input-err-msg' key={err}>{err}</div>
             ))}
-          </ul>
-        )}
+          </div>
+        : null }
+
         <input
+          className={nameErrs.length ? 'input-err' : null}
           placeholder="Server Name"
           name="name"
           value={name}
           onChange={(e) => setName(e.target.value)}
           type="text"
         ></input>
+
+        {nameErrs.length ? 
+          <div className='err-visibility-container'>
+            {nameErrs.map(err => (
+              <div className='input-err-msg' key={err}>{err}</div>
+            ))}
+          </div>
+        : null }
 
         <input
           placeholder="Icon URL (optional)"
