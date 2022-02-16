@@ -16,6 +16,27 @@ const NavBar = () => {
   const defaultServerId = membershipsArr[0]?.server_id;
   const servers = useSelector((state) => state.servers);
   const defaultChannelId = servers[defaultServerId]?.default_channel;
+  const [showMenu, setShowMenu] = useState(false);
+
+  // Burger menu logic: only applicable at 700px wide or less
+  const openMenu = () => {
+    if (showMenu) return;
+    setShowMenu(true);
+  };
+
+  useEffect(() => {
+    if (!showMenu) return;
+    const closeMenu = () => {
+      setShowMenu(false);
+    };
+    document.addEventListener("click", closeMenu);
+    return () => document.removeEventListener("click", closeMenu);
+  }, [showMenu]);
+
+  useEffect(() => {
+    dispatch(checkMemberships(userId)); // to check if user has any memberships; if not /servers/id/channels/id is not accessible
+    dispatch(showServers());
+  }, [dispatch, userId]);
 
   // If the user has servers they're a member of, navigate to the first server
   // otherwise display an alert to prompt user to join a server first
@@ -39,8 +60,9 @@ const NavBar = () => {
     </p>
   );
 
+  // Navigation links
   let navigationLinks = (
-    <div className="nav_links">
+    <div className="nav_links" id={user ? "auth" : "noauth"}>
       <li>
         {user && (
           <NavLink
@@ -63,42 +85,17 @@ const NavBar = () => {
           About
         </NavLink>
       </li>
-      <li>
-        <a href="https://github.com/tforde4623/Euphony">
-          <i className="fab fa-github fa-2x"></i>
-        </a>
+      <li onClick={() => window.open("https://github.com/tforde4623/Euphony")}>
+        <i className="fab fa-github fa-2x"></i>
       </li>
     </div>
   );
 
-  const [showMenu, setShowMenu] = useState(false);
-
-  const openMenu = () => {
-    if (showMenu) return;
-    setShowMenu(true);
-  };
-
-  useEffect(() => {
-    if (!showMenu) return;
-
-    const closeMenu = () => {
-      setShowMenu(false);
-    };
-
-    document.addEventListener("click", closeMenu);
-
-    return () => document.removeEventListener("click", closeMenu);
-  }, [showMenu]);
-
-  useEffect(() => {
-    dispatch(checkMemberships(userId));
-    dispatch(showServers());
-  }, [dispatch, userId]);
-
+  // Session Links: if user, display user info; else auth prompts
   let sessionLinks;
   if (user) {
     sessionLinks = (
-      <div className="auth_nav_div">
+      <div className="auth_nav_div" id={user ? "auth" : "noauth"}>
         <div className="auth_user_info">
           <div className="auth_user_icon light_medium">
             {user?.icon_url ? null : user?.username[0]}
@@ -112,7 +109,7 @@ const NavBar = () => {
   } else {
     sessionLinks = (
       <>
-        <div className="auth_nav_div">
+        <div className="auth_nav_div" id={user ? "auth" : "noauth"}>
           <li>
             <button>
               <NavLink
@@ -157,98 +154,105 @@ const NavBar = () => {
           </div>
         </NavLink>
 
-        {/* Navigation Links */}
+        {/* Horizontal (non-burger navbar) */}
         {navigationLinks}
-
-        {/* Authentication */}
         {sessionLinks}
+      </ul>
 
-        <button onClick={openMenu} id="menu">
-          <i className="fas fa-bars fa-lg"></i>
-        </button>
-        {showMenu && (
-          <ul className="dropdown">
-            <button onClick={openMenu} id="menu_on_dropdown">
-              <i className="fas fa-bars fa-lg"></i>
-            </button>
-            {user ? (
-              <div className="auth_nav_div_dropdown">
-                <div className="auth_user_info">
-                  <div className="auth_user_icon light_medium">
-                    {user?.icon_url ? null : user?.username[0]}
-                    {user?.icon_url && (
-                      <img src={user?.icon_url} alt="user icon"></img>
-                    )}
-                  </div>
-                  <p>{user?.username}</p>
+      {/* ----------------------------*/}
+      {/* Dropdown burger menu */}
+      {/* Button to toggle menu */}
+      <button onClick={openMenu} id="menu">
+        <i className="fas fa-bars fa-lg"></i>
+      </button>
+
+      {/* On click, change T/F of showMenu */}
+      {showMenu && (
+        <ul className="dropdown">
+          <button onClick={openMenu} id="menu_on_dropdown">
+            <i className="fas fa-bars fa-lg"></i>
+          </button>
+
+          {/* If there's a user, display user info; otherwise auth options */}
+          {user ? (
+            <>
+              <div className="auth_user_info" id="user_indo_dropdown">
+                <div className="auth_user_icon light_medium">
+                  {user?.icon_url ? null : user?.username[0]}
+                  {user?.icon_url && (
+                    <img src={user?.icon_url} alt="user icon"></img>
+                  )}
                 </div>
-                <LogoutButton />
+                <p>{user?.username}</p>
               </div>
-            ) : (
-              <>
-                <div className="auth_nav_div_dropdown">
-                  <li>
-                    <button>
-                      <NavLink
-                        to="/login"
-                        exact={true}
-                        activeClassName="active"
-                        className="light_small"
-                      >
-                        Login
-                      </NavLink>
-                    </button>
-                  </li>
-                  <li>
-                    <button>
-                      <NavLink
-                        to="/sign-up"
-                        exact={true}
-                        activeClassName="active"
-                        className="light_small"
-                      >
-                        Sign Up
-                      </NavLink>
-                    </button>
-                  </li>
-                  <li>
-                    <DemoButton />
-                  </li>
-                </div>
-              </>
-            )}
-            <div className="nav_links_dropdown">
+              <LogoutButton />
+            </>
+          ) : (
+            <>
               <li>
-                {user && (
+                <button>
                   <NavLink
-                    to="/servers"
+                    to="/login"
                     exact={true}
                     activeClassName="active"
-                    className="dark_large dynamic_underline"
+                    className="light_small"
                   >
-                    Join Servers
+                    Login
                   </NavLink>
-                )}
+                </button>
               </li>
-              <li>{user && yourServersLink}</li>
+              <li>
+                <button>
+                  <NavLink
+                    to="/sign-up"
+                    exact={true}
+                    activeClassName="active"
+                    className="light_small"
+                  >
+                    Sign Up
+                  </NavLink>
+                </button>
+              </li>
+              <li>
+                <DemoButton />
+              </li>
+            </>
+          )}
+
+          {/* If there's a user, show links join/see own servers */}
+          {user && (
+            <>
               <li>
                 <NavLink
-                  to="/about"
+                  to="/servers"
+                  exact={true}
                   activeClassName="active"
                   className="dark_large dynamic_underline"
                 >
-                  About
+                  Join Servers
                 </NavLink>
               </li>
-              <li>
-                <a href="https://github.com/tforde4623/Euphony">
-                  <i className="fab fa-github fa-2x"></i>
-                </a>
-              </li>
-            </div>
-          </ul>
-        )}
-      </ul>
+              {yourServersLink}
+            </>
+          )}
+          <li>
+            <NavLink
+              to="/about"
+              activeClassName="active"
+              className="dark_large dynamic_underline"
+            >
+              About
+            </NavLink>
+          </li>
+
+          <li
+            onClick={() => window.open("https://github.com/tforde4623/Euphony")}
+            id="dropdown_gh"
+          >
+            <i className="fab fa-github fa-2x"></i>
+          </li>
+        </ul>
+      )}
     </nav>
   );
 };

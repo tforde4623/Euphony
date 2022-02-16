@@ -1,8 +1,53 @@
-#words{
-    font-size: 2.5rem;
+.errorpage {
+  /* background-color: hotpink; */
+  height: calc(100vh - 60px);
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-image: url("https://source.unsplash.com/esRJtEsvJhU");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: bottom;
 }
 
-.wompwompimg{
-    height: 225px;
-    width: 600px;
+#words {
+  font-size: 2.5rem;
+  background-color: rgba(194, 107, 2, 0.8);
+  padding: 10px 20px;
+  border-radius: 8px;
+  margin-top: 25px;
+}
+
+#wompwompimg {
+  height: 70vh;
+  background-color: rgba(165, 59, 23, 0.95);
+  border-radius: 20px;
+}
+
+@media only screen and (max-width: 950px) {
+  #words {
+    font-size: 2rem;
+  }
+
+  #wompwompimg {
+    height: 50vh;
+  }
+}
+
+@media only screen and (max-width: 700px) {
+  #words {
+    font-size: 1.5rem;
+  }
+
+  #wompwompimg {
+    height: 45vh;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  #wompwompimg {
+    height: 35vh;
+  }
 }

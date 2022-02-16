@@ -22,26 +22,28 @@ nav ul {
   font-size: 50px;
 }
 
-.nav_links,
-.nav_links_dropdown {
+.nav_links {
   display: flex;
   justify-content: space-between;
+}
+
+.nav_links#noauth {
+  width: 15vw;
+}
+.nav_links#auth {
   width: 50vw;
 }
 
-.nav_links li,
-.nav_links_dropdown li {
+.nav_links li {
   list-style: none;
 }
 
-.nav_links li a i,
-.nav_links_dropdown li a i {
+.nav_links li a i {
   box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
   border-radius: 30px;
 }
 
-.nav_links li a i:hover,
-.nav_links_dropdown li a i:hover {
+.nav_links li a i:hover {
   box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
 }
 
@@ -49,6 +51,10 @@ nav ul {
   display: flex;
   flex-direction: row;
   align-items: center;
+}
+
+.auth_nav_div#noauth {
+  width: 40vw;
 }
 
 .auth_nav_div li,
@@ -97,7 +103,6 @@ nav ul {
   display: none;
 }
 
-
 @media only screen and (max-width: 1100px) {
   .nav_links {
     width: 45vw;
@@ -136,33 +141,7 @@ nav ul {
   }
 }
 
-@media only screen and (max-width: 800px) {
-  .nav_links {
-    width: 50vw;
-  }
-
-  .nav_links li a {
-    font-size: 20px;
-  }
-
-  .nav_links li a i {
-    font-size: 20px;
-  }
-  .logo_div {
-    width: 10vw;
-  }
-  #logo {
-    font-size: 30px;
-  }
-}
-
-@media only screen and (max-width: 750px) {
-  .nav_links {
-    width: 45vw;
-  }
-}
-
-@media only screen and (max-width: 700px) {
+@media only screen and (max-width: 815px) {
   .auth_nav_div,
   .nav_links {
     display: none;
@@ -183,33 +162,23 @@ nav ul {
     height: 100vh;
     top: 0;
     right: 0;
-    /* background-color: rgba(165, 59, 23, 0.95); */
     background-color: rgba(222, 164, 6, 0.95);
     z-index: 1;
   }
 
-  .dropdown .auth_nav_div_dropdown {
-    height: 15vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    margin-top: 5vh;
+  .dropdown li {
+    list-style: none;
   }
 
-  .dropdown .auth_nav_div_dropdown .auth_user_info {
+  #user_indo_dropdown {
     margin: 0;
-  }
-
-  .dropdown .nav_links_dropdown {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    height: 50vh;
-    margin-bottom: 25vh;
-    margin-top: 3vh;
   }
 
   #menu {
     display: block;
+  }
+
+  #dropdown_gh {
+    margin-bottom: 20vh;
   }
 }
