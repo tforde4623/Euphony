@@ -138,3 +138,19 @@ textarea {
 .light_large.dynamic_underline:after {
   background: #e8eaed;
 }
+
+/* this is for error messages on inputs */
+.input-err {
+  background: #fff0f4;
+  border: red 2px solid !important;
+  outline: none;
+}
+
+.input-err::placeholder {
+  color: red !important;
+  opacity: 0.7;
+}
+
+.input-err-msg {
+  color: red;
+}

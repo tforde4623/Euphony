@@ -51,9 +51,9 @@ def create_server():
 	err_msgs = make_val_msgs(form.errors)
 
 	if not svr_data['owner_id']:
-		err_msgs.append({'general': 'field missing'})
+		err_msgs['general'] = 'cannot authenticate'
 
-	return jsonify(err_msgs)
+	return jsonify({ 'errors': err_msgs })
 
 # ~~~~~~~~~~~~ READ ~~~~~~~~~~~~
 @servers.route('/<id>', methods=['GET'])
@@ -91,9 +91,9 @@ def edit_server(server_id):
 	err_msgs = make_val_msgs(form.errors)
 
 	if not owned:
-		err_msgs.append({'general': 'unauthorized'})
+		err_msgs['general'] = 'unauthorized request'
 
-	return jsonify(err_msgs)
+	return jsonify({'errors': err_msgs})
 
 
 # ~~~~~~~~~~~~ DELETE ~~~~~~~~~~~~
