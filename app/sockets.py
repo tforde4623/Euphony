@@ -1,4 +1,5 @@
-from flask_socketio import SocketIO, emit, join_room
+from flask_login import current_user
+from flask_socketio import SocketIO, emit, join_room, ConnectionRefusedError
 from .models.messages import Message
 from .models import db
 import os
@@ -11,13 +12,18 @@ def fix_datetime(dic):
     return new_obj
 
 
-# setup socket origins for prod and dev
 if os.environ.get('FLASK_ENV') == 'production':
   origins = ['https://euphony-web.herokuapp.com']
 else:
   origins = ['http://localhost:3000']
 
 sock = SocketIO(cors_allowed_origins=origins)
+
+@sock.on('connect')
+def connect():
+  if not current_user.is_authenticated:
+    raise ConnectionRefusedError('unauthorized')
+
 
 @sock.on('join')
 def join(data):
@@ -34,7 +40,7 @@ def chat(data):
       errors['content'] = 'required.'
 
   # these are less important to convey on the front end because it shouln't happen if not misused from third party source
-  if not data['userId'] or data['channelId']:
+  if not data['userId'] or not data['channelId']:
       errors['general'] = 'Required information not present.'
 
   if len(errors):
@@ -56,17 +62,30 @@ def chat(data):
 def edit_chat(data):
   room = str(data['channelId'])
   msg = Message.query.filter_by(id=data['id']).one()
-  msg.content = data['content']
-  db.session.commit()
-  msg_dict = msg.to_dict()
-  msg_dict['user'] = data['user']
-  # since content is the only thing that changes
-  emit('edit_chat', fix_datetime(msg_dict), broadcast=True, to=room)
+
+  # make sure user owns the message
+  if not current_user or current_user.id != msg.user_id:
+    emit('err', 'Not authorized to do this.')
+
+  else:
+    msg.content = data['content']
+    db.session.commit()
+    msg_dict = msg.to_dict()
+    msg_dict['user'] = data['user']
+    # since content is the only thing that changes
+    emit('edit_chat', fix_datetime(msg_dict), broadcast=True, to=room)
 
 
 @sock.on('delete_chat')
 def delete_chat(data):
   room = str(data['channel_id'])
-  Message.query.filter_by(id=data['id']).delete()
-  db.session.commit()
-  emit('delete_chat', data, broadcast=True, to=room)
+  msg = Message.query.filter_by(id=data['id'])
+
+  # make sure user owns the message
+  if not current_user or current_user.id != msg.user_id:
+    emit('err', 'Not authorized to do this.')
+
+  else:
+    msg.delete()
+    db.session.commit()
+    emit('delete_chat', data, broadcast=True, to=room)
