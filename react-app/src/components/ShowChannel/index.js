@@ -157,7 +157,7 @@ const ShowChannel = () => {
               <div id="category_edit">
                 <h2 className="dark_large">{cat.name}</h2>
                 {owned && editMode && (
-                  <button onClick={() => setShowCategoryEdit(cat?.id)}>
+                  <button onClick={() => setShowCategoryEdit(cat?.id)} id="edit_cat_btn">
                     <i className="fas fa-edit fa-lg"></i>
                   </button>
                 )}

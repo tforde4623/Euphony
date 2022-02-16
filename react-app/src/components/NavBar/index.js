@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
 import { checkMemberships } from "../../store/members";
@@ -38,6 +38,57 @@ const NavBar = () => {
       Your Servers
     </p>
   );
+
+  let navigationLinks = (
+    <div className="nav_links">
+      <li>
+        {user && (
+          <NavLink
+            to="/servers"
+            exact={true}
+            activeClassName="active"
+            className="dark_large dynamic_underline"
+          >
+            Join Servers
+          </NavLink>
+        )}
+      </li>
+      <li>{user && yourServersLink}</li>
+      <li>
+        <NavLink
+          to="/about"
+          activeClassName="active"
+          className="dark_large dynamic_underline"
+        >
+          About
+        </NavLink>
+      </li>
+      <li>
+        <a href="https://github.com/tforde4623/Euphony">
+          <i className="fab fa-github fa-2x"></i>
+        </a>
+      </li>
+    </div>
+  );
+
+  const [showMenu, setShowMenu] = useState(false);
+
+  const openMenu = () => {
+    if (showMenu) return;
+    setShowMenu(true);
+  };
+
+  useEffect(() => {
+    if (!showMenu) return;
+
+    const closeMenu = () => {
+      setShowMenu(false);
+    };
+
+    document.addEventListener("click", closeMenu);
+
+    return () => document.removeEventListener("click", closeMenu);
+  }, [showMenu]);
 
   useEffect(() => {
     dispatch(checkMemberships(userId));
@@ -107,38 +158,96 @@ const NavBar = () => {
         </NavLink>
 
         {/* Navigation Links */}
-        <div className="nav_links">
-          <li>
-            {user && (
-              <NavLink
-                to="/servers"
-                exact={true}
-                activeClassName="active"
-                className="dark_large dynamic_underline"
-              >
-                Join Servers
-              </NavLink>
-            )}
-          </li>
-          <li>{user && yourServersLink}</li>
-          <li>
-            <NavLink
-              to="/about"
-              activeClassName="active"
-              className="dark_large dynamic_underline"
-            >
-              About
-            </NavLink>
-          </li>
-          <li>
-            <a href="https://github.com/tforde4623/Euphony">
-              <i className="fab fa-github fa-2x"></i>
-            </a>
-          </li>
-        </div>
+        {navigationLinks}
 
         {/* Authentication */}
         {sessionLinks}
+
+        <button onClick={openMenu} id="menu">
+          <i className="fas fa-bars fa-lg"></i>
+        </button>
+        {showMenu && (
+          <ul className="dropdown">
+            <button onClick={openMenu} id="menu_on_dropdown">
+              <i className="fas fa-bars fa-lg"></i>
+            </button>
+            {user ? (
+              <div className="auth_nav_div_dropdown">
+                <div className="auth_user_info">
+                  <div className="auth_user_icon light_medium">
+                    {user?.icon_url ? null : user?.username[0]}
+                    {user?.icon_url && (
+                      <img src={user?.icon_url} alt="user icon"></img>
+                    )}
+                  </div>
+                  <p>{user?.username}</p>
+                </div>
+                <LogoutButton />
+              </div>
+            ) : (
+              <>
+                <div className="auth_nav_div_dropdown">
+                  <li>
+                    <button>
+                      <NavLink
+                        to="/login"
+                        exact={true}
+                        activeClassName="active"
+                        className="light_small"
+                      >
+                        Login
+                      </NavLink>
+                    </button>
+                  </li>
+                  <li>
+                    <button>
+                      <NavLink
+                        to="/sign-up"
+                        exact={true}
+                        activeClassName="active"
+                        className="light_small"
+                      >
+                        Sign Up
+                      </NavLink>
+                    </button>
+                  </li>
+                  <li>
+                    <DemoButton />
+                  </li>
+                </div>
+              </>
+            )}
+            <div className="nav_links_dropdown">
+              <li>
+                {user && (
+                  <NavLink
+                    to="/servers"
+                    exact={true}
+                    activeClassName="active"
+                    className="dark_large dynamic_underline"
+                  >
+                    Join Servers
+                  </NavLink>
+                )}
+              </li>
+              <li>{user && yourServersLink}</li>
+              <li>
+                <NavLink
+                  to="/about"
+                  activeClassName="active"
+                  className="dark_large dynamic_underline"
+                >
+                  About
+                </NavLink>
+              </li>
+              <li>
+                <a href="https://github.com/tforde4623/Euphony">
+                  <i className="fab fa-github fa-2x"></i>
+                </a>
+              </li>
+            </div>
+          </ul>
+        )}
       </ul>
     </nav>
   );

@@ -59,9 +59,10 @@
   margin-bottom: 10px;
 }
 
-#category_edit button {
+div div#category_edit button#edit_cat_btn {
   box-shadow: none;
-  padding: none;
+  padding: 0;
+  height: 15px;
 }
 
 #category_edit button i {
@@ -78,13 +79,16 @@
 
 .channels_list li {
   display: flex;
+  /* width: 100%; */
   justify-content: space-between;
+  /* align-items: space-between; */
 }
 
 .channels_list li button {
-  padding: none;
+  padding: 0;
   background-color: none;
   box-shadow: none;
+  justify-self: flex-end;
 }
 
 .channels_list li i {
