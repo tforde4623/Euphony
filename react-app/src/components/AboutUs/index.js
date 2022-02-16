@@ -92,15 +92,21 @@ const AboutUs = () => {
             remote software engineering opportunities as of Spring 2022.
           </p>
           <div className="profile_links">
-            <a href="https://github.com/sezder">
+            <span onClick={() => window.open("https://github.com/sezder")}>
               <i className="fab fa-github fa-lg"></i>
-            </a>
-            <a href="https://www.linkedin.com/in/shannon-e-zander/">
+            </span>
+            <span
+              onClick={() =>
+                window.open("https://www.linkedin.com/in/shannon-e-zander/")
+              }
+            >
               <i className="fab fa-linkedin-in fa-lg"></i>
-            </a>
-            <a href="https://angel.co/u/shannon-zander">
+            </span>
+            <span
+              onClick={() => window.open("https://angel.co/u/shannon-zander")}
+            >
               <i className="fab fa-angellist fa-lg"></i>
-            </a>
+            </span>
           </div>
         </div>
       </div>
