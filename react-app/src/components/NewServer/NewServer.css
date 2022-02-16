@@ -39,3 +39,23 @@
   background-color: #b4c3d1;
   color: #0f0f11;
 }
+
+@media only screen and (max-width: 800px) {
+  .new_server_div form {
+    width: 70vw;
+  }
+
+  .new_server_div form input {
+    width: 85%;
+  }
+}
+
+@media only screen and (max-width: 500px) {
+  .new_server_div form {
+    width: 90vw;
+  }
+
+  .new_server_div form input {
+    width: 95%;
+  }
+}
