@@ -69,7 +69,7 @@ def update_category(category_id):
     category_data = request.json
     server = Server.query.filter_by(id=category_data['serverId']).one()
 
-    if form.validate_on_subit() and server.owner_id == current_user.id:
+    if form.validate_on_submit() and server.owner_id == current_user.id:
         category = Category.query.filter_by(id=category_id).one()
         category_data = request.json
 
