@@ -26,11 +26,14 @@ export const createCategory = (newCategory) => async (dispatch) => { //include s
     },
     body: JSON.stringify(newCategory),
   });
+
+  let categories;
   if (res.ok) {
-    const categories = await res.json();
+    categories = await res.json();
     dispatch(loadAllCategories(categories));
-    return categories;
   }
+
+  return categories;
 };
 
 // Edit a category
@@ -43,11 +46,13 @@ export const updateCategory =
       body: JSON.stringify({ name, categoryId, serverId }),
     });
 
+    let categories;
     if (res.ok) {
-      const categories = await res.json();
+      categories = await res.json();
       dispatch(loadAllCategories(categories));
-      return categories;
     }
+
+    return categories;
 };
 
 // Delete a category
@@ -60,11 +65,12 @@ export const deleteCategory =
       body: JSON.stringify({ userId, serverId, categoryId }),
     });
 
+    let categories;
     if (res.ok) {
-      const categories = await res.json();
+      categories = await res.json();
       dispatch(loadAllCategories(categories));
-      return categories;
     }
+    return categories;
 };
 
 const initialState = {};

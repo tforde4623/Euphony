@@ -96,10 +96,10 @@ def edit_channel(id):
 @channels.route('/<id>', methods=['DELETE'])
 @login_required
 def delete_channel(id):
-    server = Server.query.filter_by(id=id).one()
+    channel = Channel.query.filter_by(id=id).one()
+    server = Server.query.filter_by(id=channel.server_id).one()
 
     if server.owner_id == current_user.id:
-        channel = Channel.query.filter_by(id=id).one()
         db.session.delete(channel)
         db.session.commit()
 
