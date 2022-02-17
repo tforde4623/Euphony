@@ -13,16 +13,11 @@ const NewCategory = ({ setShowNewCategoryForm }) => {
 
   const [name, setName] = useState("");
   const [errors, setErrors] = useState([]);
+  const [nameErrs, setNameErrs] = useState([]);
 
   useEffect(() => {
     dispatch(showServers());
   }, [dispatch]);
-
-  useEffect(() => {
-    const errors = [];
-    if (!name.length) errors.push("Category name must not be empty.");
-    setErrors(errors);
-  }, [name]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -31,32 +26,53 @@ const NewCategory = ({ setShowNewCategoryForm }) => {
       serverId,
     };
 
-    dispatch(createCategory(newCategory));
-    dispatch(getAllChannels(serverId));
-    dispatch(getAllCategories(serverId));
-    setShowNewCategoryForm(false);
+    dispatch(createCategory(newCategory))
+      .then(res => {
+        console.log(res)
+        if (res.errors) {
+          if (res.errors.name) {
+            setNameErrs(res.errors.name);
+          } else {
+            // this would be an error not related to user input
+            res.errors.general && setErrors(res.errors.general);
+          }
+        } else {
+          dispatch(getAllChannels(serverId));
+          dispatch(getAllCategories(serverId));
+          setShowNewCategoryForm(false);
+        }
+      })
   };
 
   return (
     <div className="new_category_div">
       <form onSubmit={handleSubmit}>
         {/* Errors */}
-        {errors.length > 0 && (
-          <ul className="errors">
-            {errors.map((error) => (
-              <li key={error}>{error}</li>
+        {errors.length ? 
+          <div className='err-visibility-container'>
+            {errors.map(err => (
+              <div className='input-err-msg' key={err}>{err}</div>
             ))}
-          </ul>
-        )}
+          </div>
+        : null }
 
         {/* Name */}
         <input
           placeholder="Category Name"
+          className={nameErrs.length ? 'input-err' : null}
           name="category_name"
           value={name}
           onChange={(e) => setName(e.target.value)}
           type="text"
         ></input>
+
+        {nameErrs.length ? 
+          <div className='err-visibility-container'>
+            {nameErrs.map(err => (
+              <div className='input-err-msg' key={err}>{err}</div>
+            ))}
+          </div>
+        : null }
 
         {/* Submit */}
         <div>

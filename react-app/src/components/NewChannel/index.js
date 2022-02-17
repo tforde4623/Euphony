@@ -9,23 +9,15 @@ const NewChannel = ({ setShowNewChannelForm }) => {
   let { serverId } = useParams();
   serverId = Number(serverId);
   const dispatch = useDispatch();
-
   const categories = useSelector((state) => state.categories);
-
   const [name, setName] = useState("");
   const [errors, setErrors] = useState([]);
+  const [nameErrs, setNameErrs] = useState([]);
   const [selectCategory, setSelectCategory] = useState(null);
 
   useEffect(() => {
     dispatch(showServers());
   }, [dispatch]);
-
-
-  useEffect(() => {
-    const errors = [];
-    if (!name.length) errors.push("Channel name must not be empty.");
-    setErrors(errors);
-  }, [name]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -35,30 +27,50 @@ const NewChannel = ({ setShowNewChannelForm }) => {
       categoryId: selectCategory
     };
 
-    dispatch(createChannel(newChannel));
-    setShowNewChannelForm(false);
+    dispatch(createChannel(newChannel))
+      .then(res => {
+        console.log(res)
+        if (res.errors) {
+          if (res.errors.name) {
+            setNameErrs(res.errors.name);
+          } else {
+            // this would be an error not related to user input
+            res.errors.general && setErrors(res.errors.general);
+          }
+        } else {
+          setShowNewChannelForm(false);
+        }
+      })
+
   };
 
   return (
     <div className="new_channel_div">
       <form onSubmit={handleSubmit}>
         {/* Errors */}
-        {errors.length > 0 && (
-          <ul className="errors">
-            {errors.map((error) => (
-              <li key={error}>{error}</li>
+        {errors.length ? 
+          <div className='err-visibility-container'>
+            {errors.map(err => (
+              <div className='input-err-msg' key={err}>{err}</div>
             ))}
-          </ul>
-        )}
+          </div>
+        : null }
 
         {/* Name */}
         <input
           placeholder="Channel Name"
+          className={nameErrs.length ? 'input-err' : null}
           name="channel_name"
           value={name}
           onChange={(e) => setName(e.target.value)}
           type="text"
         ></input>
+
+        {nameErrs.length ? 
+            nameErrs.map(err => (
+              <div className='input-err-msg' key={err}>{err}</div>
+            ))
+        : null }
 
         {/* Change Category */}
         <select

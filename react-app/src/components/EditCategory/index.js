@@ -16,19 +16,14 @@ const EditCategory = ({ serverId, categoryId, setShowCategoryEdit }) => {
   const category = useSelector((state) => state.categories[categoryId]);
   
   const [name, setName] = useState("");
+  const [nameErrs, setNameErrs] = useState([]);
   const [errors, setErrors] = useState([]);
 
   useEffect(() => {
-    dispatch(getAllCategories());
+    // dispatch(getAllCategories(serverId));
     dispatch(showServers());
     setName(category?.name);
   }, [dispatch, serverId, categoryId, category?.name, category]);
-
-  useEffect(() => {
-    const errors = [];
-    if (!name?.length) errors.push("Category name must not be empty.");
-    setErrors(errors);
-  }, [name]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -39,8 +34,20 @@ const EditCategory = ({ serverId, categoryId, setShowCategoryEdit }) => {
       userId,
     };
 
-    dispatch(updateCategory(updatedCategory));
-    setShowCategoryEdit(null);
+    dispatch(updateCategory(updatedCategory))
+      .then(res => {
+        console.log(res)
+        if (res.errors) {
+          if (res.errors.name) {
+            setNameErrs(res.errors.name);
+          } else {
+            // this would be an error not related to user input
+            res.errors.general && setErrors(res.errors.general);
+          }
+        } else {
+          setShowCategoryEdit(null);
+        }
+      })
   };
 
   const handleDelete = (e) => {
@@ -54,23 +61,31 @@ const EditCategory = ({ serverId, categoryId, setShowCategoryEdit }) => {
   return (
     <div>
       <form onSubmit={handleSubmit}>
-        {/* Errors */}
-        {errors.length > 0 && (
-          <ul className="errors">
-            {errors.map((error) => (
-              <li key={error}>{error}</li>
+        {errors.length ? 
+          <div className='err-visibility-container'>
+            {errors.map(err => (
+              <div className='input-err-msg' key={err}>{err}</div>
             ))}
-          </ul>
-        )}
+          </div>
+        : null }
 
         {/* Name */}
         <input
           placeholder="Category Name"
           name="category_name"
+          className={nameErrs.length ? 'input-err' : null}
           value={name}
           onChange={(e) => setName(e.target.value)}
           type="text"
         ></input>
+
+        {nameErrs.length ? 
+          <div className='err-visibility-container'>
+            {nameErrs.map(err => (
+              <div className='input-err-msg' key={err}>{err}</div>
+            ))}
+          </div>
+        : null }
 
         {/* Submit */}
         <button type="submit" disabled={errors.length > 0} className="add_btn">

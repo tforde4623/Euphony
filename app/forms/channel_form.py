@@ -3,5 +3,5 @@ from wtforms import StringField
 from wtforms.validators import DataRequired
 
 
-class CreateServerForm(FlaskForm):
+class ChannelForm(FlaskForm):
     name = StringField('name', validators=[DataRequired()])
