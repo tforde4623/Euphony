@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { updateChannel, getAllChannels } from "../../store/channels";
-import "./EditChannel.css";
 import DeleteChannel from "../DeleteChannel";
 
 const EditChannel = ({ channelId, setShowChannelEdit }) => {
@@ -52,45 +51,41 @@ const EditChannel = ({ channelId, setShowChannelEdit }) => {
   };
 
   return (
-    <div>
-      <form onSubmit={handleSubmit}>
-        {/* Errors */}
-        {errors.length > 0 && (
-          <ul className="errors">
-            {errors.map((error) => (
-              <li key={error}>{error}</li>
-            ))}
-          </ul>
-        )}
-
-        {/* Name */}
-        <input
-          placeholder="Channel Name"
-          className="channel-name-input"
-          name="channel_name"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-          type="text"
-        ></input>
-
-        {/* Change Category */}
-        <select
-          className="select-input"
-          value={selectCategory}
-          onChange={(e) => setSelectCategory(e.target.value)}
-        >
-          <option value={null}>None</option>
-          {Object.values(categories).map((cat) => (
-            <option value={cat.id}>{cat.name}</option>
+    <form onSubmit={handleSubmit} className="c_form">
+      {/* Errors */}
+      {errors.length > 0 && (
+        <ul className="errors">
+          {errors.map((error) => (
+            <li key={error}>{error}</li>
           ))}
-        </select>
+        </ul>
+      )}
 
-        {/* Submit */}
-        <button
-          type="submit"
-          disabled={errors.length > 0}
-          className="add_btn"
-        >
+      {/* Name */}
+      <input
+        placeholder="Channel Name"
+        className="channel-name-input"
+        name="channel_name"
+        value={name}
+        onChange={(e) => setName(e.target.value)}
+        type="text"
+      ></input>
+
+      {/* Change Category */}
+      <select
+        className="select-input"
+        value={selectCategory}
+        onChange={(e) => setSelectCategory(e.target.value)}
+      >
+        <option value={null}>None</option>
+        {Object.values(categories).map((cat) => (
+          <option value={cat.id}>{cat.name}</option>
+        ))}
+      </select>
+
+      {/* Submit */}
+      <div>
+        <button type="submit" disabled={errors.length > 0} className="add_btn">
           <i className="fas fa-plus"></i>
         </button>
 
@@ -102,8 +97,8 @@ const EditChannel = ({ channelId, setShowChannelEdit }) => {
           default_channel={default_channel}
           setShowEditChannel={setShowChannelEdit}
         />
-      </form>
-    </div>
+      </div>
+    </form>
   );
 };
 
