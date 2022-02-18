@@ -19,21 +19,25 @@
 .card {
   display: flex;
   flex-direction: column;
-  background-color: #a53b17;
   grid-column-end: span 4;
-  cursor: pointer;
-  transition: all 0.3s ease 0s;
-  border-radius: 10px;
-  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
 }
 
 .card button {
   background-color: #c26b02;
-  transform: translateY(-10px);
+  transform: translateY(10px);
 }
 
 .card button:hover {
   box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
+}
+
+.card a {
+  width: 100%;
+  background-color: #a53b17;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.3s ease 0s;
 }
 
 .card_img_container {
@@ -59,6 +63,7 @@
 
 .card_title {
   margin-bottom: 10px;
+  text-align: center;
 }
 
 #svrs_memberships_list .servers_list_div {
@@ -92,7 +97,7 @@ main.grid {
   grid-gap: 40px;
 }
 
-.card:hover {
+.card a:hover {
   transform: translateY(-7px);
 }
 
