@@ -154,3 +154,34 @@ textarea {
 .input-err-msg {
   color: red;
 }
+
+/* Inplace form styling */
+.c_form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #b4c3d1;
+  padding: 8px;
+  border-radius: 15px;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+  margin: 8px 0 8px 0;
+}
+
+.c_form input,
+.c_form select {
+  width: 95%;
+}
+
+.c_form .errors {
+  box-shadow: none;
+}
+
+.select-input {
+  border: none;
+  border-radius: 60px;
+  margin: 10px 5px;
+  font-size: 14px;
+  padding: 0 10px 0 5px;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+  height: 25px;
+}
