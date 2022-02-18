@@ -96,6 +96,7 @@ const NavBar = () => {
   if (user) {
     sessionLinks = (
       <div className="auth_nav_div" id={user ? "auth" : "noauth"}>
+        <LogoutButton />
         <div className="auth_user_info">
           <div className="auth_user_icon light_medium">
             {user?.icon_url ? null : user?.username[0]}
@@ -103,7 +104,6 @@ const NavBar = () => {
           </div>
           <p>{user?.username}</p>
         </div>
-        <LogoutButton />
       </div>
     );
   } else {
