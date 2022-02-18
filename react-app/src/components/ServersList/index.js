@@ -18,13 +18,13 @@ const ServersList = () => {
 
   return (
     <div className="servers_list_div">
-      <NavLink to="/servers" title="Join Servers">
+      <NavLink to="/servers" title="Join Servers" id="join_svrs">
         <div>
           <i className="fas fa-home fa-lg"></i>
         </div>
       </NavLink>
 
-      <NavLink to="/servers/new" title="Add a Server">
+      <NavLink to="/servers/new" title="Add a Server" id="new_svr">
         <div>
           <i className="fas fa-plus fa-lg"></i>
         </div>

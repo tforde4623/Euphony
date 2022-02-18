@@ -151,3 +151,19 @@ section {
 .card_title {
   margin-bottom: 10px;
 }
+
+#svrs_memberships_list .servers_list_div {
+  flex-direction: row;
+  align-items: center;
+  width: 100vw;
+  height: 9vh;
+  border-bottom: 2px solid #a53b17;
+  border-top: 2px solid #a53b17;
+  overflow-x: scroll;
+  overflow-y: hidden;
+}
+
+#svrs_memberships_list .servers_list_div #join_svrs,
+#svrs_memberships_list .servers_list_div #new_svr {
+  display: none;
+}

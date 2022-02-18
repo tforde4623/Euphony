@@ -1,9 +1,10 @@
-import React, {useEffect } from "react";
+import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { NavLink, Redirect } from "react-router-dom";
 import ServerCard from "./serverCards";
 import { showServers } from "../../store/servers";
 import { checkMemberships } from "../../store/members";
+import ServersList from "../ServersList";
 import "./JoinServerPage.css";
 
 function ServerGrid() {
@@ -19,7 +20,7 @@ function ServerGrid() {
     dispatch(checkMemberships(userId));
   }, [dispatch, userId]);
 
-  if (!currUser) return <Redirect to="/login"></Redirect>
+  if (!currUser) return <Redirect to="/login"></Redirect>;
 
   return (
     <div className="server_grid_page">
@@ -27,6 +28,9 @@ function ServerGrid() {
         <NavLink to="servers/new">
           <button className="dark_medium">Add a Server</button>
         </NavLink>
+      </div>
+      <div id="svrs_memberships_list">
+        <ServersList />
       </div>
       <div className="grid">
         <section className="cards">
