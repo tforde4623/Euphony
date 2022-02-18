@@ -15,6 +15,7 @@
   background-size: 100vw 60vh;
   width: 100vw;
   height: 60vh;
+  border-bottom: 2px solid #a53b17;
 }
 
 .splash_text_div {
@@ -27,6 +28,7 @@
   width: 50vw;
   min-height: fit-content;
   padding: 20px 40px;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
 }
 .splash_photo_div h1 {
   margin-bottom: 20px;
@@ -38,6 +40,7 @@
 }
 
 .server_rotate_div {
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
   background-color: #e8eaed;
   display: flex;
   flex-wrap: wrap;
@@ -137,7 +140,6 @@
   .splash_photo_div {
     min-height: 50vh;
   }
-
 }
 
 @media only screen and (max-width: 1150px) {
