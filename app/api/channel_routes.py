@@ -78,7 +78,12 @@ def edit_channel(id):
 
     if form.validate_on_submit() and current_user.id == server.owner_id:
         channel.name = channel_data['name']
-        if 'categoryId' in channel_data:
+
+        if 'categoryId' not in channel_data \
+                or channel_data['categoryId'] == 'None':
+            channel.category_id = None
+
+        else:
             channel.category_id = channel_data['categoryId']
 
         db.session.commit()
