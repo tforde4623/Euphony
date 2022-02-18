@@ -32,13 +32,13 @@ function ServerGrid() {
       <div id="svrs_memberships_list">
         <ServersList />
       </div>
-      <div className="grid">
+      <main className="grid">
         <section className="cards">
           {serverArr.map((server) => {
             return <ServerCard server={server} key={server.id} />;
           })}
         </section>
-      </div>
+      </main>
     </div>
   );
 }
