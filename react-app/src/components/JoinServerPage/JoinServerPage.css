@@ -16,115 +16,29 @@
   color: #0f0f11;
 }
 
-.grid {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100vw;
-}
-
-section {
-  display: grid;
-  grid-template-columns: 1fr repeat(12, minmax(auto, 60px)) 1fr;
-  grid-gap: 40px;
-  padding: 60px 0;
-}
-
-.cards {
-  grid-column: 2 / span 12;
-  display: grid;
-  grid-template-columns: repeat(12, minmax(auto, 60px));
-  grid-gap: 40px;
-}
-
-@media only screen and (max-width: 700px) {
-  section {
-    grid-gap: 20px;
-  }
-}
-
-@media only screen and (max-width: 500px) {
-  section {
-    grid-template-columns: 10px repeat(6, 1fr) 10px;
-    grid-gap: 10px;
-  }
-
-  .cards {
-    grid-column: 2 / span 6;
-    grid-template-columns: repeat(6, 1fr);
-    grid-gap: 20px;
-  }
-}
-
-.splash_div {
-  height: calc(100vh - 60px);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.splash_photo_div {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-image: url("https://source.unsplash.com/esRJtEsvJhU");
-  background-repeat: no-repeat;
-  background-position: top;
-  background-size: 100vw 60vh;
-  width: 100vw;
-  height: 60vh;
-}
-.splash_text_div {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  background-color: #e8eaed;
-  border-radius: 70px;
-  width: 50vw;
-  height: 25vh;
-  padding: 20px 40px;
-}
-.splash_photo_div h1 {
-  margin-bottom: 20px;
-}
-
-#card_link:hover {
-  z-index: 0;
-  text-decoration: none;
-}
-
-.server_rotate_div {
-  background-color: #e8eaed;
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  border-radius: 30px;
-  padding: 0 30px;
-  margin: 15px;
-}
-
 .card {
   display: flex;
   flex-direction: column;
-  width: 270px;
-  height: 270px;
-  background-color: #a53b17;
-  cursor: pointer;
-  transition: all 0.3s ease 0s;
-  border-radius: 10px;
-  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
-  margin: 20px 10px;
+  align-items: center;
+  grid-column-end: span 4;
 }
 
 .card button {
   background-color: #c26b02;
+  transform: translateY(10px);
 }
 
 .card button:hover {
-  transform: translateY(-5px);
   box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
+}
+
+.card a {
+  width: 100%;
+  background-color: #a53b17;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.3s ease 0s;
 }
 
 .card_img_container {
@@ -150,6 +64,73 @@ section {
 
 .card_title {
   margin-bottom: 10px;
+  text-align: center;
+}
+
+#svrs_memberships_list .servers_list_div {
+  flex-direction: row;
+  align-items: center;
+  width: 100vw;
+  height: 7vw;
+  min-height: fit-content;
+  border-bottom: 2px solid #a53b17;
+  border-top: 2px solid #a53b17;
+  overflow-x: none;
+  overflow-y: hidden;
+}
+
+#svrs_memberships_list .servers_list_div #join_svrs,
+#svrs_memberships_list .servers_list_div #new_svr {
+  display: none;
+}
+
+main.grid {
+  display: grid;
+  grid-template-columns: 1fr repeat(12, minmax(auto, 60px)) 1fr;
+  grid-gap: 40px;
+  padding: 60px 0;
+}
+
+.cards {
+  grid-column: 2 / span 12;
+  display: grid;
+  grid-template-columns: repeat(12, minmax(auto, 60px));
+  grid-gap: 40px;
+}
+
+.card a:hover {
+  transform: translateY(-7px);
+}
+
+@media only screen and (max-width: 1000px) {
+  .card {
+    grid-column-end: span 6;
+  }
+}
+
+@media only screen and (max-width: 700px) {
+  main.grid {
+    grid-gap: 20px;
+  }
+  .card {
+    grid-column-end: span 12;
+  }
+}
+
+@media only screen and (max-width: 500px) {
+  main.grid {
+    grid-template-columns: 10px repeat(6, 1fr) 10px;
+    grid-gap: 10px;
+  }
+
+  .cards {
+    grid-column: 2 / span 6;
+    grid-template-columns: repeat(6, 1fr);
+    grid-gap: 20px;
+  }
+  .card {
+    grid-column-end: span 6;
+  }
 }
 
 .tutorial-modal {

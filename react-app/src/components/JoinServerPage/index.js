@@ -4,6 +4,7 @@ import { NavLink, Redirect } from "react-router-dom";
 import ServerCard from "./serverCards";
 import { showServers } from "../../store/servers";
 import { checkMemberships } from "../../store/members";
+import ServersList from "../ServersList";
 import "./JoinServerPage.css";
 
 function ServerGrid() {
@@ -20,7 +21,7 @@ function ServerGrid() {
     dispatch(checkMemberships(userId));
   }, [dispatch, userId]);
 
-  if (!currUser) return <Redirect to="/login"></Redirect>
+  if (!currUser) return <Redirect to="/login"></Redirect>;
 
   return (
     <div className="server_grid_page">
@@ -29,32 +30,35 @@ function ServerGrid() {
           <button className="dark_medium">Add a Server</button>
         </NavLink>
       </div>
-      <div className="grid">
+      <div id="svrs_memberships_list">
+        <ServersList />
+      </div>
+      <main className="grid">
         <section className="cards">
           {serverArr.map((server) => {
             return <ServerCard server={server} key={server.id} />;
           })}
         </section>
-      </div>
+      </main>
 
-      {showModal && 
-        <div className='tutorial-modal'>
-          <i 
-            onClick={() => setShowModal(false)} 
-            className="exit fas fa-times fa-lg"></i>
-          <div className='modal-body'>
-            <span className='tutorial-text'>
-                Welcome to the Join Servers Page! Here is where you will choose which 
-              communities you want to be a part of! We have all kinds of categories from dogs
-              to sports. Find a server you like, click the button underneath. If the button
-              shows an X it means you are already a part of the server, once you have
-              a server navigate to "Your Servers".
-            </span>
-            <button onClick={() => setShowModal(false)}>I Got It!</button>
+        {showModal && 
+          <div className='tutorial-modal'>
+            <i 
+              onClick={() => setShowModal(false)} 
+              className="exit fas fa-times fa-lg"></i>
+            <div className='modal-body'>
+              <span className='tutorial-text'>
+                  Welcome to the Join Servers Page! Here is where you will choose which 
+                communities you want to be a part of! We have all kinds of categories from dogs
+                to sports. Find a server you like, click the button underneath. If the button
+                shows an X it means you are already a part of the server, once you have
+                a server navigate to "Your Servers".
+              </span>
+              <button onClick={() => setShowModal(false)}>I Got It!</button>
+            </div>
           </div>
-        </div>
-      }
-    {showModal && <div className='darken'></div>}
+        }
+      {showModal && <div className='darken'></div>}
     </div>
   );
 }
