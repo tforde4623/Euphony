@@ -52,7 +52,7 @@ function ServerGrid() {
                 communities you want to be a part of! We have all kinds of categories from dogs
                 to sports. Find a server you like, click the button underneath. If the button
                 shows an X it means you are already a part of the server, once you have
-                a server navigate to "Your Servers".
+                a server navigate to "Your Servers" or choose one from the server list above.
               </span>
               <button onClick={() => setShowModal(false)}>I Got It!</button>
             </div>
