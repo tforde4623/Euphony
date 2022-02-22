@@ -75,7 +75,7 @@
   min-height: fit-content;
   border-bottom: 2px solid #a53b17;
   border-top: 2px solid #a53b17;
-  overflow-x: scroll;
+  overflow-x: none;
   overflow-y: hidden;
 }
 
@@ -131,4 +131,54 @@ main.grid {
   .card {
     grid-column-end: span 6;
   }
+}
+
+.tutorial-modal {
+  position: fixed;
+  top: 40vh;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: white;
+  width: 450px;
+  height: 300px;
+  border-radius: 5px;
+  box-shadow: 2px 2px 5px rgb(0 0 0 / 30%);
+  z-index: 1;
+}
+
+.exit {
+  position: relative;
+  display: block;
+  top: 0;
+  left: 0;
+  color: black;
+  padding: 3px;
+}
+
+.exit:hover {
+  transform: translate(0, -2px);
+}
+
+.tutorial-text {
+  margin: 5px 5px;
+}
+
+.darken {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #282828;
+  opacity: 0.8;
+  z-index: 0;
+}
+
+.modal-body {
+  display: flex;
+  height: 84%;
+  justify-content: space-between;
+  flex-direction: column;
+  margin-top: 15px;
+  margin-left: 15px;
+  margin-right: 15px;
 }

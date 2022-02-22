@@ -4,7 +4,7 @@ from flask_cors import CORS
 from flask_migrate import Migrate
 from flask_wtf.csrf import generate_csrf
 from flask_login import LoginManager
-from flask_session import Session, SqlAlchemySessionInterface
+from flask_session import Session
 
 from .models import db, User
 from .api.user_routes import user_routes
@@ -27,9 +27,11 @@ app = Flask(__name__)
 login = LoginManager(app)
 login.login_view = 'auth.unauthorized'
 
+
 @login.user_loader
 def load_user(id):
     return User.query.get(int(id))
+
 
 # Tell flask about our seed commands
 app.cli.add_command(seed_commands)

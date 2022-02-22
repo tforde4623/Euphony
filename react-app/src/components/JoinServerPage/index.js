@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { NavLink, Redirect } from "react-router-dom";
 import ServerCard from "./serverCards";
@@ -14,6 +14,7 @@ function ServerGrid() {
   const dispatch = useDispatch();
   const serverlist = useSelector((state) => state.servers);
   const serverArr = Object.values(serverlist);
+  const [showModal, setShowModal] = useState(true);
 
   useEffect(() => {
     dispatch(showServers());
@@ -39,6 +40,25 @@ function ServerGrid() {
           })}
         </section>
       </main>
+
+        {showModal && 
+          <div className='tutorial-modal'>
+            <i 
+              onClick={() => setShowModal(false)} 
+              className="exit fas fa-times fa-lg"></i>
+            <div className='modal-body'>
+              <span className='tutorial-text'>
+                  Welcome to the Join Servers Page! Here is where you will choose which 
+                communities you want to be a part of! We have all kinds of categories from dogs
+                to sports. Find a server you like, click the button underneath. If the button
+                shows an X it means you are already a part of the server, once you have
+                a server navigate to "Your Servers" or choose one from the server list above.
+              </span>
+              <button onClick={() => setShowModal(false)}>I Got It!</button>
+            </div>
+          </div>
+        }
+      {showModal && <div className='darken'></div>}
     </div>
   );
 }

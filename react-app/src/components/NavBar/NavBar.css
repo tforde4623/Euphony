@@ -1,5 +1,7 @@
 nav {
   display: flex;
+  z-index: 1;
+  position: relative;
   align-items: center;
   background-color: #dea406;
   width: 100vw;
