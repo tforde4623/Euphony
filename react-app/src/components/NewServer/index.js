@@ -89,7 +89,7 @@ const NewServer = () => {
             <img src={iconURL} alt={name}></img>
           ) : (
             <>
-              <img src="https://source.unsplash.com/ctXf1GVyf9A"></img>
+              <img src="https://source.unsplash.com/ctXf1GVyf9A" alt="gray placeholder"></img>
               <p className="dark_medium">Your Photo Here</p>
             </>
           )}

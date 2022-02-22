@@ -1,5 +1,5 @@
 import React from "react";
-import { Redirect, useHistory } from "react-router-dom";
+import {  useHistory } from "react-router-dom";
 import wompwomp from "../images/404EuphonyTransparent.svg";
 import "./errorpage.css";
 

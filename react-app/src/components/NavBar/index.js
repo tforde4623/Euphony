@@ -34,7 +34,10 @@ const NavBar = () => {
   }, [showMenu]);
 
   useEffect(() => {
-    dispatch(checkMemberships(userId)); // to check if user has any memberships; if not /servers/id/channels/id is not accessible
+    if (userId) {
+      dispatch(checkMemberships(userId)); // to check if user has any memberships; if not /servers/id/channels/id is not accessible
+    }
+
     dispatch(showServers());
   }, [dispatch, userId]);
 
