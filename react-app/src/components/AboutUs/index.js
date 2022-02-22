@@ -66,7 +66,7 @@ const AboutUs = () => {
             skilled and reliable team mates and I enjoy the collective
             consciousness aspect of creating something together but in parts and
             watching the final product come together. I will be looking for work
-            starting in February and hope to work in a backend development role.
+            starting in February and hope to work in a React/Flask development role.
           </p>
           <div className="profile_links">
             <a href="https://github.com/030820acc">
@@ -75,9 +75,9 @@ const AboutUs = () => {
             <a href="https://www.linkedin.com/in/adam-cole-83915a21a/">
               <i className="fab fa-linkedin-in fa-lg"></i>
             </a>
-            {/* <a>
+            <a href="https://angel.co/u/adam-cole-24">
               <i className="fab fa-angellist fa-lg"></i>
-            </a> */}
+            </a>
           </div>
         </div>
 
