@@ -78,7 +78,7 @@ const NewChannel = ({ setShowNewChannelForm }) => {
         value={selectCategory}
         onChange={(e) => setSelectCategory(e.target.value)}
       >
-        <option value={null}>Select a Category</option>
+        <option value={null}>None</option>
         {Object.values(categories).map((cat) => (
           <option value={cat.id}>{cat.name}</option>
         ))}

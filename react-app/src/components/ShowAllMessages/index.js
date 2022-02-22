@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -16,8 +16,21 @@ import "./ShowAllMessages.css";
 let sock;
 const ShowAllMessages = () => {
   const { channelId } = useParams();
+  const msgEnd = useRef(null);
   const messages = useSelector((state) => Object.values(state.messages)) || [];
   const dispatch = useDispatch();
+
+  const scrollMsgs = () => {
+    if (msgEnd) {
+      setTimeout(() => {
+        msgEnd.current?.scrollIntoView({ 
+          behavior: 'smooth', 
+          block: 'nearest', 
+          inline: 'start' 
+        });
+      }, 150);
+    }
+  };
 
   // handle sock connection
   useEffect(() => {
@@ -28,13 +41,14 @@ const ShowAllMessages = () => {
       withCredentials: true
     };
 
-    sock = io("http://localhost:5000", connectionObj); // LOCAL
-    // sock = io("", connectionObj); // PRODUCTION
+    //sock = io("http://localhost:5000", connectionObj); // LOCAL
+    sock = io("", connectionObj); // PRODUCTION
 
     // listener for new chats
     sock.on("chat", (data) => {
       // maybe tmp msgs?
-      dispatch(createMessage(data));
+      dispatch(createMessage(data))
+      scrollMsgs();
     });
 
     // listener for chat revisions
@@ -56,7 +70,12 @@ const ShowAllMessages = () => {
   }, [channelId]);
 
   useEffect(() => {
-    dispatch(readMessages(channelId));
+    dispatch(readMessages(channelId))
+      .then(res => {
+        if (!res.errors) {
+          scrollMsgs();
+        }
+      })
   }, [channelId, dispatch]);
 
   return (
@@ -79,6 +98,10 @@ const ShowAllMessages = () => {
             <h3 className="dark_large">Be the first to send a message...</h3>
           </div>
         )}
+        <div
+          style={{ float: 'left', clear: 'both' }}
+          ref={msgEnd}
+        ></div>
       </div>
 
       {/* send a new message */}

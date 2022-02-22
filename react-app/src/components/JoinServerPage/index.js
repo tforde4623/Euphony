@@ -14,7 +14,16 @@ function ServerGrid() {
   const dispatch = useDispatch();
   const serverlist = useSelector((state) => state.servers);
   const serverArr = Object.values(serverlist);
-  const [showModal, setShowModal] = useState(true);
+  const [showModal, setShowModal] = useState(
+    localStorage.getItem('show-beans-tutorial') === 'false' ? false : true
+  );
+
+  const dontShow = val => {
+    setShowModal(val);
+
+    // set dont show again in local storage
+    localStorage.setItem('show-beans-tutorial', false);
+  };
 
   useEffect(() => {
     dispatch(showServers());
@@ -54,7 +63,10 @@ function ServerGrid() {
                 shows an X it means you are already a part of the server, once you have
                 a server navigate to "Your Servers" or choose one from the server list above.
               </span>
-              <button onClick={() => setShowModal(false)}>I Got It!</button>
+              <div>
+                <button onClick={() => setShowModal(false)}>Ok!</button>
+                <button onClick={() => dontShow(false)}>Don't Show Me Again!</button>
+              </div>
             </div>
           </div>
         }

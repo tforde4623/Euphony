@@ -51,9 +51,9 @@ const AboutUs = () => {
             <a href="https://www.linkedin.com/in/tommyforde/">
               <i className="fab fa-linkedin-in fa-lg"></i>
             </a>
-            {/* <a>
+            <a href='https://angel.co/u/thomas-forde'>
               <i className="fab fa-angellist fa-lg"></i>
-            </a> */}
+            </a>
           </div>
         </div>
 
