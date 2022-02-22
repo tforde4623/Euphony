@@ -9,10 +9,12 @@ const loadMessages = (messages) => ({
 
 export const readMessages = (channelId) => async(dispatch)=> {
   const messages = await fetch(`/api/channels/${channelId}/messages`); 
+  const list = await messages.json();
+
   if(messages.ok) {
-    const list = await messages.json();
     dispatch(loadMessages(list))
   }
+  return list;
 }
 
 // Create a message
