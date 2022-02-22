@@ -27,7 +27,6 @@ const NewChannel = ({ setShowNewChannelForm }) => {
     };
 
     dispatch(createChannel(newChannel)).then((res) => {
-      console.log(res);
       if (res.errors) {
         if (res.errors.name) {
           setNameErrs(res.errors.name);

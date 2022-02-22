@@ -8,6 +8,7 @@ const Splash = () => {
 
   const servers = useSelector((state) => state.servers);
   const fourStaticServers = Object.values(servers).slice(0, 4);
+  const user = useSelector((state) => state.session.user);
 
   useEffect(() => {
     dispatch(showServers());
@@ -32,7 +33,7 @@ const Splash = () => {
           return (
             <div className="splash_card" key={`${server?.id}`}>
               {/* FAV CHANNEL FIX */}
-              <a href={`/servers`} id="splash_card_link">
+              <a href={user ? `/servers` : `/login`} id="splash_card_link">
                 <div className="splash_card_img_container">
                   <img src={server?.icon_url} alt={server?.name}></img>
                 </div>

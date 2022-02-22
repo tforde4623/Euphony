@@ -18,7 +18,6 @@ const LoginForm = () => {
     e.preventDefault();
     dispatch(login(email, password))
       .then(res => {
-        console.log(res)
         if(res.errors) {
           if (res.errors.email) {
             setEmailErrs(res.errors.email);

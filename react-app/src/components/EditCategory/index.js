@@ -30,7 +30,6 @@ const EditCategory = ({ serverId, categoryId, setShowCategoryEdit }) => {
     };
 
     dispatch(updateCategory(updatedCategory)).then((res) => {
-      console.log(res);
       if (res.errors) {
         if (res.errors.name) {
           setNameErrs(res.errors.name);
