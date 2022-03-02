@@ -122,7 +122,7 @@ const ShowChannel = () => {
             />
           ) : (
             // Otherwise show the name of the channel as well as an edit button (if owner of server)
-            <li key={`displaying:${nch?.id}`}>
+            <li className={nch.id === channelId ? 'selected-channel' : null} key={`displaying:${nch?.id}`}>
               <NavLink to={`/servers/${serverId}/channels/${nch?.id}`}>
                 <p className="light_medium dynamic_underline" key={nch?.id}>
                   {nch?.name}
@@ -176,7 +176,7 @@ const ShowChannel = () => {
                     />
                   ) : (
                     // Otherwise render the name and an edit button
-                    <li key={`displaying:${channel?.id}`}>
+                    <li className={channel.id === channelId ? 'selected-channel' : null} key={`displaying:${channel?.id}`}>
                       <NavLink
                         to={`/servers/${serverId}/channels/${channel?.id}`}
                       >

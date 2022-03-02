@@ -98,3 +98,9 @@ div div#category_edit button#edit_cat_btn {
 .fa-ellipsis-v {
   padding: 0;
 }
+
+.selected-channel {
+  background-color: #dea406;
+  padding: 5px;
+  border-radius: 3px;
+}
